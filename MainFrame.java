@@ -1,59 +1,50 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class MainFrame extends JFrame {
 
   // two components.
   // a region of text editor.
-  private TextPanel textPanel;
-  private Toolbar toolbar;
+ 
+  private MiddlePanel Middle;
   private JButton btn;
   private FormPanel formPanel;
+  private GraphPanel graphPanel;
 
-  // setJMenuBar(menubar());
+ 
 
-  public MainFrame() {
+  public MainFrame() throws IOException {
 
     super("Run Dyne");
     BorderLayout ab = new BorderLayout();
     setLayout(ab);
 
     formPanel = new FormPanel();
-    toolbar = new Toolbar();
-    textPanel = new TextPanel();
+    Middle = new MiddlePanel();
+  //  textPanel = new TextPanel();
 
 
+   
 
-    formPanel.setFormListener(new FormListener() {
+   
 
-
-      @Override
-      public void formEventOccured(FormEvent e) {
-        // TODO Auto-generated method stub
-        String name = e.getName();
-        String job = e.getJob();
-        int id = e.getAge();
-        String employ = e.getEmploy();
-        String taxID = e.getTaxID();
-        Boolean citizen = e.isCitizen();
-        String gender = e.getGender();
-        textPanel.appendText(name + " : " + job + " : " + id + " : " + employ + " : " + citizen
-            + " : " + taxID + " : " + gender + "\n");
-
-      }
-    });
-
+    
 
     btn = new JButton("CLICK ME ");
     // action listener interface
@@ -80,16 +71,17 @@ public class MainFrame extends JFrame {
 
     // pass in the controller.
 
-    add(formPanel, ab.WEST);
+ 
     add((menubar()), ab.NORTH);
-    add(Box.createRigidArea(new Dimension(10, 0)));
-    add(textPanel);
-    add(toolbar);
+   
+    add(Middle, ab.CENTER);
     add(btn, ab.SOUTH);
 
-
+    formPanel.setPreferredSize(new Dimension(300,10));
+    //formPanel.setBackground(Color.ORANGE);
+   // gui.add(panel2, BorderLayout.CENTER);
     // add(Box.createRigidArea(new Dimension(10,50)));
-    add(textPanel, ab.CENTER);
+    add(formPanel, ab.WEST);
     // add(new JSeparator(SwingConstants.VERTICAL));
     add(btn, ab.SOUTH);
 
