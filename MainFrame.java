@@ -21,30 +21,26 @@ public class MainFrame extends JFrame {
 
   // two components.
   // a region of text editor.
- 
+
   private MiddlePanel Middle;
+  private TabPanel window;
   private JButton btn;
   private FormPanel formPanel;
   private GraphPanel graphPanel;
 
- 
+
 
   public MainFrame() throws IOException {
 
     super("Run Dyne");
     BorderLayout ab = new BorderLayout();
     setLayout(ab);
-
+    window = new TabPanel();
     formPanel = new FormPanel();
     Middle = new MiddlePanel();
-  //  textPanel = new TextPanel();
+    // textPanel = new TextPanel();
 
 
-   
-
-   
-
-    
 
     btn = new JButton("CLICK ME ");
     // action listener interface
@@ -71,15 +67,17 @@ public class MainFrame extends JFrame {
 
     // pass in the controller.
 
- 
-    add((menubar()), ab.NORTH);
-   
-    add(Middle, ab.CENTER);
-    add(btn, ab.SOUTH);
 
-    formPanel.setPreferredSize(new Dimension(300,10));
-    //formPanel.setBackground(Color.ORANGE);
-   // gui.add(panel2, BorderLayout.CENTER);
+    add((menubar()), ab.NORTH);
+
+    add(Middle, ab.CENTER);
+
+    add(btn, ab.SOUTH);
+    add(window);
+
+    formPanel.setPreferredSize(new Dimension(300, 10));
+    // formPanel.setBackground(Color.ORANGE);
+    // gui.add(panel2, BorderLayout.CENTER);
     // add(Box.createRigidArea(new Dimension(10,50)));
     add(formPanel, ab.WEST);
     // add(new JSeparator(SwingConstants.VERTICAL));

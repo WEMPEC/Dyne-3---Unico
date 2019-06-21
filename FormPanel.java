@@ -67,14 +67,14 @@ public class FormPanel extends JPanel {
     imageLabel = new JLabel(new ImageIcon(imgresize));
 
     // check box
-    // tcp = new JLabel("Tcp");
     Tcp = new JCheckBox("Tcp");
 
-    Rem = new JCheckBox("Rem Not in Loop");
+    Rem = new JCheckBox("Rem Not in Loop  ");
     Rem.setBackground(Color.red);
+    Rem.setForeground(Color.WHITE);
 
 
-    AcD = new JCheckBox("AcD Write Ena");
+    AcD = new JCheckBox("AcD Write Enable");
     AcD.setBackground(Color.yellow);
 
     // imageLabel.setSize(3,4);
@@ -159,7 +159,7 @@ public class FormPanel extends JPanel {
     Dimension dim = getPreferredSize();
 
     // resize the panel.
-    dim.width = 400;
+    dim.width = 600;
     dim.height = 100;
 
     setPreferredSize(dim);
@@ -192,7 +192,7 @@ public class FormPanel extends JPanel {
     add(imageLabel, gc);
     gc.gridx = 1;
     add(Tcp, gc);
-  //  gc.gridx = 2;
+    // gc.gridx = 2;
     gc.insets = new Insets(0, 55, 0, 0);
     add(reset, gc);
     gc.anchor = GridBagConstraints.LINE_END;
@@ -208,7 +208,10 @@ public class FormPanel extends JPanel {
     gc.gridx = 1;
     gc.insets = new Insets(0, 0, 0, 5);
     add(Rem, gc);
-
+    gc.gridy = 2;
+    gc.insets = new Insets(0, 0, 0, 0);
+    
+    add(AcD, gc);
     gc.anchor = GridBagConstraints.LINE_END;
 
     // // THIRD ROW
