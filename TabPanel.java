@@ -20,6 +20,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +29,8 @@ import java.awt.event.KeyEvent;
 public class TabPanel extends JPanel {
 
   private TabCool coolTab;
-private TabAbs AbsTab;
+  private TabAbs AbsTab;
+
   public TabPanel() {
 
     JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -37,21 +39,23 @@ private TabAbs AbsTab;
     JTabbedPane Cool = new JTabbedPane(JTabbedPane.TOP);
     tabbedPane.addTab("Cool/ Lube", null, Cool, null);
     JPanel panel = new JPanel();
-     GroupLayout gl_panel = new GroupLayout(panel);
-     Cool.addTab("Detail", null, panel, null);  
+    GroupLayout gl_panel = new GroupLayout(panel);
+    Cool.addTab("Detail", null, panel, null);
     coolTab = new TabCool(panel, gl_panel);
     panel.setLayout(coolTab.getGlpanel());
+    panel.setPreferredSize(new Dimension(550, 400));
 
     // abs//////////////////////////
     JTabbedPane Abs = new JTabbedPane(JTabbedPane.TOP);
     tabbedPane.addTab("Abs", null, Abs, null);
     JPanel panel_1 = new JPanel();
-    GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+    GridBagLayout gbl_panel_1 = new GridBagLayout();
     Abs.addTab("Values", null, panel_1, null);
 
-    AbsTab = new TabAbs(panel_1, gl_panel_1);
-    panel_1.setLayout(gl_panel_1);
-
+    AbsTab = new TabAbs(panel_1, gbl_panel_1);
+    panel_1.setLayout(gbl_panel_1);
+    panel_1.setPreferredSize(new Dimension(450, 400));
+    // change tab size with new dimension
 
 
     JComponent panel1 = makeTextPanel("Panel #1");
