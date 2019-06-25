@@ -156,5 +156,20 @@ public class FormPanel extends JPanel {
 }
 
 
+class AgeCat {
+  private String text;
+  private int id;
 
+  public AgeCat(int id, String text) {
+    this.text = text;
+    this.id = id;
+  }
+
+  public String toString() {
+    return text;
+  }
+
+  public int getID() {
+    return id;
+  }
 }
