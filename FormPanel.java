@@ -24,6 +24,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class FormPanel extends JPanel {
@@ -33,23 +34,7 @@ public class FormPanel extends JPanel {
   private Image image;
   private JCheckBox Tcp, Rem, AcD;
   private JButton reset;
-
-
-  private JLabel jobLabel;
-  private JLabel ageLabel;
-
-  private JTextField textField2;
-  private JButton btn;
-  private JList ageList;
-  private JComboBox empcom;
-  private JCheckBox citizen;
-  // for radio
-  private JRadioButton maleRadio;
-  private JRadioButton femaleRadio;
-  private ButtonGroup genderGroup;
-  //
-  private JTextField taxField;
-  private JLabel taxLabel;
+  private TabPanel tab;
 
 
   public FormPanel() {
@@ -76,91 +61,14 @@ public class FormPanel extends JPanel {
 
     AcD = new JCheckBox("AcD Write Enable");
     AcD.setBackground(Color.yellow);
-
-    // imageLabel.setSize(3,4);
-    // specify how large the textield;
-
-    textField2 = new JTextField(10);
-    ageList = new JList();
-    citizen = new JCheckBox();
-    taxField = new JTextField(10);
-    maleRadio = new JRadioButton(" off");
-    femaleRadio = new JRadioButton(" on");
-    genderGroup = new ButtonGroup();
-    maleRadio.setActionCommand("on");
-    femaleRadio.setActionCommand("off");
-    // set radio
-    genderGroup.add(femaleRadio);
-    genderGroup.add(maleRadio);
-
-    taxLabel = new JLabel("Cool");
-    // set up tax id
-    taxLabel.setEnabled(false);
-    taxField.setEnabled(false);
-    citizen.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
-        boolean isclicked = citizen.isSelected();
-        taxLabel.setEnabled(true);
-        taxField.setEnabled(true);
-      }
-
-    });
-    // set up combo box
-    empcom = new JComboBox();
-    DefaultComboBoxModel combomodel = new DefaultComboBoxModel();
-    combomodel.addElement("ABS");
-    combomodel.addElement("self-employed");
-    combomodel.addElement("unemployed");
-    empcom.setModel(combomodel);
-    empcom.setSelectedIndex(0);
-    empcom.setEditable(true);
-
-    // Set a list box
-    DefaultListModel ageModel = new DefaultListModel();
-    // use the utility class.
-    ageModel.addElement(new AgeCat(0, "bUS"));
-    ageModel.addElement(new AgeCat(1, "bus on"));
-    ageModel.addElement(new AgeCat(2, "bus off"));
-    ageList.setModel(ageModel);
-    // make the age list better
-    ageList.setPreferredSize(new Dimension(110, 70));
-    ageList.setBorder(BorderFactory.createEtchedBorder());
-    ageList.setSelectedIndex(1);
-    btn = new JButton("OK");
-    // add button listener
-    btn.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
-        String name = taxField.getText();
-        String job = textField2.getText();
-        String empCat = (String) empcom.getSelectedItem();
-        System.out.println(empCat);
-        String genderc = genderGroup.getSelection().getActionCommand();
-        AgeCat age = (AgeCat) ageList.getSelectedValue();
-        // int id = ageList.getSelectedIndex();
-        int id = age.getID();
-        System.out.println(id);
-        String taxID = taxField.getText();
-        boolean citizenSelect = citizen.isSelected();
-        FormEvent ev = new FormEvent(this, name, job, id, empCat, citizenSelect, taxID, genderc);
-        if (formev != null) {
-          formev.formEventOccured(ev);
-
-        }
-      }
-    });
+    tab = new TabPanel();
     // call layout manager to determines the perferred size.
 
     Dimension dim = getPreferredSize();
 
     // resize the panel.
-    dim.width = 600;
-    dim.height = 100;
+    dim.width = 800;
+    dim.height = 750;
 
     setPreferredSize(dim);
     //
@@ -180,146 +88,63 @@ public class FormPanel extends JPanel {
 
     ///////////// first row/////////////////////
     gc.weightx = 1;
-    gc.weighty = 0.1;
+    gc.weighty = 0;
     // fill can be horizontal, vertical, none or both.
     gc.fill = GridBagConstraints.NONE;
     // make sure the line is start in from left to the right.
     gc.anchor = GridBagConstraints.LINE_START;
     gc.gridx = 0;
-    gc.gridy = 0;
-    gc.insets = new Insets(0, 0, 0, 2);
+    gc.gridy = 1;
+    gc.insets = new Insets(20,20 , 0, 0);
     add(headerLabel, gc);
+    gc.insets = new Insets(20,20 , 0, 0);
     add(imageLabel, gc);
-    gc.gridx = 1;
+    gc.insets = new Insets(20, 200, 0, 0);
     add(Tcp, gc);
     // gc.gridx = 2;
-    gc.insets = new Insets(0, 55, 0, 0);
+    gc.insets = new Insets(20, 255, 0, 0);
     add(reset, gc);
+    gc.insets = new Insets(20, 350, 0, 0);
+
+    add(Rem, gc);
     gc.anchor = GridBagConstraints.LINE_END;
     ///////////// SECOND ROW ///////////////////////
     gc.gridx = 0;
-    gc.gridy++;
-    gc.weightx = 5;
-    gc.weighty = 0.04;
-    gc.insets = new Insets(0, 5, 0, 0);
     gc.anchor = GridBagConstraints.LINE_START;
+    gc.gridy++;
+ gc.weighty =0;
+    gc.insets = new Insets(0, 22, 0, 0);
+
+    // add(headertextField, gc);
+    //gc.weightx = 0.1;
     add(headertextField, gc);
-    gc.weightx = 0.1;
-    gc.gridx = 1;
-    gc.insets = new Insets(0, 0, 0, 5);
-    add(Rem, gc);
-    gc.gridy = 2;
-    gc.insets = new Insets(0, 0, 0, 0);
-    
+    gc.insets = new Insets(0, 350, 0, 0);
+
+
+
     add(AcD, gc);
     gc.anchor = GridBagConstraints.LINE_END;
 
     // // THIRD ROW
     //
-    // gc.anchor = GridBagConstraints.LINE_START;
-    //
-    // gc.gridx = 0;
-    // gc.gridy++;
-    // gc.weightx = 1;
-    // gc.weighty = 0.5;
-    // add(ageLabel, gc);
-    //
+    gc.anchor = GridBagConstraints.LINE_START;
+
+    gc.gridx = 0;
+    gc.gridy++;
+    gc.weightx = 1;
+    gc.weighty = 0.5;
+    gc.insets = new Insets(0, 10, 30, 0);
+    add(tab, gc);
+
     // gc.weightx = 1;
     // gc.weighty = 0.2;
     // gc.gridx = 1;
     // gc.insets = new Insets(0, 0, 0, 0);
     // add(ageList, gc);
-    // gc.anchor = GridBagConstraints.LINE_END;
-    // THIRD ROW
-
-    gc.anchor = GridBagConstraints.LINE_START;
-
-    gc.gridx = 0;
-    gc.gridy = 3;
-    gc.weightx = 1;
-    gc.weighty = 0.5;
-    add(new JLabel("new section"), gc);
-    gc.weightx = 1;
-    gc.weighty = 1;
-    gc.gridx = 1;
-    gc.gridy = 3;
-    gc.insets = new Insets(0, 0, 0, 0);
-    add(empcom, gc);
     gc.anchor = GridBagConstraints.LINE_END;
 
 
-    // Forth ROW
 
-    gc.anchor = GridBagConstraints.LINE_START;
-
-    gc.gridx = 0;
-    gc.gridy++;
-    gc.weightx = 1;
-    gc.weighty = 0.5;
-    add(new JLabel("PIU"), gc);
-    gc.weightx = 1;
-    gc.weighty = 1;
-    gc.gridx = 1;
-    gc.insets = new Insets(0, 0, 0, 0);
-    add(citizen, gc);
-    gc.anchor = GridBagConstraints.LINE_END;
-
-    // FIFTH ROW
-
-
-    gc.anchor = GridBagConstraints.LINE_START;
-    gc.gridx = 0;
-    gc.gridy++;
-    gc.weightx = 1;
-    gc.weighty = 0.5;
-    add(taxLabel, gc);
-    gc.weightx = 1;
-    gc.weighty = 0.1;
-    gc.gridx = 1;
-    gc.insets = new Insets(0, 0, 0, 0);
-    add(taxField, gc);
-    gc.anchor = GridBagConstraints.LINE_END;
-
-    // sixth ROW
-
-    gc.anchor = GridBagConstraints.LINE_START;
-
-    gc.gridx = 0;
-    gc.gridy++;
-    gc.weightx = 1;
-    gc.weighty = 0.05;
-    add(new JLabel("Volt mode"), gc);
-    gc.weightx = 1;
-    gc.weighty = 0.02;
-    gc.gridx = 1;
-    gc.insets = new Insets(0, 0, 0, 0);
-    add(maleRadio, gc);
-    gc.anchor = GridBagConstraints.LINE_END;
-
-    // seventh ROW
-
-    gc.anchor = GridBagConstraints.LINE_START;
-
-
-    gc.gridy++;
-    gc.weightx = 1;
-    gc.weighty = 0.02;
-    gc.gridx = 1;
-    gc.insets = new Insets(0, 0, 0, 0);
-    add(femaleRadio, gc);
-    gc.anchor = GridBagConstraints.LINE_END;
-
-
-    // Last ROW
-    gc.weightx = 1;
-    gc.weighty = 1.0;
-    gc.gridx = 1;
-    gc.gridy++;
-    gc.anchor = GridBagConstraints.FIRST_LINE_START;
-    gc.insets = new Insets(0, 0, 0, 0);
-
-
-    add(btn, gc);
   }
 
   public void setFormListener(FormListener formListener) {
@@ -331,20 +156,5 @@ public class FormPanel extends JPanel {
 }
 
 
-class AgeCat {
-  private String text;
-  private int id;
 
-  public AgeCat(int id, String text) {
-    this.text = text;
-    this.id = id;
-  }
-
-  public String toString() {
-    return text;
-  }
-
-  public int getID() {
-    return id;
-  }
 }
