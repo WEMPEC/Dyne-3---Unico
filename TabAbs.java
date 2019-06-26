@@ -2,11 +2,13 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import javax.swing.AbstractButton;
 import javax.swing.GroupLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SpinnerNumberModel;
@@ -25,12 +27,16 @@ public class TabAbs {
   private JTextField textField_5;
   private JTextField textField_6;
   private JTextField textField_7;
-
-  public TabAbs(JPanel panel, GridBagLayout gl_panel) {
+  private JPanel panel_2;
+  private JTable table;
+  private GridBagLayout gbl_panel_2;
+  
+  public TabAbs(JPanel panel, GridBagLayout gl_panel, JPanel panel1,  GridBagLayout gl_panel1) {
     // TODO Auto-generated constructor stub
     this.gbl_panel_1 = gl_panel;
     this.panel_1 = panel;
-
+    this.panel_2 = panel1;
+     gbl_panel_2 = gl_panel1;
     // elements
 
     // GridBagLayout gbl_panel_1 = new GridBagLayout();
@@ -140,7 +146,7 @@ public class TabAbs {
 
     JToggleButton tglbtnTorsReady_1 = new JToggleButton("Tors Ready");
     tglbtnTorsReady_1.setHorizontalAlignment(SwingConstants.LEFT);
-   // tglbtnTorsReady_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    // tglbtnTorsReady_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
     GridBagConstraints gbc_tglbtnTorsReady_1 = new GridBagConstraints();
     gbc_tglbtnTorsReady_1.anchor = GridBagConstraints.EAST;
     gbc_tglbtnTorsReady_1.insets = new Insets(0, 0, 5, 5);
@@ -381,5 +387,37 @@ public class TabAbs {
     gbc_textField_5.gridx = 3;
     gbc_textField_5.gridy = 12;
     panel_1.add(textField_5, gbc_textField_5);
+
+
+    // Table
+    String data[][] = {{"Name", "Min", "Max", "Set"}, {"Min Speed (rpm) ", "0", "10000", "?"},
+        {"Def Speed(rpm) ", "0", "10000", "?"}, {"Max Speed(rpm) ", "0", "1000", "?"},
+        {"Min Torque(Nm) ", "0", "10000", "Set"}, {"Def Torque(Nm) ", "0", "10000", "?"},
+        {"Max Torque(Nm) ", "0", "1000", "?"},
+        {"Min Acceleration Limit (rpm/s)", "0", "10000", "?"}, {"Def Acceleration Limit (rpm/s)", "0", "10000", "?"},
+        {"Max Acceleration Limit (rpm/s)", "0", "70", "?"}, {"Minium Inertia (kgm2)", "0", "70", "?"},
+        {"Default Inertia (kgm2)", "0", "700", "Set"}, {"Max Inertia (kgm2)", "0", "70", "?"}};
+    String column[] = {"ID", "NAME", "SALARY", "set"};
+    isCellEditable(4, 4);
+   // = new GridBagLayout();
+    gbl_panel_2.columnWidths = new int[] {600, 0};
+    gbl_panel_2.rowHeights = new int[] {431, 0};
+    gbl_panel_2.columnWeights = new double[] {0.0, Double.MIN_VALUE};
+    gbl_panel_2.rowWeights = new double[] {0.0, Double.MIN_VALUE};
+    panel_2.setLayout(gbl_panel_2);
+    table = new JTable(data, column);
+    table.setColumnSelectionAllowed(true);
+   table.getColumnModel().getColumn(0).setPreferredWidth(300);
+table.getColumnModel().getColumn(2).setPreferredWidth(220);
+  table.getColumnModel().getColumn(3).setPreferredWidth(220);
+    GridBagConstraints gbc_table = new GridBagConstraints();
+    gbc_table.fill = GridBagConstraints.BOTH;
+    gbc_table.gridx = 0;
+    gbc_table.gridy = 0;
+    panel_2.add(table, gbc_table);
   }
+  
+  public boolean isCellEditable(int row, int col) { 
+    return true; 
+}
 }
