@@ -32,35 +32,38 @@ public class FormPanel extends JPanel {
   private JLabel headerLabel, imageLabel;
   private JTextField headertextField;
   private Image image;
-  private JCheckBox Tcp, Rem, AcD;
+  private JButton stopDrive, stopPiu;
   private JButton reset;
   private TabPanel tab;
 
 
   public FormPanel() {
-    headerLabel = new JLabel("   ACSYSdyne");
-    headerLabel.setFont(new Font("Courier New", Font.BOLD, 23));
+    headerLabel = new JLabel("  Dyne 3");
+    headerLabel.setFont(new Font("Courier New", Font.BOLD, 46));
     headertextField = new JTextField("WEMPEC CELL4 170KW");
     reset = new JButton("RESET");
+    reset.setFont((new Font("Times New Roman", Font.BOLD, 17)));
     try {
       image = ImageIO.read(new File("letter.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    Image imgresize = image.getScaledInstance(33, 33, Image.SCALE_DEFAULT);
+    Image imgresize = image.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
     imageLabel = new JLabel(new ImageIcon(imgresize));
 
-    // check box
-    Tcp = new JCheckBox("Tcp");
+    // Buttons
+    stopDrive = new JButton("Stop Drives");
+    stopPiu = new JButton("Stop  Piu     ");
+    stopDrive.setFont((new Font("Times New Roman", Font.BOLD, 17)));
+    stopPiu.setFont((new Font("Times New Roman", Font.BOLD, 17)));
+    stopDrive.setBackground(Color.red);
+    stopDrive.setForeground(Color.WHITE);
+    stopPiu.setBackground(Color.red);
+    stopPiu.setForeground(Color.WHITE);
 
-    Rem = new JCheckBox("Rem Not in Loop  ");
-    Rem.setBackground(Color.red);
-    Rem.setForeground(Color.WHITE);
 
 
-    AcD = new JCheckBox("AcD Write Enable");
-    AcD.setBackground(Color.yellow);
     tab = new TabPanel();
     // call layout manager to determines the perferred size.
 
@@ -71,14 +74,7 @@ public class FormPanel extends JPanel {
     dim.height = 750;
 
     setPreferredSize(dim);
-    //
-    // TitledBorder innerBorder = BorderFactory.createTitledBorder("");
-    // javax.swing.border.Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
-    //
-    // setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
-
-
-    // layout();
+  // layout();
     //
     // public void layout() {
     setLayout(new GridBagLayout());
@@ -95,34 +91,26 @@ public class FormPanel extends JPanel {
     gc.anchor = GridBagConstraints.LINE_START;
     gc.gridx = 0;
     gc.gridy = 1;
-    gc.insets = new Insets(20,20 , 0, 0);
+    gc.insets = new Insets(20, 20, 0, 0);
     add(headerLabel, gc);
-    gc.insets = new Insets(20,20 , 0, 0);
+    gc.insets = new Insets(20, 20, 0, 0);
     add(imageLabel, gc);
     gc.insets = new Insets(20, 200, 0, 0);
-    add(Tcp, gc);
+   
     // gc.gridx = 2;
-    gc.insets = new Insets(20, 255, 0, 0);
+    gc.insets = new Insets(20, 300, 0, 0);
     add(reset, gc);
-    gc.insets = new Insets(20, 350, 0, 0);
-
-    add(Rem, gc);
+    gc.insets = new Insets(20, 450, 0, 0);
+    add(stopDrive, gc);
     gc.anchor = GridBagConstraints.LINE_END;
     ///////////// SECOND ROW ///////////////////////
     gc.gridx = 0;
     gc.anchor = GridBagConstraints.LINE_START;
     gc.gridy++;
- gc.weighty =0;
-    gc.insets = new Insets(0, 22, 0, 0);
+    gc.weighty = 0;
+    gc.insets = new Insets(0, 450, 0, 0);
 
-    // add(headertextField, gc);
-    //gc.weightx = 0.1;
-    add(headertextField, gc);
-    gc.insets = new Insets(0, 350, 0, 0);
-
-
-
-    add(AcD, gc);
+    add(stopPiu, gc);
     gc.anchor = GridBagConstraints.LINE_END;
 
     // // THIRD ROW
