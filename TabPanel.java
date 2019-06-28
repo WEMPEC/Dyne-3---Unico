@@ -18,6 +18,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
@@ -30,6 +31,7 @@ public class TabPanel extends JPanel {
 
   private TabCool coolTab;
   private TabAbs AbsTab;
+  private TabPiu tabPiu;
 
   public TabPanel() {
 
@@ -50,18 +52,36 @@ public class TabPanel extends JPanel {
     tabbedPane.addTab("Abs", null, Abs, null);
     JPanel panel_1 = new JPanel();
     GridBagLayout gbl_panel_1 = new GridBagLayout();
+    GridBagLayout gbl_panel_2 = new GridBagLayout();
     Abs.addTab("Values", null, panel_1, null);
-
-    AbsTab = new TabAbs(panel_1, gbl_panel_1);
+    JPanel panel_2 = new JPanel();
+    Abs.addTab("Limits & SetPoints", null, panel_2, null);
+    
+    AbsTab = new TabAbs(panel_1, gbl_panel_1, panel_2, gbl_panel_2);
     panel_1.setLayout(gbl_panel_1);
     panel_1.setPreferredSize(new Dimension(450, 400));
-    // change tab size with new dimension
+    panel_2.setLayout(gbl_panel_2);
+    panel_2.setPreferredSize(new Dimension(450, 400));
+    
+   
+    // Piu
 
-
-    JComponent panel1 = makeTextPanel("Panel #1");
-    tabbedPane.addTab("Tab 1", icon, panel1, "Does nothing");
+    JTabbedPane Piu = new JTabbedPane(JTabbedPane.TOP);
+   JPanel panel_3 = new JPanel();
+    tabbedPane.addTab("Piu", null, Piu, null);
+    Piu.addTab("Values", null, panel_3, null);
     tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-
+    
+    //JPanel panel_4 = new JPanel();
+    GroupLayout gbl_panel_3 = new GroupLayout(panel_3);
+   // GroupLayout gbl_panel_4 = new GroupLayout(panel_4);
+    
+    tabPiu = new TabPiu (panel_3, gbl_panel_3);
+    //panel_3.setLayout(gbl_panel_3);
+    panel_3.setLayout(tabPiu.getGlpanel());
+    //panel_1.setPreferredSize(new Dimension(450, 400));
+    
+    ////
     JComponent panel2 = makeTextPanel("Panel #2");
     tabbedPane.addTab("Tab 2", icon, panel2, "Does twice as much nothing");
     tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
