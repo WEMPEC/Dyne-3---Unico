@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -99,6 +101,68 @@ public class TabPiu extends JPanel {
     label_2 = new JLabel("IntRes mOhm");
     label_2.setEnabled(false);
     label.setEnabled(false);
+  
+
+
+    JSlider framesPerSecond = new JSlider(JSlider.VERTICAL,
+        0, 30, 15);
+    //framesPerSecond.addChangeListener(this);
+    framesPerSecond.setMajorTickSpacing(10);
+    framesPerSecond.setPaintTicks(true);
+
+ 
+    //framesPerSecond.setLabelTable( labelTable );
+
+    framesPerSecond.setPaintLabels(true);
+    //Turn on labels at major tick marks.
+    framesPerSecond.setMajorTickSpacing(10);
+    framesPerSecond.setMinorTickSpacing(1);
+    framesPerSecond.setPaintTicks(true);
+    framesPerSecond.setPaintLabels(true);
+    
+      JLabel lblPowerlimkw = new JLabel("Volt Cmd (kw)");
+    
+    JLabel label_3 = new JLabel("Curr Lim (A)");
+    
+    JLabel label_4 = new JLabel("PwrLim (kw)");
+    
+    JLabel label_5 = new JLabel("IntRes (mOhm)");
+    
+    JSlider slider = new JSlider(JSlider.VERTICAL,
+        0, 30, 15);
+    //framesPerSecond.addChangeListener(this);
+    framesPerSecond.setMajorTickSpacing(10);
+    framesPerSecond.setPaintTicks(true);
+    framesPerSecond.setEnabled(false);
+    
+   
+    //slider.setLabelTable( labelTable );
+
+    slider.setPaintLabels(true);
+    //Turn on labels at major tick marks.
+    slider.setMajorTickSpacing(10);
+    slider.setMinorTickSpacing(1);
+    slider.setPaintTicks(true);
+    slider.setPaintLabels(true);
+    slider.setEnabled(false);
+    JSlider slider_1 = new JSlider(SwingConstants.VERTICAL, 0, 30, 15);
+    slider_1.setPaintTicks(true);
+    slider_1.setPaintLabels(true);
+    slider_1.setMinorTickSpacing(1);
+    slider_1.setMajorTickSpacing(10);
+   
+    
+    JSlider slider_2 = new JSlider(SwingConstants.VERTICAL, 0, 30, 15);
+    slider_2.setPaintTicks(true);
+    slider_2.setPaintLabels(true);
+    slider_2.setMinorTickSpacing(1);
+    slider_2.setMajorTickSpacing(10);
+    slider_2.setEnabled(false);
+    
+    JLabel label_8 = new JLabel("PowerLim (kw)");
+   // JProgressBar progressBar = new JProgressBar();
+      
+    
     tglbtnNewToggleButton.addActionListener(new ActionListener() {
 
       @Override
@@ -108,113 +172,131 @@ public class TabPiu extends JPanel {
         label_1.setEnabled(true);
         label_2.setEnabled(true);
         label.setEnabled(true);
+        slider.setEnabled(true);
+        
+        framesPerSecond.setEnabled(true);
+        slider_2.setEnabled(true);
       }
 
     });
-    JSlider framesPerSecond = new JSlider(JSlider.HORIZONTAL, 0, 50, 2);
-  //  framesPerSecond.addChangeListener(this);
-  
-    // Turn on labels at major tick marks.
-    framesPerSecond.setMajorTickSpacing(10);
-    framesPerSecond.setMinorTickSpacing(1);
-    framesPerSecond.setPaintTicks(true);
-    framesPerSecond.setPaintLabels(true);
 
-
-    // GroupLayout gl_Detail = new GroupLayout(Detail);
-    gl_Detail.setHorizontalGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-        .addGroup(gl_Detail.createSequentialGroup().addGap(32)
-            .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_Detail.createSequentialGroup()
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING, false)
-                        .addComponent(lblLimAct, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-                            GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblNewLabel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-                            GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblNewLabel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-                            84, Short.MAX_VALUE))
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-                        .addComponent(textField_3, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textField, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textField_8, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING, false)
-                        .addComponent(button_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-                            Short.MAX_VALUE)
-                        .addComponent(button, GroupLayout.PREFERRED_SIZE, 105,
-                            GroupLayout.PREFERRED_SIZE)))
-                .addGroup(gl_Detail.createSequentialGroup()
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
-                        .addComponent(label_2, GroupLayout.PREFERRED_SIZE, 84,
-                            GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label_1, GroupLayout.PREFERRED_SIZE, 84,
-                            GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label, GroupLayout.PREFERRED_SIZE, 84,
-                            GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-                        .addComponent(textField_11, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-                            .addGroup(gl_Detail.createSequentialGroup()
-                                .addComponent(textField_10, GroupLayout.PREFERRED_SIZE,
-                                    GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(42)
-                                .addComponent(tglbtnNewToggleButton, 0, 0, Short.MAX_VALUE))
-                            .addGroup(gl_Detail.createSequentialGroup()
-                                .addComponent(textField_9, GroupLayout.PREFERRED_SIZE,
-                                    GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED, 147, Short.MAX_VALUE)))
-                        .addComponent(framesPerSecond, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-            .addGap(73))
-        .addGroup(gl_Detail.createSequentialGroup().addContainerGap()
-            .addComponent(separator, GroupLayout.PREFERRED_SIZE, 394, GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(79, Short.MAX_VALUE)));
-    gl_Detail.setVerticalGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-        .addGroup(gl_Detail.createSequentialGroup().addContainerGap()
-            .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE).addComponent(button_1)
-                .addComponent(lblNewLabel_2).addComponent(textField, GroupLayout.PREFERRED_SIZE,
-                    GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
-                .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE).addComponent(button)
-                    .addComponent(lblNewLabel_1))
-                .addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                    GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE).addComponent(lblLimAct)
-                .addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                    GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addComponent(separator, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
-            .addGroup(
-                gl_Detail.createParallelGroup(Alignment.LEADING)
-                    .addGroup(gl_Detail.createSequentialGroup().addGap(21).addComponent(label))
-                    .addGroup(gl_Detail.createSequentialGroup()
-                        .addPreferredGap(ComponentPlacement.RELATED).addComponent(textField_9,
-                            GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                            GroupLayout.PREFERRED_SIZE)))
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
+    
+    
+ 
+    gl_Detail.setHorizontalGroup(
+      gl_Detail.createParallelGroup(Alignment.LEADING)
+        .addGroup(gl_Detail.createSequentialGroup()
+          .addContainerGap()
+          .addComponent(separator, GroupLayout.PREFERRED_SIZE, 394, GroupLayout.PREFERRED_SIZE)
+          .addContainerGap(131, Short.MAX_VALUE))
+        .addGroup(gl_Detail.createSequentialGroup()
+          .addGap(32)
+          .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
+            .addGroup(gl_Detail.createSequentialGroup()
+              .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING, false)
+                .addComponent(lblLimAct, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblNewLabel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblNewLabel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
+              .addPreferredGap(ComponentPlacement.RELATED)
+              .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
+                .addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+              .addPreferredGap(ComponentPlacement.RELATED, 360, Short.MAX_VALUE))
+            .addGroup(gl_Detail.createSequentialGroup()
+              .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(tglbtnNewToggleButton).addComponent(label_1))
-                .addComponent(textField_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                    GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(ComponentPlacement.RELATED)
+                  .addComponent(label_1, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+                  .addComponent(label, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+                  .addComponent(label_2, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE))
+                .addComponent(framesPerSecond, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
+              .addPreferredGap(ComponentPlacement.RELATED)
+              .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
+                .addComponent(textField_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGroup(gl_Detail.createSequentialGroup()
+                  .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
+                    .addComponent(textField_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGroup(gl_Detail.createSequentialGroup()
+                      .addGap(32)
+                      .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
+                        .addComponent(slider, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label_3, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))))
+                  .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
+                    .addComponent(tglbtnNewToggleButton, 0, 0, Short.MAX_VALUE)
+                    .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING, false)
+                      .addComponent(button, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                      .addComponent(button_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+                    .addGroup(gl_Detail.createSequentialGroup()
+                      .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_Detail.createSequentialGroup()
+                          .addGap(2)
+                          .addComponent(slider_1, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(label_8, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE))
+                      .addPreferredGap(ComponentPlacement.RELATED)
+                      .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
+                        .addComponent(label_5, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(slider_2, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)))))))
+            .addComponent(lblPowerlimkw))
+          .addGap(154)
+          .addComponent(label_4, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
+          .addGap(63))
+    );
+    gl_Detail.setVerticalGroup(
+      gl_Detail.createParallelGroup(Alignment.LEADING)
+        .addGroup(gl_Detail.createSequentialGroup()
+          .addGap(19)
+          .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE)
+            .addComponent(lblNewLabel_2)
+            .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addComponent(button_1))
+          .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
+            .addGroup(gl_Detail.createSequentialGroup()
+              .addGap(18)
+              .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
+                .addComponent(lblNewLabel_1)
+                .addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+              .addPreferredGap(ComponentPlacement.RELATED)
+              .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE)
+                .addComponent(lblLimAct)
+                .addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+              .addPreferredGap(ComponentPlacement.RELATED)
+              .addComponent(separator, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
+              .addGap(21)
+              .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
+                .addComponent(label)
+                .addComponent(textField_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+            .addGroup(gl_Detail.createSequentialGroup()
+              .addGap(30)
+              .addComponent(button)))
+          .addPreferredGap(ComponentPlacement.RELATED)
+          .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
+            .addComponent(tglbtnNewToggleButton)
             .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE)
-                .addComponent(textField_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                    GroupLayout.PREFERRED_SIZE)
-                .addComponent(label_2))
-            .addGap(38).addComponent(framesPerSecond, GroupLayout.PREFERRED_SIZE,
-                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(122, Short.MAX_VALUE)));
-
-
+              .addComponent(label_1)
+              .addComponent(textField_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+          .addGap(15)
+          .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
+            .addGroup(gl_Detail.createSequentialGroup()
+              .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE)
+                .addComponent(label_2)
+                .addComponent(textField_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+              .addGap(27)
+              .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE)
+                .addComponent(lblPowerlimkw)
+                .addComponent(label_3)
+                .addComponent(label_8, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+                .addComponent(label_5, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)))
+            .addComponent(label_4, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+          .addGap(18)
+          .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE)
+            .addComponent(slider, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)
+            .addComponent(slider_2, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)
+            .addComponent(framesPerSecond, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)
+            .addComponent(slider_1, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE))
+          .addContainerGap())
+    );
   }
 
   /**

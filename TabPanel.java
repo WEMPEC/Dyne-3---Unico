@@ -59,9 +59,9 @@ public class TabPanel extends JPanel {
     
     AbsTab = new TabAbs(panel_1, gbl_panel_1, panel_2, gbl_panel_2);
     panel_1.setLayout(gbl_panel_1);
-    panel_1.setPreferredSize(new Dimension(450, 400));
+    panel_1.setPreferredSize(new Dimension(450, 700));
     panel_2.setLayout(gbl_panel_2);
-    panel_2.setPreferredSize(new Dimension(450, 400));
+    panel_2.setPreferredSize(new Dimension(450, 700));
     
    
     // Piu
@@ -79,7 +79,7 @@ public class TabPanel extends JPanel {
     tabPiu = new TabPiu (panel_3, gbl_panel_3);
     //panel_3.setLayout(gbl_panel_3);
     panel_3.setLayout(tabPiu.getGlpanel());
-    //panel_1.setPreferredSize(new Dimension(450, 400));
+    panel_3.setPreferredSize(new Dimension(450, 700));
     
     ////
     JComponent panel2 = makeTextPanel("Panel #2");

@@ -23,7 +23,7 @@ public class MainFrame extends JFrame {
   // a region of text editor.
 
   private MiddlePanel Middle;
-  private TabPanel window;
+  // private TabPanel tab;
   private JButton btn;
   private FormPanel formPanel;
   private GraphPanel graphPanel;
@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
     super("Run Dyne");
     BorderLayout ab = new BorderLayout();
     setLayout(ab);
-    window = new TabPanel();
+    // tab = new TabPanel();
     formPanel = new FormPanel();
     Middle = new MiddlePanel();
     // textPanel = new TextPanel();
@@ -67,23 +67,26 @@ public class MainFrame extends JFrame {
 
     // pass in the controller.
 
-
+    // tab.setPreferredSize(new Dimension(300, 100));
     add((menubar()), ab.NORTH);
 
     add(Middle, ab.CENTER);
 
     add(btn, ab.SOUTH);
-    add(window);
 
-    formPanel.setPreferredSize(new Dimension(300, 10));
+
+    formPanel.setPreferredSize(new Dimension(600, 100));
     // formPanel.setBackground(Color.ORANGE);
     // gui.add(panel2, BorderLayout.CENTER);
     // add(Box.createRigidArea(new Dimension(10,50)));
     add(formPanel, ab.WEST);
+    // add(tab);
     // add(new JSeparator(SwingConstants.VERTICAL));
     add(btn, ab.SOUTH);
 
-    setSize(900, 600);
+    // change the entire window size.
+
+    setSize(800, 1000);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
 

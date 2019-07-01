@@ -71,7 +71,7 @@ public class FormPanel extends JPanel {
 
     // resize the panel.
     dim.width = 800;
-    dim.height = 750;
+    dim.height = 900;
 
     setPreferredSize(dim);
   // layout();
@@ -121,7 +121,7 @@ public class FormPanel extends JPanel {
     gc.gridy++;
     gc.weightx = 1;
     gc.weighty = 0.5;
-    gc.insets = new Insets(0, 10, 30, 0);
+    gc.insets = new Insets(0, 10, 0, 0);
     add(tab, gc);
 
     // gc.weightx = 1;
