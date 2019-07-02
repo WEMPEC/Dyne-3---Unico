@@ -56,31 +56,36 @@ public class TabPanel extends JPanel {
     Abs.addTab("Values", null, panel_1, null);
     JPanel panel_2 = new JPanel();
     Abs.addTab("Limits & SetPoints", null, panel_2, null);
-    
+
     AbsTab = new TabAbs(panel_1, gbl_panel_1, panel_2, gbl_panel_2);
     panel_1.setLayout(gbl_panel_1);
     panel_1.setPreferredSize(new Dimension(450, 700));
     panel_2.setLayout(gbl_panel_2);
     panel_2.setPreferredSize(new Dimension(450, 700));
-    
-   
+
+
     // Piu
 
     JTabbedPane Piu = new JTabbedPane(JTabbedPane.TOP);
-   JPanel panel_3 = new JPanel();
+    JPanel panel_3 = new JPanel();
     tabbedPane.addTab("Piu", null, Piu, null);
     Piu.addTab("Values", null, panel_3, null);
     tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-    
-    //JPanel panel_4 = new JPanel();
+
+    // JPanel panel_4 = new JPanel();
     GroupLayout gbl_panel_3 = new GroupLayout(panel_3);
-   // GroupLayout gbl_panel_4 = new GroupLayout(panel_4);
-    
-    tabPiu = new TabPiu (panel_3, gbl_panel_3);
-    //panel_3.setLayout(gbl_panel_3);
+    // GroupLayout gbl_panel_4 = new GroupLayout(panel_4);
+    JPanel panel_4 = new JPanel();
+    Piu.addTab("Limits & SetPoints", null, panel_4, null);
+
+    GridBagLayout gbl4 = new GridBagLayout();
+
+    tabPiu = new TabPiu(panel_3, gbl_panel_3, panel_4, gbl4);
+    // panel_3.setLayout(gbl_panel_3);
     panel_3.setLayout(tabPiu.getGlpanel());
     panel_3.setPreferredSize(new Dimension(450, 700));
-    
+    panel_4.setLayout(gbl4);
+    panel_4.setPreferredSize(new Dimension(450, 700));
     ////
     JComponent panel2 = makeTextPanel("Panel #2");
     tabbedPane.addTab("Tab 2", icon, panel2, "Does twice as much nothing");
