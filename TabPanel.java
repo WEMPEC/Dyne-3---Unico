@@ -32,6 +32,7 @@ public class TabPanel extends JPanel {
   private TabCool coolTab;
   private TabAbs AbsTab;
   private TabPiu tabPiu;
+  private TabFaults faultsTab;
 
   public TabPanel() {
 
@@ -86,10 +87,28 @@ public class TabPanel extends JPanel {
     panel_3.setPreferredSize(new Dimension(450, 700));
     panel_4.setLayout(gbl4);
     panel_4.setPreferredSize(new Dimension(450, 700));
-    ////
-    JComponent panel2 = makeTextPanel("Panel #2");
-    tabbedPane.addTab("Tab 2", icon, panel2, "Does twice as much nothing");
-    tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+
+
+    //// Faults
+    JTabbedPane Faults = new JTabbedPane(JTabbedPane.TOP);
+
+    tabbedPane.addTab("Faults", null, Faults, null);
+
+    tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+    JPanel panel_6 = new JPanel();
+    GridBagLayout gbl_panel_5 = new GridBagLayout();
+    // GridBagLayout gbl_panel_2 = new GridBagLayout();
+    Faults.addTab("Values", null, panel_6, null);
+
+    // Abs.addTab("Limits & SetPoints", null, panel_2, null);
+
+    faultsTab = new TabFaults(panel_6, gbl_panel_5);
+    panel_6.setLayout(gbl_panel_5);
+    panel_6.setPreferredSize(new Dimension(450, 700));
+
+    // JComponent panel2 = makeTextPanel("Faults");
+    // tabbedPane.addTab("Faults", icon, panel2, "Does twice as much nothing");
+    // tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 
     JComponent panel3 = makeTextPanel("Panel #3");
     tabbedPane.addTab("Tab 3", icon, panel3, "Still does nothing");
