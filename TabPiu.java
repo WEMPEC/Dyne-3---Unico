@@ -129,9 +129,9 @@ public class TabPiu extends JPanel {
 
     JLabel label_3 = new JLabel("Curr Lim (A)");
 
-    JLabel label_4 = new JLabel("PwrLim (kw)");
+    JLabel label_4 = new JLabel("Speed (rpm)");
 
-    JLabel label_5 = new JLabel("IntRes (mOhm)");
+    JLabel label_5 = new JLabel("Torque (Nm)");
 
     JSlider slider = new JSlider(JSlider.VERTICAL, 0, 30, 15);
     // framesPerSecond.addChangeListener(this);
@@ -173,13 +173,14 @@ public class TabPiu extends JPanel {
       public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
         boolean isclicked = tglbtnNewToggleButton.isSelected();
-        label_1.setEnabled(true);
-        label_2.setEnabled(true);
-        label.setEnabled(true);
-        slider.setEnabled(true);
+        label_1.setEnabled(isclicked);
+        label_2.setEnabled(isclicked);
+        label.setEnabled(isclicked);
+        slider.setEnabled(isclicked);
 
-        framesPerSecond.setEnabled(true);
-        slider_2.setEnabled(true);
+        framesPerSecond.setEnabled(isclicked);
+        slider_2.setEnabled(isclicked);
+        
       }
 
     });

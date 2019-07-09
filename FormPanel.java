@@ -32,7 +32,7 @@ public class FormPanel extends JPanel {
   private JLabel headerLabel, imageLabel;
   private JTextField headertextField;
   private Image image;
-  private JButton stopDrive, stopPiu;
+  private JButton stopDrive, stopPiu, savebutton, loadbutton;
   private JButton reset;
   private TabPanel tab;
 
@@ -62,19 +62,25 @@ public class FormPanel extends JPanel {
     stopPiu.setBackground(Color.red);
     stopPiu.setForeground(Color.WHITE);
 
-
-
+    savebutton = new JButton("  SAVE ");
+    savebutton .setFont((new Font("Times New Roman", Font.BOLD, 17)));
+    savebutton.setSize(200, 50);
+    loadbutton = new JButton(" LOAD  ");
+    loadbutton.setSize(200, 50);
+    loadbutton .setFont((new Font("Times New Roman", Font.BOLD, 17)));
+    
+    
     tab = new TabPanel();
     // call layout manager to determines the perferred size.
 
     Dimension dim = getPreferredSize();
 
     // resize the panel.
-    dim.width = 800;
+    dim.width = 1000;
     dim.height = 900;
 
     setPreferredSize(dim);
-  // layout();
+    // layout();
     //
     // public void layout() {
     setLayout(new GridBagLayout());
@@ -96,7 +102,7 @@ public class FormPanel extends JPanel {
     gc.insets = new Insets(20, 20, 0, 0);
     add(imageLabel, gc);
     gc.insets = new Insets(20, 200, 0, 0);
-   
+
     // gc.gridx = 2;
     gc.insets = new Insets(20, 300, 0, 0);
     add(reset, gc);
@@ -104,15 +110,24 @@ public class FormPanel extends JPanel {
     add(stopDrive, gc);
     gc.anchor = GridBagConstraints.LINE_END;
     ///////////// SECOND ROW ///////////////////////
-    gc.gridx = 0;
+    gc.gridx =0;
     gc.anchor = GridBagConstraints.LINE_START;
     gc.gridy++;
     gc.weighty = 0;
     gc.insets = new Insets(0, 450, 0, 0);
-
     add(stopPiu, gc);
     gc.anchor = GridBagConstraints.LINE_END;
+////////Save and load button/////////
+   
+    gc.anchor = GridBagConstraints.LINE_START;
 
+    gc.weighty = 0;
+    gc.insets = new Insets(0, 300, 0, 0);
+    add(savebutton, gc);
+    gc.anchor = GridBagConstraints.LINE_END;
+    gc.insets = new Insets(0, 0, 0, 360);
+    add(loadbutton, gc);
+    
     // // THIRD ROW
     //
     gc.anchor = GridBagConstraints.LINE_START;
