@@ -1,3 +1,4 @@
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -13,7 +14,12 @@ public class App {
       @Override
       public void run() {
         // TODO Auto-generated method stub
-        new MainFrame ();
+        try {
+          new MainFrame ();
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
       
       }});
 

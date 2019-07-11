@@ -425,6 +425,7 @@ public class TabAbs {
     GridBagConstraints gbc_table = new GridBagConstraints();
     gbc_table.fill = GridBagConstraints.BOTH;
     gbc_table.gridx = 0;
+
     gbc_table.gridy = 0;
     panel_2.add(table, gbc_table);
 

@@ -1,6 +1,9 @@
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -12,67 +15,49 @@ import javax.swing.JTextField;
 public class MiddlePanel extends JPanel implements ActionListener {
 
   // creating two buttons
-  private JButton FastStop;
-  private JButton byeB;
+  private JButton startPiu;
+  private JButton startDrive;
   private StringListener textListener;
-  private JLabel startHr, runHr;
-  private JTextField startHrtxt, runHrtxt;
+
 
   public MiddlePanel() {
     setBorder(BorderFactory.createBevelBorder(ABORT, getForeground(), getBackground()));
     JPanel pane = new JPanel(new GridBagLayout());
     GridBagConstraints c = new GridBagConstraints();
 
+    startPiu = new JButton("Start Piu");
+    startPiu.setFont((new Font("Times New Roman", Font.BOLD, 17)));
+    startPiu.setBackground((new Color(0, 211, 0)));
+    startPiu.setForeground(Color.WHITE);
 
-    byeB = new JButton("BYE");
+    startDrive = new JButton("Start Drive");
+    startDrive.setFont((new Font("Times New Roman", Font.BOLD, 17)));
+    startDrive.setBackground(new Color(0, 211, 0));
+    startDrive.setForeground(Color.WHITE);
+
+
     add(pane);
-   
-    // textPanel2 = new TextPanel();
 
-    // reference to the actionPerformed method.
-   // FastStop.addActionListener(this);
-    byeB.addActionListener(this);
+
+    startPiu.addActionListener(this);
     // flow layout allows to add a group of components.
     setLayout(new FlowLayout(FlowLayout.LEFT));
-    FastStop = new JButton("FastStop");
+
     c.fill = GridBagConstraints.HORIZONTAL;
-    c.weightx = 0.5;
+    //c.weightx = 0.5;
     c.gridx = 1;
     c.gridy = 0;
-    pane.add(FastStop, c);
+    c.insets = new Insets(22, 0, 0, 0);
+    pane.add(startPiu, c);
 
-    startHr = new JLabel("Start Hr: ");
+
+
     c.fill = GridBagConstraints.HORIZONTAL;
-    c.weightx = 0.5;
-    c.gridx = 2;
-    c.gridy = 0;
-    pane.add(startHr, c);
-    
-    startHrtxt =  new JTextField(5);
-    c.fill = GridBagConstraints.HORIZONTAL;
-    c.weightx = 0.5;
-    c.gridx = 3;
-    c.gridy = 0;
-    pane.add(startHrtxt, c);
-    
-  
-    
-    runHr = new JLabel("Run Hr: ");
-    c.fill = GridBagConstraints.HORIZONTAL;
-    c.weightx = 0.5;
-    c.gridx = 4;
-    c.gridy = 0;
-    pane.add(runHr, c);
-    
-    
-    runHrtxt =  new JTextField(5);
-    c.fill = GridBagConstraints.HORIZONTAL;
-    c.weightx = 0.5;
-    c.gridx = 5;
-    c.gridy = 0;
-    pane.add(runHrtxt, c);
-    
-   
+    // c.weightx = 0.5;
+    c.gridx = 1;
+    c.gridy = 1;
+    c.insets = new Insets(15, 0, 0, 0);
+    pane.add(startDrive, c);
 
 
 
@@ -89,12 +74,12 @@ public class MiddlePanel extends JPanel implements ActionListener {
     // TODO Auto-generated method stub
     System.out.print("is clicked");
     JButton whichButton = (JButton) e.getSource();
-    if (whichButton == FastStop) {
+    if (whichButton == startPiu) {
       if (textListener != null) {
         textListener.textEmitted("Hello\n");
       }
       // textPanel2.appendText("HELLO\n");
-    } else if (whichButton == byeB) {
+    } else if (whichButton == startDrive) {
       if (textListener != null) {
         textListener.textEmitted("BYE\n");
       }

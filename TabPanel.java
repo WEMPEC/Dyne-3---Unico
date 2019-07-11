@@ -29,24 +29,19 @@ import java.awt.event.KeyEvent;
 
 public class TabPanel extends JPanel {
 
-  private TabCool coolTab;
+  // private TabCool coolTab;
   private TabAbs AbsTab;
   private TabPiu tabPiu;
   private TabFaults faultsTab;
+  private int tabHeight;
+  private int tabWidth;
 
   public TabPanel() {
-
+    tabHeight = 700;
+    tabWidth = 550;
     JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
     ImageIcon icon = createImageIcon("");
 
-    JTabbedPane Cool = new JTabbedPane(JTabbedPane.TOP);
-    tabbedPane.addTab("Cool/ Lube", null, Cool, null);
-    JPanel panel = new JPanel();
-    GroupLayout gl_panel = new GroupLayout(panel);
-    Cool.addTab("Detail", null, panel, null);
-    coolTab = new TabCool(panel, gl_panel);
-    panel.setLayout(coolTab.getGlpanel());
-    panel.setPreferredSize(new Dimension(550, 400));
 
     // abs//////////////////////////
     JTabbedPane Abs = new JTabbedPane(JTabbedPane.TOP);
@@ -60,9 +55,9 @@ public class TabPanel extends JPanel {
 
     AbsTab = new TabAbs(panel_1, gbl_panel_1, panel_2, gbl_panel_2);
     panel_1.setLayout(gbl_panel_1);
-    panel_1.setPreferredSize(new Dimension(450, 700));
+    panel_1.setPreferredSize(new Dimension(tabWidth, tabHeight));
     panel_2.setLayout(gbl_panel_2);
-    panel_2.setPreferredSize(new Dimension(450, 700));
+    panel_2.setPreferredSize(new Dimension(tabWidth, tabHeight));
 
 
     // Piu
@@ -84,9 +79,9 @@ public class TabPanel extends JPanel {
     tabPiu = new TabPiu(panel_3, gbl_panel_3, panel_4, gbl4);
     // panel_3.setLayout(gbl_panel_3);
     panel_3.setLayout(tabPiu.getGlpanel());
-    panel_3.setPreferredSize(new Dimension(450, 700));
+    panel_3.setPreferredSize(new Dimension(tabWidth, tabHeight));
     panel_4.setLayout(gbl4);
-    panel_4.setPreferredSize(new Dimension(450, 700));
+    panel_4.setPreferredSize(new Dimension(tabWidth, tabHeight));
 
 
     //// Faults
@@ -97,25 +92,17 @@ public class TabPanel extends JPanel {
     tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
     JPanel panel_6 = new JPanel();
     GridBagLayout gbl_panel_5 = new GridBagLayout();
-    // GridBagLayout gbl_panel_2 = new GridBagLayout();
     Faults.addTab("Values", null, panel_6, null);
-
-    // Abs.addTab("Limits & SetPoints", null, panel_2, null);
-
     faultsTab = new TabFaults(panel_6, gbl_panel_5);
     panel_6.setLayout(gbl_panel_5);
-    panel_6.setPreferredSize(new Dimension(450, 700));
-
-    // JComponent panel2 = makeTextPanel("Faults");
-    // tabbedPane.addTab("Faults", icon, panel2, "Does twice as much nothing");
-    // tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+    panel_6.setPreferredSize(new Dimension(tabWidth, tabHeight));
 
     JComponent panel3 = makeTextPanel("Panel #3");
     tabbedPane.addTab("Tab 3", icon, panel3, "Still does nothing");
     tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
 
     JComponent panel4 = makeTextPanel("Panel #4 (has a preferred size of 410 x 50).");
-    panel4.setPreferredSize(new Dimension(410, 50));
+    panel4.setPreferredSize(new Dimension(tabWidth, tabHeight));
     tabbedPane.addTab("Tab 4", icon, panel4, "Does nothing at all");
     tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
 

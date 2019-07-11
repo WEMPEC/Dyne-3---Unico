@@ -86,7 +86,7 @@ public class MainFrame extends JFrame {
 
     // change the entire window size.
 
-    setSize(800, 1000);
+    setSize(1100, 1000);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
 

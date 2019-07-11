@@ -13,8 +13,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class TabCool {
-private  GroupLayout gl_panel ;
-private  JPanel panel;
+  private GroupLayout gl_panel;
+  private JPanel panel;
+
   public TabCool(JPanel panel, GroupLayout gl_panel) {
     // TODO Auto-generated constructor stub
     this.gl_panel = gl_panel;
@@ -41,81 +42,75 @@ private  JPanel panel;
     separator.setToolTipText("ok");
     separator.setOrientation(SwingConstants.VERTICAL);
 
-    //OR Comms BAD
+    // OR Comms BAD
     JLabel lblCommsOk = createJLabel("CommsOK: ", Color.BLACK, Color.green);
     lblCommsOk.setBorder(BorderFactory.createBevelBorder(0));
     lblCommsOk.setFont(new Font("Times New Roman", Font.BOLD, 16));
-   // lblCommsOk.setSize(40, 10);
-//OR Fault
+    // lblCommsOk.setSize(40, 10);
+    // OR Fault
     JLabel lblReady = createJLabel("Ready", Color.BLACK, Color.green);
     lblReady.setBorder(BorderFactory.createBevelBorder(0));
     lblReady.setFont(new Font("Times New Roman", Font.BOLD, 16));
 
-//OR CS write enable
+    // OR CS write enable
     JLabel lblAcdWriteEnable = createJLabel("AcD Write Enable", Color.BLACK, Color.green);
     lblAcdWriteEnable.setBorder(BorderFactory.createBevelBorder(0));
     lblAcdWriteEnable.setFont(new Font("Times New Roman", Font.BOLD, 16));
 
-//stopped
+    // stopped
     JLabel lblPressOk = createJLabel("Press OK", Color.BLACK, Color.green);
     lblPressOk.setBorder(BorderFactory.createBevelBorder(0));
     lblPressOk.setBackground(new Color(0, 255, 0));
     lblPressOk.setFont(new Font("Times New Roman", Font.BOLD, 16));
 
-//OR press low---new label is needed in deactivated mode.
+    // OR press low---new label is needed in deactivated mode.
     JLabel lblLubesystem = new JLabel("LubeSystem: ");
     lblLubesystem.setFont(new Font("Times New Roman", Font.BOLD, 16));
     lblLubesystem.setFont(new Font("Times New Roman", Font.BOLD, 16));
 
-    //May be added in lube?
+    // May be added in lube?
     JLabel lblNewLabel = new JLabel("New label");
-    //Set align
-  //  GroupLayout gl_panel = new GroupLayout(panel);
-    gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-        .addGroup(gl_panel.createSequentialGroup().addGap(42)
-            .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_panel.createSequentialGroup().addComponent(btnNewButton).addGap(1)
-                    .addComponent(btnNewButton_1))
-                .addComponent(lblCoolsyst).addComponent(lblNewLabel).addComponent(lblLubesystem))
-            .addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-            .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-                .addComponent(lblCoolsystStatus)
-                .addGroup(gl_panel.createSequentialGroup()
-                    .addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-                        .addComponent(lblPressOk, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-                           160, Short.MAX_VALUE)
-                        .addComponent(lblCommsOk, GroupLayout.DEFAULT_SIZE,
-                            160, Short.MAX_VALUE)
-                        .addComponent(lblReady, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-                            GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblAcdWriteEnable, Alignment.LEADING,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGap(39).addComponent(separator, GroupLayout.PREFERRED_SIZE, 130,
-                        GroupLayout.PREFERRED_SIZE)))
-            .addGap(51)));
-
+    // Set align
+    // GroupLayout gl_panel = new GroupLayout(panel);
+    gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
+        .createSequentialGroup().addContainerGap()
+        .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+            .addGroup(gl_panel.createSequentialGroup().addComponent(lblLubesystem)
+                .addContainerGap(381, Short.MAX_VALUE))
+            .addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+                .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                    .addGroup(gl_panel.createSequentialGroup().addComponent(btnNewButton)
+                        .addPreferredGap(ComponentPlacement.RELATED).addComponent(btnNewButton_1))
+                    .addComponent(lblCoolsyst).addComponent(lblNewLabel))
+                .addPreferredGap(ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                    .addComponent(lblReady, GroupLayout.PREFERRED_SIZE, 233,
+                        GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCommsOk, GroupLayout.PREFERRED_SIZE, 233,
+                        GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCoolsystStatus)
+                    .addComponent(lblAcdWriteEnable, GroupLayout.PREFERRED_SIZE, 233,
+                        GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPressOk, GroupLayout.PREFERRED_SIZE, 233,
+                        GroupLayout.PREFERRED_SIZE))
+                .addGap(36)))));
     gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
         .createSequentialGroup().addContainerGap()
-        .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblCoolsystStatus)
-            .addComponent(lblCoolsyst))
-        .addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-            .createSequentialGroup()
-            .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_panel.createSequentialGroup().addGap(19).addComponent(separator,
-                    GroupLayout.PREFERRED_SIZE, 400,
-                    GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_panel.createSequentialGroup().addGap(9).addComponent(lblCommsOk)
-                    .addPreferredGap(ComponentPlacement.RELATED).addComponent(lblReady)
-                    .addPreferredGap(ComponentPlacement.RELATED).addComponent(lblAcdWriteEnable)))
-            .addPreferredGap(ComponentPlacement.RELATED).addComponent(lblPressOk)
-            .addPreferredGap(ComponentPlacement.RELATED))
-            .addGroup(gl_panel.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
+        .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblCoolsyst)
+            .addComponent(lblCoolsystStatus))
+        .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+            .addGroup(gl_panel.createSequentialGroup().addGap(6).addComponent(lblCommsOk)
+                .addPreferredGap(ComponentPlacement.RELATED).addComponent(lblReady)
+                .addPreferredGap(ComponentPlacement.RELATED).addComponent(lblAcdWriteEnable))
+            .addGroup(gl_panel.createSequentialGroup().addPreferredGap(ComponentPlacement.UNRELATED)
                 .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(btnNewButton_1).addComponent(btnNewButton))
-                .addGap(26).addComponent(lblLubesystem).addGap(1).addComponent(lblNewLabel)))
-        .addContainerGap(29, Short.MAX_VALUE)));
-   
+                    .addComponent(btnNewButton_1).addComponent(btnNewButton))))
+        .addPreferredGap(ComponentPlacement.RELATED).addComponent(lblPressOk).addGap(58)
+        .addComponent(lblLubesystem).addGap(29).addComponent(lblNewLabel)
+        .addContainerGap(176, Short.MAX_VALUE)));
+
   }
+
   private JLabel createJLabel(String text, Color textColor, Color backgroundColor) {
     JLabel labeltemp = new JLabel(text);
     // set align
@@ -128,6 +123,7 @@ private  JPanel panel;
 
     return labeltemp;
   }
+
   /**
    * @return the gl_panel
    */
