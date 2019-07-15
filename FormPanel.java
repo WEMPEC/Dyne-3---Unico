@@ -28,11 +28,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class FormPanel extends JPanel {
   private FormListener formev;
-  private JLabel headerLabel, imageLabel;
+  private JLabel headerLabel, imageLabel, loadNotify, temp;
   private JTextField headertextField;
   private Image image;
   private JButton stopDrive, stopPiu, savebutton, loadbutton;
@@ -46,6 +48,8 @@ public class FormPanel extends JPanel {
     headertextField = new JTextField("WEMPEC CELL4 170KW");
     reset = new JButton("RESET");
     reset.setFont((new Font("Times New Roman", Font.BOLD, 17)));
+    loadNotify = new JLabel("load Notify message");
+    temp = new JLabel("Save Notify Message");
     try {
       image = ImageIO.read(new File("letter.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
     } catch (IOException e) {
@@ -70,26 +74,32 @@ public class FormPanel extends JPanel {
     savebutton.setSize(200, 50);
     LoadButton fileUpload = new LoadButton(savebutton, loadbutton);
     savebutton.addActionListener(new ActionListener() {
-      JLabel temp = new JLabel();
+      // temp = new JLabel();
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        j.setFileFilter(filter);
         j.setPreferredSize(new Dimension(800, 600));
-     
+
         // invoke the showsSaveDialog function to show the save dialog
         int r = j.showSaveDialog(null);
-      
+
         // if the user selects a file
         if (r == JFileChooser.APPROVE_OPTION)
 
         {
           // set the label to the path of the selected file
-          temp.setText(j.getSelectedFile().getAbsolutePath());
+          temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + "successfully");
         }
+
         // if the user cancelled the operation
-        else
-          temp.setText("the user cancelled the operation");
+        else if (j.getSelectedFile() == null) {
+          temp.setText("SAVE operation cancel");
+        } else {
+          temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + "Failed");
+        }
 
       }
     });
@@ -102,38 +112,54 @@ public class FormPanel extends JPanel {
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         j.setPreferredSize(new Dimension(800, 600));
         j.setFont((new Font("Times New Roman", Font.BOLD, 26)));
-        // invoke the showsOpenDialog function to show the save dialog
-//        int r = j.showOpenDialog(null);
-//
-//        // if the user selects a file
-//        if (r == JFileChooser.APPROVE_OPTION)
-//
-//        {
-//          // set the label to the path of the selected file
-//          temp.setText(j.getSelectedFile().getAbsolutePath());
-//        }
-//        // if the user cancelled the operation
-//        else
-//          temp.setText("the user cancelled the operation");
-//      }
+        j.setFileFilter(filter);
 
-        JTextArea log = new JTextArea ();
+        // invoke the showsOpenDialog function to show the save dialog
+        // int r = j.showOpenDialog(null);
+        //
+        // // if the user selects a file
+        // if (r == JFileChooser.APPROVE_OPTION)
+        //
+        // {
+        // // set the label to the path of the selected file
+        // temp.setText(j.getSelectedFile().getAbsolutePath());
+        // }
+        // // if the user cancelled the operation
+        // else
+        // temp.setText("the user cancelled the operation");
+        // }
+
+
 
         int returnVal = j.showOpenDialog(null);
 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = j.getSelectedFile();
-            //This is where a real application would open the file.
-            log.append("Opening: " + file.getName() + "." );
-        } else {
-            log.append("Open command cancelled by user." );
-        }
-        log.setCaretPosition(log.getDocument().getLength());
 
-      }});
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+          File file = j.getSelectedFile();
+          // This is where a real application would open the file.
+          loadNotify.setText("Load: " + file.getName() + " successfully.");
+          try {
+            ParseXml loadinfo = new ParseXml (file);
+          } catch (ParserConfigurationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+          
+          
+        } else {
+          if (j.getSelectedFile() == null) {
+            loadNotify.setText("LOAD operation cancel");
+          } else {
+            loadNotify.setText("Load" + j.getSelectedFile().getAbsolutePath() + "Failed");
+          }
+        }
+      }
+
+    });
 
     tab = new TabPanel();
     // call layout manager to determines the perferred size.
@@ -187,13 +213,30 @@ public class FormPanel extends JPanel {
     gc.anchor = GridBagConstraints.LINE_START;
 
     gc.weighty = 0;
-    gc.insets = new Insets(0, 300, 0, 0);
+    gc.insets = new Insets(0, 195, 0, 0);
+
+    add(loadNotify, gc);
+    gc.insets = new Insets(0, 100, 0, 0);
     add(savebutton, gc);
     gc.anchor = GridBagConstraints.LINE_END;
-    gc.insets = new Insets(0, 0, 0, 360);
+    gc.insets = new Insets(0, 0, 0, 500);
     add(loadbutton, gc);
 
+    // gc.insets = new Insets(0, 0, 0, 300);
+    //
+    // add(temp, gc);
+
     // // THIRD ROW
+    gc.anchor = GridBagConstraints.LINE_START;
+
+    gc.gridx = 0;
+    gc.gridy++;
+
+    // add(loadNotify, gc);
+    gc.insets = new Insets(0, 195, 0, 0);
+
+    add(temp, gc);
+
     //
     gc.anchor = GridBagConstraints.LINE_START;
 
