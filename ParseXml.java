@@ -6,6 +6,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.*;
 
 public class ParseXml {
+  
+  private Node absNodeVDD;
+  private NodeList absVDDList;
 
   public ParseXml(File inputFile) throws ParserConfigurationException {
     // File inputFile = new File(fileName);
@@ -15,15 +18,19 @@ public class ParseXml {
       Document doc = dBuilder.parse(inputFile);
       doc.getDocumentElement().normalize();
       System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-      NodeList nList = doc.getElementsByTagName("values_to_Drive_Dsp");
+      
+      absVDDList = doc.getElementsByTagName("values_to_Drive_Dsp");
       System.out.println("----------------------------");
 
-      for (int temp = 0; temp < nList.getLength(); temp++) {
-        Node nNode = nList.item(temp);
+      for (int temp = 0; temp < absVDDList.getLength(); temp++) {
+        Node nNode = absVDDList.item(temp);
         System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
         if (nNode.getNodeType() == Node.ELEMENT_NODE) {
           Element eElement = (Element) nNode;
+          String name = eElement.getElementsByTagName("name").item(0).getTextContent();
+          String sent = eElement.getElementsByTagName("sent").item(0).getTextContent();
+          String receive = eElement.getElementsByTagName("received").item(0).getTextContent();
           System.out
               .println(" Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
           System.out
@@ -32,8 +39,12 @@ public class ParseXml {
               "received  : " + eElement.getElementsByTagName("received").item(0).getTextContent());
           // System.out.println(
           // "Marks : " + eElement.getElementsByTagName("marks").item(0).getTextContent());
+         // absNodeVDD.appendChild(eElement);
+         
+        
         }
       }
+      
       NodeList limitList = doc.getElementsByTagName("Limits");
       System.out.println("----------------------------");
 
@@ -90,6 +101,13 @@ public class ParseXml {
 
     } catch (Exception e) {
     }
+  }
+
+  /**
+   * @return the absVDDList
+   */
+  public NodeList getAbsVDDList() {
+    return absVDDList;
   }
 
 }

@@ -40,9 +40,11 @@ public class FormPanel extends JPanel {
   private JButton stopDrive, stopPiu, savebutton, loadbutton;
   private JButton reset;
   private TabPanel tab;
-
+  private Boolean upload;
+  private ParseXml loadinfo;
 
   public FormPanel() {
+    upload = false;
     headerLabel = new JLabel("  Dyne 3");
     headerLabel.setFont(new Font("Courier New", Font.BOLD, 46));
     headertextField = new JTextField("WEMPEC CELL4 170KW");
@@ -143,13 +145,14 @@ public class FormPanel extends JPanel {
           // This is where a real application would open the file.
           loadNotify.setText("Load: " + file.getName() + " successfully.");
           try {
-            ParseXml loadinfo = new ParseXml (file);
+            loadinfo = new ParseXml(file);
+            upload = true;
           } catch (ParserConfigurationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
           }
-          
-          
+
+
         } else {
           if (j.getSelectedFile() == null) {
             loadNotify.setText("LOAD operation cancel");
