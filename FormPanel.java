@@ -120,23 +120,6 @@ public class FormPanel extends JPanel {
         j.setFont((new Font("Times New Roman", Font.BOLD, 26)));
         j.setFileFilter(filter);
 
-        // invoke the showsOpenDialog function to show the save dialog
-        // int r = j.showOpenDialog(null);
-        //
-        // // if the user selects a file
-        // if (r == JFileChooser.APPROVE_OPTION)
-        //
-        // {
-        // // set the label to the path of the selected file
-        // temp.setText(j.getSelectedFile().getAbsolutePath());
-        // }
-        // // if the user cancelled the operation
-        // else
-        // temp.setText("the user cancelled the operation");
-        // }
-
-
-
         int returnVal = j.showOpenDialog(null);
 
 
@@ -147,7 +130,8 @@ public class FormPanel extends JPanel {
           try {
             loadinfo = new ParseXml(file);
             upload = true;
-          } catch (ParserConfigurationException e) {
+            tab = new TabPanel(loadinfo, upload);
+          }catch (ParserConfigurationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
           }
@@ -164,9 +148,10 @@ public class FormPanel extends JPanel {
 
     });
 
-    tab = new TabPanel();
+   
     // call layout manager to determines the perferred size.
-
+    tab = new TabPanel(loadinfo, upload);
+    
     Dimension dim = getPreferredSize();
 
     // resize the panel.

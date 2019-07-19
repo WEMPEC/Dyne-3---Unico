@@ -35,14 +35,22 @@ public class TabPanel extends JPanel {
   private TabFaults faultsTab;
   private int tabHeight;
   private int tabWidth;
+  private ParseXml loadinfo;
+  private Boolean checkupload;
 
-  public TabPanel() {
+  public TabPanel(ParseXml loadinfo, Boolean upload) {
     tabHeight = 700;
     tabWidth = 550;
     JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
     ImageIcon icon = createImageIcon("");
+    this.loadinfo = loadinfo;
+    checkupload = upload;
 
-
+    //pass the load file info to the abs tab
+//    if (checkupload) {
+//      loadinfo.
+//    }
+    
     // abs//////////////////////////
     JTabbedPane Abs = new JTabbedPane(JTabbedPane.TOP);
     tabbedPane.addTab("Abs", null, Abs, null);
@@ -53,7 +61,7 @@ public class TabPanel extends JPanel {
     JPanel panel_2 = new JPanel();
     Abs.addTab("Limits & SetPoints", null, panel_2, null);
 
-    AbsTab = new TabAbs(panel_1, gbl_panel_1, panel_2, gbl_panel_2);
+    AbsTab = new TabAbs(panel_1, gbl_panel_1, panel_2, gbl_panel_2, checkupload, loadinfo);
     panel_1.setLayout(gbl_panel_1);
     panel_1.setPreferredSize(new Dimension(tabWidth, tabHeight));
     panel_2.setLayout(gbl_panel_2);
