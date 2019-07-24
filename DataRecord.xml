@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABS>
+	<values_to_Drive_Dsp>
+		<name>Abort Rate (rpm/sec)</name>
+		<sent>1000</sent>
+		<received>500</received>
+	</values_to_Drive_Dsp>
+
+	<values_to_Drive_Dsp>
+		<name>TorqFull Scale AE (Nm)</name>
+		<sent>12000</sent>
+		<received>5200</received>
+	</values_to_Drive_Dsp>
+
+	<values_to_Drive_Dsp>
+		<name>Torq Zero AE (Nm)</name>
+		<sent>13000</sent>
+		<received>5300</received>
+	</values_to_Drive_Dsp>
+
+	<values_to_Drive_Dsp>
+		<name>Not Used </name>
+		<sent>14000</sent>
+		<received>5400</received>
+	</values_to_Drive_Dsp>
+	
+	<values_to_Drive_Dsp>
+		<name>Not Used </name>
+		<sent>15000</sent>
+		<received>5500</received>
+	</values_to_Drive_Dsp>
+
+	<values_to_Drive_Dsp>
+		<name>Tcmd Filt Const (ms) </name>
+		<sent>16000</sent>
+		<received>5600</received>
+	</values_to_Drive_Dsp>
+
+	<Config_Status>
+		<name>Cfg Ready</name>
+		<status>ON</status>
+	</Config_Status>
+
+	<Config_Status>
+		<name>Cfg Done</name>
+		<status>ON</status>
+	</Config_Status>
+
+	<Config_Status>
+		<name>Tors Ready</name>
+		<status>ON</status>
+	</Config_Status>
+
+	<Config_Status>
+		<name>Tors Sent</name>
+		<status>ON</status>
+	</Config_Status>
+
+	<Torq>
+		<name>CAL Signal AE (Nm)</name>
+		<value>400</value>
+	</Torq>
+
+	<Torq>
+		<name>Torq F/B AE(Nm)</name>
+		<value> 0.1</value>
+	</Torq>
+
+	<States>
+		<name>Converter</name>
+		<value>400</value>
+	</States>
+
+	<States>
+		<name>Converter</name>
+		<value>410</value>
+	</States>
+
+	<States>
+		<name>Inverter</name>
+		<value>1400</value>
+	</States>
+
+	<States>
+		<name>Host Contr</name>
+		<value>2400</value>
+	</States>
+
+	<Limits>
+		<name>Min Speed (rpm)</name>
+		<value>0</value>
+	</Limits>
+
+	<Limits>
+		<name>Def Speed (rpm)</name>
+		<value>0</value>
+	</Limits>
+
+	<Limits>
+		<name>Max Speed (rpm)</name>
+		<value>2400</value>
+	</Limits>
+
+	<Limits>
+		<name>Min Torque (Nm)</name>
+		<value>-400</value>
+	</Limits>
+
+	<Limits>
+		<name>Def Torque (Nm)</name>
+		<value>100</value>
+	</Limits>
+
+	<Limits>
+		<name>Max Torque (Nm)</name>
+		<value>400</value>
+	</Limits>
+
+	<Limits>
+		<name>Min AccelLim (rpm/s)</name>
+		<value>20</value>
+	</Limits>
+
+	<Limits>
+		<name>Def AccelLim (rpm/s)</name>
+		<value>-400</value>
+	</Limits>
+
+	<Limits>
+		<name>Max AccelLim (rpm/s)</name>
+		<value>1000</value>
+	</Limits>
+
+	<Limits>
+		<name>Min Interia (kgm2)</name>
+		<value>-0.25</value>
+	</Limits>
+
+	<Limits>
+		<name>Default Interia (kgm2)</name>
+		<value>10.00</value>
+	</Limits>
+
+	<Limits>
+		<name>Max Interia (kgm2)</name>
+		<value>10.00</value>
+	</Limits>
+</ABS>
