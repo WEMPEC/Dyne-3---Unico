@@ -9,8 +9,13 @@ public class ParseXml {
 
   private Node absNodeVDD;
   private NodeList absVDDList;
+  private NodeList torqCalList;
   private int[] sentVal;
   private int[] recVal;
+  private String[] states;
+  private String[] torq;
+private String [] configStatus;
+
 
   public ParseXml(File inputFile) throws ParserConfigurationException {
     // File inputFile = new File(fileName);
@@ -52,7 +57,27 @@ public class ParseXml {
 
 
         }
+        System.out.println("sentval in parse" + sentVal[2]);
       }
+
+      NodeList torqDuo = doc.getElementsByTagName("Torq");
+      System.out.println("----------------------------");
+      torq = new String[torqDuo.getLength()];
+      for (int temp = 0; temp < torqDuo.getLength(); temp++) {
+        Node nNode = torqDuo.item(temp);
+        System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+          Element eElement = (Element) nNode;
+          String torqVal = eElement.getElementsByTagName("value").item(0).getTextContent();
+          torq[temp] = torqVal;
+          System.out
+              .println(" Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
+          System.out.println(
+              "value : " + eElement.getElementsByTagName("value").item(0).getTextContent());
+        }
+      }
+
 
       NodeList limitList = doc.getElementsByTagName("Limits");
       System.out.println("----------------------------");
@@ -70,16 +95,19 @@ public class ParseXml {
         }
       }
 
-      NodeList torqCalList = doc.getElementsByTagName("States");
+      torqCalList = doc.getElementsByTagName("States");
       System.out.println("----------------------------");
-
+      states = new String[torqCalList.getLength()];
       for (int temp = 0; temp < torqCalList.getLength(); temp++) {
         Node nNode = torqCalList.item(temp);
         System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
         if (nNode.getNodeType() == Node.ELEMENT_NODE) {
           Element eElement = (Element) nNode;
+          String statesVal = eElement.getElementsByTagName("value").item(0).getTextContent();
+
           // System.out.println("Student roll no : " + eElement.getAttribute("rollno"));
+          states[temp] = statesVal;
           System.out
               .println(" Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
           System.out.println(
@@ -91,13 +119,16 @@ public class ParseXml {
 
       NodeList statusList = doc.getElementsByTagName("Config_Status");
       System.out.println("----------------------------");
-
+      configStatus = new String [statusList.getLength()];
       for (int temp = 0; temp < statusList.getLength(); temp++) {
         Node nNode = statusList.item(temp);
         System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
         if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+          
           Element eElement = (Element) nNode;
+          String configVal = eElement.getElementsByTagName("status").item(0).getTextContent();
+          configStatus [temp] = configVal;
           // System.out.println("Student roll no : " + eElement.getAttribute("rollno"));
           System.out
               .println(" Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
@@ -110,6 +141,20 @@ public class ParseXml {
 
     } catch (Exception e) {
     }
+  }
+
+  /**
+   * @return the configStatus
+   */
+  public String[] getConfigStatus() {
+    return configStatus;
+  }
+
+  /**
+   * @param configStatus the configStatus to set
+   */
+  public void setConfigStatus(String[] configStatus) {
+    this.configStatus = configStatus;
   }
 
   /**
@@ -147,4 +192,31 @@ public class ParseXml {
     this.recVal = recVal;
   }
 
+  /**
+   * @return the states
+   */
+  public String[] getStates() {
+    return states;
+  }
+
+  /**
+   * @param states the states to set
+   */
+  public void setStates(String[] states) {
+    this.states = states;
+  }
+
+  /**
+   * @return the torq
+   */
+  public String[] getTorq() {
+    return torq;
+  }
+
+  /**
+   * @param torq the torq to set
+   */
+  public void setTorq(String[] torq) {
+    this.torq = torq;
+  }
 }
