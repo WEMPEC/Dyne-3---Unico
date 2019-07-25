@@ -14,7 +14,9 @@ public class ParseXml {
   private int[] recVal;
   private String[] states;
   private String[] torq;
-private String [] configStatus;
+  private String[] configStatus;
+  private String[] limits;
+
 
 
   public ParseXml(File inputFile) throws ParserConfigurationException {
@@ -81,13 +83,15 @@ private String [] configStatus;
 
       NodeList limitList = doc.getElementsByTagName("Limits");
       System.out.println("----------------------------");
-
+      limits = new String[limitList.getLength()];
       for (int temp = 0; temp < limitList.getLength(); temp++) {
         Node nNode = limitList.item(temp);
         System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
         if (nNode.getNodeType() == Node.ELEMENT_NODE) {
           Element eElement = (Element) nNode;
+          String tempv = eElement.getElementsByTagName("value").item(0).getTextContent();
+          limits[temp] = tempv;
           System.out
               .println(" Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
           System.out.println(
@@ -119,16 +123,16 @@ private String [] configStatus;
 
       NodeList statusList = doc.getElementsByTagName("Config_Status");
       System.out.println("----------------------------");
-      configStatus = new String [statusList.getLength()];
+      configStatus = new String[statusList.getLength()];
       for (int temp = 0; temp < statusList.getLength(); temp++) {
         Node nNode = statusList.item(temp);
         System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
         if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-          
+
           Element eElement = (Element) nNode;
           String configVal = eElement.getElementsByTagName("status").item(0).getTextContent();
-          configStatus [temp] = configVal;
+          configStatus[temp] = configVal;
           // System.out.println("Student roll no : " + eElement.getAttribute("rollno"));
           System.out
               .println(" Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
@@ -218,5 +222,19 @@ private String [] configStatus;
    */
   public void setTorq(String[] torq) {
     this.torq = torq;
+  }
+  
+  /**
+   * @return the limits
+   */
+  public String[] getLimits() {
+    return limits;
+  }
+
+  /**
+   * @param limits the limits to set
+   */
+  public void setLimits(String[] limits) {
+    this.limits = limits;
   }
 }
