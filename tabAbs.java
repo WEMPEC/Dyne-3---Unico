@@ -26,6 +26,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Highlighter;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.NodeList;
 import javax.swing.GroupLayout.Alignment;
@@ -53,6 +54,7 @@ public class TabAbs implements ChangeListener {
   private String[] tempstates;
   private String[] tempTorq;
   private String[] tempConfigStatus;
+  private String[] tempLimit;
 
   public TabAbs(JPanel panel, GridBagLayout gl_panel, JPanel panel1, GridBagLayout gl_panel1,
       Boolean checkupload, ParseXml loadinfo) {
@@ -69,6 +71,7 @@ public class TabAbs implements ChangeListener {
       tempstates = loadinfo.getStates();
       tempTorq = loadinfo.getTorq();
       tempConfigStatus = loadinfo.getConfigStatus();
+      tempLimit = loadinfo.getLimits();
       // absVDD = loadinfo.getAbsVDDList();
     } else {
       tempsent = new int[6];
@@ -79,6 +82,11 @@ public class TabAbs implements ChangeListener {
       for (int i = 0; i < tempConfigStatus.length; ++i) {
         tempConfigStatus[i] = "OFF";
       }
+      tempLimit = new String[15];
+      for (int i = 0; i < tempLimit.length; ++i) {
+        tempLimit[i] = "0";
+      }
+      
     }
     // System.out.println(tempConfigStatus[1]);
     // absVDD = getAbsVDDList();
@@ -350,6 +358,7 @@ public class TabAbs implements ChangeListener {
     panel_1.add(spinner_10, gbc_spinner_10);
 
     JLabel lblConfig = new JLabel("Config");
+    lblConfig.setFont(new Font("Times New Roman", Font.BOLD, 17));
 
     GridBagConstraints gbc_lblConfig = new GridBagConstraints();
     gbc_lblConfig.insets = new Insets(0, 0, 5, 5);
@@ -387,8 +396,8 @@ public class TabAbs implements ChangeListener {
     gbc_spinner_11.gridy = 7;
     panel_1.add(spinner_11, gbc_spinner_11);
 
-    textField_1 = new JTextField();
-    textField_1.setText(tempTorq[0]);
+    textField_1 = new JTextField("% V");
+    // textField_1.setText();
     GridBagConstraints gbc_textField_1 = new GridBagConstraints();
     gbc_textField_1.insets = new Insets(0, 0, 5, 5);
     gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
@@ -397,8 +406,8 @@ public class TabAbs implements ChangeListener {
     panel_1.add(textField_1, gbc_textField_1);
     textField_1.setColumns(10);
 
-    textField_2 = new JTextField();
-    textField_1.setText(tempTorq[1]);
+    textField_2 = new JTextField("# W");
+    // textField_2.setText(tempTorq[1]);
     textField_2.setColumns(10);
     GridBagConstraints gbc_textField_2 = new GridBagConstraints();
     gbc_textField_2.insets = new Insets(0, 0, 5, 5);
@@ -424,8 +433,7 @@ public class TabAbs implements ChangeListener {
     panel_1.add(lblStates, gbc_lblStates);
 
     JLabel lblCalSignalAe = new JLabel("CAL Signal AE (Nm)");
-    lblAbortRaterpmsec.setFont(new Font("Times New Roman", Font.BOLD, 17));
-
+    lblCalSignalAe.setFont(new Font("Times New Roman", Font.BOLD, 17));
     GridBagConstraints gbc_lblCalSignalAe = new GridBagConstraints();
     gbc_lblCalSignalAe.anchor = GridBagConstraints.EAST;
     gbc_lblCalSignalAe.insets = new Insets(0, 0, 5, 5);
@@ -444,8 +452,7 @@ public class TabAbs implements ChangeListener {
     panel_1.add(textField_6, gbc_textField_6);
 
     JLabel lblConverter = new JLabel("Converter");
-    lblAbortRaterpmsec.setFont(new Font("Times New Roman", Font.BOLD, 17));
-
+    lblConverter.setFont(new Font("Times New Roman", Font.BOLD, 17));
     GridBagConstraints gbc_lblConverter = new GridBagConstraints();
     gbc_lblConverter.insets = new Insets(0, 0, 5, 5);
     gbc_lblConverter.anchor = GridBagConstraints.EAST;
@@ -574,21 +581,21 @@ public class TabAbs implements ChangeListener {
 
 
     // Table
-    String data[][] = {{"Name", "Set", "Min", "Max"}, {"Min Speed (rpm) ", "?", "0", "10000"},
-        {"Def Speed (rpm) ", "?", "0", "10000"}, {"Max Speed (rpm) ", "?", "0", "1000"},
-        {"Min Torque(Nm) ", "?", "0", "10000"}, {"Def Torque (Nm) ", "?", "0", "10000"},
-        {"Max Torque (Nm) ", "?", "0", "1000"},
-        {"Min Acceleration Limit (rpm/s)", "?", "0", "10000"},
-        {"Def Acceleration Limit (rpm/s)", "?", "0", "10000"},
-        {"Max Acceleration Limit (rpm/s)", "?", "0", "70"},
-        {"Minium Inertia (kgm2)", "?", "0", "70"}, {"Default Inertia (kgm2)", "?", "0", "700"},
-        {"Max Inertia (kgm2)", "?", "0", "70"}};
+    String data[][] = {{"Name", "Set", "Min", "Max"}, {"Min Speed (rpm) ", tempLimit [0], "0", "10000"},
+        {"Def Speed (rpm) ", tempLimit [1], "0", "10000"}, {"Max Speed (rpm) ", tempLimit [2], "0", "1000"},
+        {"Min Torque(Nm) ", tempLimit [3], "0", "10000"}, {"Def Torque (Nm) ", tempLimit [4], "0", "10000"},
+        {"Max Torque (Nm) ", tempLimit [5], "0", "1000"},
+        {"Min Acceleration Limit (rpm/s)", tempLimit [6], "0", "10000"},
+        {"Def Acceleration Limit (rpm/s)", tempLimit [7], "0", "10000"},
+        {"Max Acceleration Limit (rpm/s)", tempLimit [8], "0", "70"},
+        {"Minium Inertia (kgm2)", tempLimit [9], "0", "70"}, {"Default Inertia (kgm2)", tempLimit [10], "0", "700"},
+        {"Max Inertia (kgm2)", tempLimit [11], "0", "70"}};
     String column[] = {"ID", "NAME", "SALARY", "set"};
 
     gbl_panel_2.columnWidths = new int[] {600, 0};
     gbl_panel_2.rowHeights = new int[] {800, 0};
     gbl_panel_2.columnWeights = new double[] {0.0, Double.MIN_VALUE};
-    gbl_panel_2.rowWeights = new double[] {0.0, Double.MIN_VALUE};
+    gbl_panel_2.rowWeights = new double[] {10.0, Double.MIN_VALUE};
     panel_2.setLayout(gbl_panel_2);
 
     // = new GridBagLayout();
@@ -598,12 +605,12 @@ public class TabAbs implements ChangeListener {
         return column == 1 ? true : false;
       }
     };
-
+    table.setFont(new Font("Times New Roman", Font.BOLD, 17));
+    table.setRowHeight(50);
     table.setColumnSelectionAllowed(true);
-
-    table.getColumnModel().getColumn(0).setPreferredWidth(300);
-    table.getColumnModel().getColumn(1).setPreferredWidth(180);
-    table.getColumnModel().getColumn(3).setPreferredWidth(220);
+    table.getColumnModel().getColumn(0).setPreferredWidth(330);
+    table.getColumnModel().getColumn(1).setPreferredWidth(120);
+    table.getColumnModel().getColumn(3).setPreferredWidth(120);
 
     GridBagConstraints gbc_table = new GridBagConstraints();
     gbc_table.fill = GridBagConstraints.BOTH;
