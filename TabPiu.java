@@ -1,7 +1,10 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
@@ -22,7 +25,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class TabPiu extends JPanel {
 
   private JPanel panel3;
-  private GroupLayout gl_Detail;
+  private GridBagLayout gl_Detail;
   private JTextField textField_9, textField_10, textField_11, textField_3, textField_8, textField;
   private JButton button_1, button;
   private JLabel lblNewLabel_2, lblNewLabel, lblNewLabel_1, lblLimAct, label_1, label_2, label;
@@ -31,116 +34,183 @@ public class TabPiu extends JPanel {
   private GridBagLayout gbl_panel_2;
   private JPanel panel_2;
 
-  public TabPiu(JPanel panel, GroupLayout gl_panel, JPanel panel1, GridBagLayout gl_panel1) {
+  public TabPiu(JPanel panel, GridBagLayout gl_panel, JPanel panel1, GridBagLayout gl_panel1) {
     // TODO Auto-generated constructor stub
     this.gl_Detail = gl_panel;
     this.panel3 = panel;
     panel_2 = panel1;
     gbl_panel_2 = gl_panel1;
 
-    tglbtnNewToggleButton = new JCheckBox("Volt Mode");
 
-    label = new JLabel("Vslew Cmd");
-
-    JSeparator separator = new JSeparator();
-    separator.setBackground(new Color(0, 0, 0));
-    textField_8 = new JTextField();
-    textField_3 = new JTextField();
-    textField = new JTextField();
-
+    gl_Detail.columnWidths = new int[] {112, 112, 112, 112, 0, 0, 0, 0, 0, 0};
+    gl_Detail.rowHeights = new int[] {50, 55, 26, 8, 22, 20, 0, 0, 0, 0, 514, 0};
+    gl_Detail.columnWeights =
+        new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    gl_Detail.rowWeights =
+        new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    panel3.setLayout(gl_Detail);
 
 
-    lblNewLabel_1 = new JLabel("Vslew Cmd");
-    lblNewLabel_2 = new JLabel("Vslew Cmd");
-    lblNewLabel = new JLabel("Vslew Cmd");
-    lblLimAct = new JLabel("Vslew Cmd");
+    JButton button1 = new JButton("Bus ON");
+    button1.setBackground(Color.GREEN);
+    GridBagConstraints gbc_button1 = new GridBagConstraints();
+    gbc_button1.anchor = GridBagConstraints.WEST;
+    gbc_button1.insets = new Insets(0, 35, 0, 0);
+    gbc_button1.gridheight = 2;
+    gbc_button1.gridx = 3;
+    gbc_button1.gridy = 0;
+    panel3.add(button1, gbc_button1);
 
-    label_1 = new JLabel("Vslew Cmd");
-    label_2 = new JLabel("Vslew Cmd");
-    button = new JButton();
-    button_1 = new JButton();
-    JLabel lblNewLabel_2 = new JLabel("Vslew Cmd");
+    JButton button2 = new JButton("Start PIU");
+    button2.setBackground(Color.GREEN);
+    GridBagConstraints gbc_button2 = new GridBagConstraints();
+    gbc_button2.anchor = GridBagConstraints.WEST;
+    // gbc_button2.insets = new Insets(10, 0, 0, 0);
+    gbc_button2.gridheight = 2;
+    gbc_button2.gridx = 4;
+    gbc_button2.gridy = 0;
+    panel3.add(button2, gbc_button2);
 
-    JLabel lblNewLabel_1 = new JLabel("Vslew Act");
+    button1.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent arg0) {}
+    });
 
     JButton button = new JButton("Bus Off");
+    button.setForeground(Color.WHITE);
+    button.setBackground(Color.RED);
+    GridBagConstraints gbc_button = new GridBagConstraints();
+    gbc_button.anchor = GridBagConstraints.WEST;
+    gbc_button.insets = new Insets(0, 70, 0, 0);
+    gbc_button.gridheight = 2;
+    gbc_button.gridx = 2;
+    gbc_button.gridy = 0;
+    panel3.add(button, gbc_button);
+
     button.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {}
     });
-    button.setForeground(Color.WHITE);
-    button.setBackground(Color.RED);
 
-    JButton button_1 = new JButton("Bus On");
-    button_1.setBackground(Color.GREEN);
+    JLabel lblNewLabel_2 = new JLabel("Vslew Cmd");
+    lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 17));
+    GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+    // gbc_lblNewLabel_2.anchor = GridBagConstraints.NORTH;
+    gbc_lblNewLabel_2.fill = GridBagConstraints.HORIZONTAL;
+    // gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+    // gbc_lblNewLabel_2.gridwidth = 2;
+    gbc_lblNewLabel_2.gridx = 0;
+    gbc_lblNewLabel_2.gridy = 1;
+    panel3.add(lblNewLabel_2, gbc_lblNewLabel_2);
 
-    JLabel lblLimAct = new JLabel("Lim Act");
+    textField_8 = new JTextField("");
+    GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+    textField_8.setColumns(2);// gbc_textField_1.insets = new Insets(0, 0, 5, 5);
+    gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+    gbc_textField_1.gridx = 1;
+    gbc_textField_1.gridy = 1;
+    panel3.add(textField_8, gbc_textField_1);
+    
 
-    textField = new JTextField();
-    textField.setColumns(10);
+    JLabel lblNewLabel_1 = new JLabel("Vslew Act");
+    GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+    lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 17));
+    gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
+    // gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 0);
+    gbc_lblNewLabel_1.gridx = 0;
+    gbc_lblNewLabel_1.gridy = 2;
+    panel3.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-    textField_3 = new JTextField();
-    textField_3.setColumns(10);
+    textField_9 = new JTextField("");
+    GridBagConstraints gbc_textField_9 = new GridBagConstraints();
+     gbc_textField_1.insets = new Insets(0, 0, 0, 0);
+    gbc_textField_9.fill = GridBagConstraints.HORIZONTAL;
+    gbc_textField_9.gridx = 1;
+    gbc_textField_9.gridy = 2;
+    panel3.add(textField_9, gbc_textField_9);
+    textField_9.setColumns(5);
 
-    textField_8 = new JTextField();
-    textField_8.setColumns(10);
+    JLabel lblNewLabel_3 = new JLabel("Lim Act");
+    GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+    lblNewLabel_3.setFont(new Font("Times New Roman", Font.BOLD, 17));
+    gbc_lblNewLabel_3.fill = GridBagConstraints.HORIZONTAL;
+gbc_lblNewLabel_3.insets = new Insets(0, 5, 0, 0);
+    gbc_lblNewLabel_3.gridx = 2;
+    gbc_lblNewLabel_3.gridy = 2;
+    panel3.add(lblNewLabel_3, gbc_lblNewLabel_3);
+
+    textField_10 = new JTextField("");
+    GridBagConstraints gbc_textField_10 = new GridBagConstraints();
+     gbc_textField_10.insets = new Insets(0, 70, 0, 0);
+    gbc_textField_10.fill = GridBagConstraints.HORIZONTAL;
+    gbc_textField_10.gridx = 2;
+    gbc_textField_10.gridy = 2;
+    panel3.add(textField_10, gbc_textField_10);
+    textField_10.setColumns(5);
+
+ JToggleButton tglbtnNewToggleButton = new JToggleButton("Volt Mode");
+    GridBagConstraints gbc_tglbtnNewToggleButton = new GridBagConstraints();
+    gbc_tglbtnNewToggleButton.anchor = GridBagConstraints.NORTH;
+    gbc_tglbtnNewToggleButton.fill = GridBagConstraints.HORIZONTAL;
+    gbc_tglbtnNewToggleButton.insets = new Insets(0, 0, 0, 0);
+    gbc_tglbtnNewToggleButton.gridx = 4;
+    gbc_tglbtnNewToggleButton.gridy = 2;
+    panel3.add(tglbtnNewToggleButton, gbc_tglbtnNewToggleButton);
 
 
-    label = new JLabel("Volt Cmd");
-
-
+    JSeparator separator = new JSeparator();
     separator.setBackground(new Color(0, 0, 0));
-
-    textField_9 = new JTextField();
-    textField_9.setEnabled(false);
-    textField_9.setColumns(10);
-
-    textField_10 = new JTextField();
-    textField_10.setEnabled(false);
-    textField_10.setColumns(10);
-
-    textField_11 = new JTextField();
-    textField_11.setEnabled(false);
-    textField_11.setColumns(10);
-
-    label_1 = new JLabel("Curr Lim");
-    label_1.setEnabled(false);
-    label_2 = new JLabel("IntRes mOhm");
-    label_2.setEnabled(false);
-    label.setEnabled(false);
+    GridBagConstraints gbc_separator = new GridBagConstraints();
+    gbc_separator.fill = GridBagConstraints.BOTH;
+    gbc_separator.insets = new Insets(0, 0, 5, 5);
+    gbc_separator.gridwidth = 6;
+    gbc_separator.gridx = 0;
+    gbc_separator.gridy = 4;
+    panel3.add(separator, gbc_separator);
 
 
 
-    JSlider framesPerSecond = new JSlider(JSlider.VERTICAL, 0, 30, 15);
-    // framesPerSecond.addChangeListener(this);
-    framesPerSecond.setMajorTickSpacing(10);
-    framesPerSecond.setPaintTicks(true);
+   
+    JLabel label_4 = new JLabel("PowerLim (kw)");
+    GridBagConstraints gbc_label_4 = new GridBagConstraints();
+    gbc_label_4.fill = GridBagConstraints.BOTH;
+    gbc_label_4.insets = new Insets(0, 0, 5, 5);
+    gbc_label_4.gridx = 3;
+    gbc_label_4.gridy = 7;
+    panel3.add(label_4, gbc_label_4);
+
+    JLabel label_8 = new JLabel("PowerLim (kw)");
+    GridBagConstraints gbc_label_8 = new GridBagConstraints();
+    gbc_label_8.fill = GridBagConstraints.BOTH;
+    gbc_label_8.insets = new Insets(0, 0, 5, 5);
+    gbc_label_8.gridx = 2;
+    gbc_label_8.gridy = 9;
+    panel3.add(label_8, gbc_label_8);
+
+    JLabel label_5 = new JLabel("PowerLim (kw)");
+    GridBagConstraints gbc_label_5 = new GridBagConstraints();
+    gbc_label_5.fill = GridBagConstraints.BOTH;
+    gbc_label_5.insets = new Insets(0, 0, 5, 5);
+    gbc_label_5.gridx = 1;
+    gbc_label_5.gridy = 9;
+    panel3.add(label_5, gbc_label_5);
+
+    JSlider slider_4 = new JSlider(SwingConstants.VERTICAL, 0, 30, 15);
+    slider_4.setPaintTicks(true);
+    slider_4.setPaintLabels(true);
+    slider_4.setMinorTickSpacing(1);
+    slider_4.setMajorTickSpacing(10);
+    GridBagConstraints gbc_slider_4 = new GridBagConstraints();
+    gbc_slider_4.anchor = GridBagConstraints.WEST;
+    gbc_slider_4.fill = GridBagConstraints.VERTICAL;
+    gbc_slider_4.insets = new Insets(0, 0, 0, 5);
+    gbc_slider_4.gridx = 4;
+    gbc_slider_4.gridy = 10;
+    slider_4.setEnabled(false);
+    panel3.add(slider_4, gbc_slider_4);
 
 
-    // framesPerSecond.setLabelTable( labelTable );
-
-    framesPerSecond.setPaintLabels(true);
-    // Turn on labels at major tick marks.
-    framesPerSecond.setMajorTickSpacing(10);
-    framesPerSecond.setMinorTickSpacing(1);
-    framesPerSecond.setPaintTicks(true);
-    framesPerSecond.setPaintLabels(true);
-
-    JLabel lblPowerlimkw = new JLabel("Volt Cmd (kw)");
-
-    JLabel label_3 = new JLabel("Curr Lim (A)");
-
-    JLabel label_4 = new JLabel("Speed (rpm)");
-
-    JLabel label_5 = new JLabel("Torque (Nm)");
 
     JSlider slider = new JSlider(JSlider.VERTICAL, 0, 30, 15);
-    // framesPerSecond.addChangeListener(this);
-    framesPerSecond.setMajorTickSpacing(10);
-    framesPerSecond.setPaintTicks(true);
-    framesPerSecond.setEnabled(false);
-
-
-    // slider.setLabelTable( labelTable );
+    // slider.setLabelTable(labelTable);
 
     slider.setPaintLabels(true);
     // Turn on labels at major tick marks.
@@ -148,24 +218,41 @@ public class TabPiu extends JPanel {
     slider.setMinorTickSpacing(1);
     slider.setPaintTicks(true);
     slider.setPaintLabels(true);
+    GridBagConstraints gbc_slider = new GridBagConstraints();
+    gbc_slider.fill = GridBagConstraints.VERTICAL;
+    gbc_slider.insets = new Insets(0, 10, 0, 0);
+    gbc_slider.gridx = 2;
+    gbc_slider.gridy = 10;
     slider.setEnabled(false);
-    JSlider slider_1 = new JSlider(SwingConstants.VERTICAL, 0, 30, 15);
-    slider_1.setPaintTicks(true);
-    slider_1.setPaintLabels(true);
-    slider_1.setMinorTickSpacing(1);
-    slider_1.setMajorTickSpacing(10);
-
+    panel3.add(slider, gbc_slider);
 
     JSlider slider_2 = new JSlider(SwingConstants.VERTICAL, 0, 30, 15);
     slider_2.setPaintTicks(true);
     slider_2.setPaintLabels(true);
     slider_2.setMinorTickSpacing(1);
     slider_2.setMajorTickSpacing(10);
-    slider_2.setEnabled(false);
+    GridBagConstraints gbc_slider_2 = new GridBagConstraints();
+    gbc_slider_2.anchor = GridBagConstraints.WEST;
+    gbc_slider_2.fill = GridBagConstraints.VERTICAL;
+    gbc_slider_2.insets = new Insets(0, 10, 0, 0);
+    gbc_slider_2.gridx = 1;
+    gbc_slider_2.gridy = 10;
+   slider_2.setEnabled(false);
+    panel3.add(slider_2, gbc_slider_2);
 
-    JLabel label_8 = new JLabel("PowerLim (kw)");
-    // JProgressBar progressBar = new JProgressBar();
-
+    JSlider slider_1 = new JSlider(SwingConstants.VERTICAL, 0, 30, 15);
+    slider_1.setPaintTicks(true);
+    slider_1.setPaintLabels(true);
+    slider_1.setMinorTickSpacing(1);
+    slider_1.setMajorTickSpacing(10);
+    GridBagConstraints gbc_slider_1 = new GridBagConstraints();
+    gbc_slider_1.anchor = GridBagConstraints.WEST;
+    gbc_slider_1.fill = GridBagConstraints.VERTICAL;
+    gbc_slider_1.insets = new Insets(0, 20, 0, 0);
+    gbc_slider_1.gridx = 0;
+    gbc_slider_1.gridy = 10;
+    panel3.add(slider_1, gbc_slider_1);
+    slider_1.setEnabled(false);
 
     tglbtnNewToggleButton.addActionListener(new ActionListener() {
 
@@ -173,154 +260,19 @@ public class TabPiu extends JPanel {
       public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
         boolean isclicked = tglbtnNewToggleButton.isSelected();
-        label_1.setEnabled(isclicked);
-        label_2.setEnabled(isclicked);
-        label.setEnabled(isclicked);
+//        label_1.setEnabled(isclicked);
+//        label_2.setEnabled(isclicked);
+//        label.setEnabled(isclicked);
         slider.setEnabled(isclicked);
 
-        framesPerSecond.setEnabled(isclicked);
-        slider_2.setEnabled(isclicked);
-        
+        slider_1.setEnabled(isclicked);
+       slider_2.setEnabled(isclicked);
+        slider_4.setEnabled(isclicked);
+
       }
 
     });
 
-
-
-    gl_Detail
-        .setHorizontalGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_Detail.createSequentialGroup().addContainerGap()
-                .addComponent(separator, GroupLayout.PREFERRED_SIZE, 394,
-                    GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
-            .addGroup(gl_Detail.createSequentialGroup().addGap(32).addGroup(gl_Detail
-                .createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_Detail.createSequentialGroup()
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING, false)
-                        .addComponent(lblLimAct, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-                            GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblNewLabel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-                            GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblNewLabel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-                            84, Short.MAX_VALUE))
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-                        .addComponent(textField_8, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textField, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textField_3, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(ComponentPlacement.RELATED, 360, Short.MAX_VALUE))
-                .addGroup(gl_Detail.createSequentialGroup().addGroup(gl_Detail
-                    .createParallelGroup(Alignment.LEADING)
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
-                        .addComponent(label_1, GroupLayout.PREFERRED_SIZE, 84,
-                            GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label, GroupLayout.PREFERRED_SIZE, 84,
-                            GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label_2, GroupLayout.PREFERRED_SIZE, 84,
-                            GroupLayout.PREFERRED_SIZE))
-                    .addComponent(framesPerSecond, GroupLayout.PREFERRED_SIZE, 87,
-                        GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING).addComponent(
-                        textField_11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                        GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_Detail.createSequentialGroup().addGroup(gl_Detail
-                            .createParallelGroup(Alignment.LEADING)
-                            .addComponent(textField_9, GroupLayout.PREFERRED_SIZE,
-                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField_10, GroupLayout.PREFERRED_SIZE,
-                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGroup(gl_Detail.createSequentialGroup().addGap(32)
-                                .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
-                                    .addComponent(slider, GroupLayout.PREFERRED_SIZE, 99,
-                                        GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label_3, GroupLayout.PREFERRED_SIZE, 107,
-                                        GroupLayout.PREFERRED_SIZE))))
-                            .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE)
-                            .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-                                .addComponent(tglbtnNewToggleButton, 0, 0, Short.MAX_VALUE)
-                                .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING, false)
-                                    .addComponent(button, Alignment.LEADING,
-                                        GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-                                        Short.MAX_VALUE)
-                                    .addComponent(button_1, Alignment.LEADING,
-                                        GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-                                .addGroup(gl_Detail.createSequentialGroup()
-                                    .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-                                        .addGroup(gl_Detail.createSequentialGroup().addGap(2)
-                                            .addComponent(slider_1, GroupLayout.PREFERRED_SIZE, 99,
-                                                GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(label_8, GroupLayout.PREFERRED_SIZE, 168,
-                                            GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(ComponentPlacement.RELATED)
-                                    .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(label_5, GroupLayout.PREFERRED_SIZE, 150,
-                                            GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(slider_2, GroupLayout.PREFERRED_SIZE, 99,
-                                            GroupLayout.PREFERRED_SIZE)))))))
-                .addComponent(lblPowerlimkw)).addGap(154)
-                .addComponent(label_4, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
-                .addGap(63)));
-    gl_Detail.setVerticalGroup(gl_Detail.createParallelGroup(Alignment.LEADING)
-        .addGroup(gl_Detail.createSequentialGroup().addGap(19)
-            .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel_2)
-                .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                    GroupLayout.PREFERRED_SIZE)
-                .addComponent(button_1))
-            .addGroup(gl_Detail
-                .createParallelGroup(
-                    Alignment.LEADING)
-                .addGroup(gl_Detail.createSequentialGroup().addGap(18)
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
-                        .addComponent(lblNewLabel_1)
-                        .addComponent(textField_8, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addGroup(
-                        gl_Detail.createParallelGroup(Alignment.BASELINE).addComponent(lblLimAct)
-                            .addComponent(textField_3, GroupLayout.PREFERRED_SIZE,
-                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(
-                        separator, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
-                    .addGap(21)
-                    .addGroup(gl_Detail.createParallelGroup(Alignment.LEADING).addComponent(label)
-                        .addComponent(textField_9, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                .addGroup(gl_Detail.createSequentialGroup().addGap(30).addComponent(button)))
-            .addPreferredGap(ComponentPlacement.RELATED)
-            .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING)
-                .addComponent(tglbtnNewToggleButton)
-                .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE).addComponent(label_1)
-                    .addComponent(textField_10, GroupLayout.PREFERRED_SIZE,
-                        GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-            .addGap(15)
-            .addGroup(gl_Detail.createParallelGroup(Alignment.TRAILING).addGroup(gl_Detail
-                .createSequentialGroup()
-                .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE).addComponent(label_2)
-                    .addComponent(textField_11, GroupLayout.PREFERRED_SIZE,
-                        GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGap(27)
-                .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(lblPowerlimkw).addComponent(label_3)
-                    .addComponent(label_8, GroupLayout.PREFERRED_SIZE, 39,
-                        GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_5, GroupLayout.PREFERRED_SIZE, 39,
-                        GroupLayout.PREFERRED_SIZE)))
-                .addComponent(label_4, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-            .addGap(18)
-            .addGroup(gl_Detail.createParallelGroup(Alignment.BASELINE)
-                .addComponent(slider, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)
-                .addComponent(slider_2, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)
-                .addComponent(framesPerSecond, GroupLayout.PREFERRED_SIZE, 390,
-                    GroupLayout.PREFERRED_SIZE)
-                .addComponent(slider_1, GroupLayout.PREFERRED_SIZE, 390,
-                    GroupLayout.PREFERRED_SIZE))
-            .addContainerGap()));
 
 
     String data[][] = {{"Name", "Set", "Min", "Max"}, {"Min Speed (rpm) ", "?", "0", "10000"},
@@ -340,15 +292,15 @@ public class TabPiu extends JPanel {
     gbl_panel_2.columnWeights = new double[] {0.0, Double.MIN_VALUE};
     gbl_panel_2.rowWeights = new double[] {0.0, Double.MIN_VALUE};
     panel_2.setLayout(gbl_panel_2);
-    
+
     JTable table = new JTable(data, column) {
       @Override
       public boolean isCellEditable(int row, int column) {
-          return column == 1  ? true : false;
+        return column == 1 ? true : false;
       }
-  };
+    };
     table.setColumnSelectionAllowed(true);
-    
+
     table.getColumnModel().getColumn(0).setPreferredWidth(300);
     table.getColumnModel().getColumn(1).setPreferredWidth(180);
     table.getColumnModel().getColumn(3).setPreferredWidth(220);
@@ -357,15 +309,10 @@ public class TabPiu extends JPanel {
     gbc_table.gridx = 0;
     gbc_table.gridy = 0;
     panel_2.add(table, gbc_table);
-   
+
   }
 
-  /**
-   * @return the gl_panel
-   */
-  public GroupLayout getGlpanel() {
-    return gl_Detail;
-  }
+
 
   public boolean isCellEditable(int row, int col) {
     return true;
