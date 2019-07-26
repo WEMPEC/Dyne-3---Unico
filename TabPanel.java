@@ -38,20 +38,28 @@ public class TabPanel extends JPanel {
   private ParseXml loadinfo;
   private Boolean checkupload;
 
-  public TabPanel(ParseXml loadinfo, Boolean upload) {
+  public TabPanel(ParseXml loadinfo) {
     tabHeight = 700;
     tabWidth = 550;
     JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
     ImageIcon icon = createImageIcon("");
     this.loadinfo = loadinfo;
-    checkupload = upload;
+    checkupload =false;
+    if (loadinfo != null) {
+      checkupload = true;
+    }
+     // pass the load file info to the abs tab
+    // if (checkupload) {
+    // loadinfo.
+    // }
 
-    //pass the load file info to the abs tab
-//    if (checkupload) {
-//      loadinfo.
-//    }
-    
     // abs//////////////////////////
+    System.out.println("tab panel if load " + checkupload  );
+    if (loadinfo != null) {
+      
+      System.out.println( "value [2]" + loadinfo.getSentVal() [2] );  }
+    
+  
     JTabbedPane Abs = new JTabbedPane(JTabbedPane.TOP);
     tabbedPane.addTab("Abs", null, Abs, null);
     JPanel panel_1 = new JPanel();
@@ -77,7 +85,7 @@ public class TabPanel extends JPanel {
     tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
     // JPanel panel_4 = new JPanel();
-    GroupLayout gbl_panel_3 = new GroupLayout(panel_3);
+    GridBagLayout gbl_panel_3 = new GridBagLayout();
     // GroupLayout gbl_panel_4 = new GroupLayout(panel_4);
     JPanel panel_4 = new JPanel();
     Piu.addTab("Limits & SetPoints", null, panel_4, null);
@@ -86,7 +94,7 @@ public class TabPanel extends JPanel {
 
     tabPiu = new TabPiu(panel_3, gbl_panel_3, panel_4, gbl4);
     // panel_3.setLayout(gbl_panel_3);
-    panel_3.setLayout(tabPiu.getGlpanel());
+    panel_3.setLayout(gbl_panel_3);
     panel_3.setPreferredSize(new Dimension(tabWidth, tabHeight));
     panel_4.setLayout(gbl4);
     panel_4.setPreferredSize(new Dimension(tabWidth, tabHeight));
@@ -121,6 +129,8 @@ public class TabPanel extends JPanel {
     tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
   }
 
+
+
   protected JComponent makeTextPanel(String text) {
     JPanel panel = new JPanel(false);
     JLabel filler = new JLabel(text);
@@ -152,6 +162,11 @@ public class TabPanel extends JPanel {
     labeltemp.setBackground(backgroundColor);
 
     return labeltemp;
+  }
+
+  public TabAbs setAbsTab() {
+    // TODO Auto-generated method stub
+    return AbsTab;
   }
 
 
