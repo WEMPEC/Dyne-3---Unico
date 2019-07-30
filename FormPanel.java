@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -106,6 +107,14 @@ public class FormPanel extends JPanel {
         if (r == JFileChooser.APPROVE_OPTION)
 
         {
+          try {
+            FileWriter fw = new FileWriter(j.getSelectedFile() + ".xml");
+            fw.write("test content");
+            fw.close();
+          } catch (Exception ex) {
+            ex.printStackTrace();
+          }
+
           // set the label to the path of the selected file
           temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + "successfully");
         }
@@ -236,9 +245,9 @@ public class FormPanel extends JPanel {
             loadinfo = new ParseXml(file);
             upload = true;
             tab.removeAll();
-            tab = new TabPanel(loadinfo);           
+            tab = new TabPanel(loadinfo);
             gc.anchor = GridBagConstraints.LINE_START;
-            
+
             gc.gridx = 0;
             gc.gridy = 4;
             gc.weightx = 1;
@@ -263,7 +272,32 @@ public class FormPanel extends JPanel {
 
     });
 
+    reset.addActionListener(new ActionListener() {
 
+      @Override
+      public void actionPerformed(ActionEvent arg0) {
+        try {
+          loadinfo = new ParseXml(null);
+        } catch (ParserConfigurationException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        // TODO Auto-generated method stub
+        tab.removeAll();
+        System.out.print("reset is clicked");
+        tab = new TabPanel(null);
+        gc.anchor = GridBagConstraints.LINE_START;
+        revalidate();
+        gc.gridx = 0;
+        gc.gridy = 3;
+        gc.weightx = 1;
+        gc.weighty = 0.5;
+        gc.insets = new Insets(0, 10, 0, 0);
+        add(tab, gc);
+
+
+      }
+    });
 
     //
 
