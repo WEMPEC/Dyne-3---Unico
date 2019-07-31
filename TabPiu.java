@@ -378,6 +378,19 @@ public class TabPiu extends JPanel {
       }
     };
     table.setColumnSelectionAllowed(true);
+table.setFont(new Font("Times New Roman", Font.BOLD, 17));
+    table.setRowHeight(50);
+    table.setColumnSelectionAllowed(true);
+    table.getColumnModel().getColumn(0).setPreferredWidth(330);
+    table.getColumnModel().getColumn(1).setPreferredWidth(120);
+    table.getColumnModel().getColumn(3).setPreferredWidth(120);
+
+    GridBagConstraints gbc_table = new GridBagConstraints();
+    gbc_table.fill = GridBagConstraints.BOTH;
+    gbc_table.gridx = 0;
+
+    gbc_table.gridy = 0;
+    panel_2.add(table, gbc_table);
 
     table.getColumnModel().getColumn(0).setPreferredWidth(300);
     table.getColumnModel().getColumn(1).setPreferredWidth(180);
