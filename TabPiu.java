@@ -53,7 +53,7 @@ public class TabPiu extends JPanel {
     gbl_panel_2 = gl_panel1;
 
 
-    gl_Detail.columnWidths = new int[] {112, 112, 112, 112, 0, 0, 0, 0, 0, 0};
+    gl_Detail.columnWidths = new int[] {120, 90, 90, 120, 0, 0, 0, 0, 0, 0};
     gl_Detail.rowHeights = new int[] {30, 35, 26, 8, 22, 50, 0, 0, 0, 0, 514, 0};
     gl_Detail.columnWeights =
         new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -61,45 +61,45 @@ public class TabPiu extends JPanel {
         new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     panel3.setLayout(gl_Detail);
 
-
-    JButton button1 = new JButton("Bus ON");
-    button1.setBackground(Color.GREEN);
-    GridBagConstraints gbc_button1 = new GridBagConstraints();
-    gbc_button1.anchor = GridBagConstraints.WEST;
-    gbc_button1.insets = new Insets(0, 35, 0, 0);
-    gbc_button1.gridheight = 2;
-    gbc_button1.gridx = 3;
-    gbc_button1.gridy = 0;
-    panel3.add(button1, gbc_button1);
-
-    JButton button2 = new JButton("Start PIU");
-    button2.setBackground(Color.GREEN);
-    GridBagConstraints gbc_button2 = new GridBagConstraints();
-    gbc_button2.anchor = GridBagConstraints.WEST;
-    gbc_button2.insets = new Insets(0, 0, 0, 60);
-    gbc_button2.gridheight = 2;
-    gbc_button2.gridx = 4;
-    gbc_button2.gridy = 0;
-    panel3.add(button2, gbc_button2);
-
-    button1.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent arg0) {}
-    });
-
-    JButton button = new JButton("Bus Off");
-    button.setForeground(Color.WHITE);
-    button.setBackground(Color.RED);
-    GridBagConstraints gbc_button = new GridBagConstraints();
-    gbc_button.anchor = GridBagConstraints.WEST;
-    gbc_button.insets = new Insets(0, 70, 0, 0);
-    gbc_button.gridheight = 2;
-    gbc_button.gridx = 2;
-    gbc_button.gridy = 0;
-    panel3.add(button, gbc_button);
-
-    button.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent arg0) {}
-    });
+//
+//    JButton button1 = new JButton("Bus ON");
+//    button1.setBackground(Color.GREEN);
+//    GridBagConstraints gbc_button1 = new GridBagConstraints();
+//    gbc_button1.anchor = GridBagConstraints.WEST;
+//    gbc_button1.insets = new Insets(0, 0, 30, 40);
+//    gbc_button1.gridheight = 2;
+//    gbc_button1.gridx = 3;
+//    gbc_button1.gridy = 0;
+//    panel3.add(button1, gbc_button1);
+//
+//    JButton button2 = new JButton("Start PIU");
+//    button2.setBackground(Color.GREEN);
+//    GridBagConstraints gbc_button2 = new GridBagConstraints();
+//    gbc_button2.anchor = GridBagConstraints.WEST;
+//    gbc_button2.insets = new Insets(0, 80, 30, 0);
+//    gbc_button2.gridheight = 2;
+//    gbc_button2.gridx = 3;
+//    gbc_button2.gridy = 0;
+//    panel3.add(button2, gbc_button2);
+//
+//    button1.addActionListener(new ActionListener() {
+//      public void actionPerformed(ActionEvent arg0) {}
+//    });
+//
+//    JButton button = new JButton("Bus Off");
+//    button.setForeground(Color.WHITE);
+//    button.setBackground(Color.RED);
+//    GridBagConstraints gbc_button = new GridBagConstraints();
+//    gbc_button.anchor = GridBagConstraints.WEST;
+//    gbc_button.insets = new Insets(0, 50, 30, 0);
+//    gbc_button.gridheight = 2;
+//    gbc_button.gridx = 2;
+//    gbc_button.gridy = 0;
+//    panel3.add(button, gbc_button);
+//
+//    button.addActionListener(new ActionListener() {
+//      public void actionPerformed(ActionEvent arg0) {}
+//    });
 
     JLabel lblNewLabel_2 = new JLabel("Vslew Cmd");
     lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 17));
@@ -159,10 +159,10 @@ public class TabPiu extends JPanel {
 
     JToggleButton tglbtnNewToggleButton = new JToggleButton("Volt Mode");
     GridBagConstraints gbc_tglbtnNewToggleButton = new GridBagConstraints();
-    gbc_tglbtnNewToggleButton.anchor = GridBagConstraints.NORTH;
-    gbc_tglbtnNewToggleButton.fill = GridBagConstraints.HORIZONTAL;
-    gbc_tglbtnNewToggleButton.insets = new Insets(0, 0, 0, 60);
-    gbc_tglbtnNewToggleButton.gridx = 4;
+    gbc_tglbtnNewToggleButton.anchor = GridBagConstraints.WEST;  
+   // gbc_tglbtnNewToggleButton.fill = GridBagConstraints.HORIZONTAL;
+    gbc_tglbtnNewToggleButton.insets = new Insets(0, 30, 0, 0);
+    gbc_tglbtnNewToggleButton.gridx = 3;
     gbc_tglbtnNewToggleButton.gridy = 2;
     panel3.add(tglbtnNewToggleButton, gbc_tglbtnNewToggleButton);
 
@@ -183,7 +183,8 @@ public class TabPiu extends JPanel {
     label_4.setFont(new Font("Times New Roman", Font.BOLD, 14));
     GridBagConstraints gbc_label_4 = new GridBagConstraints();
     gbc_label_4.fill = GridBagConstraints.BOTH;
-    gbc_label_4.insets = new Insets(10, 15, 0, 0);
+    gbc_label_4.anchor = GridBagConstraints.EAST;
+    gbc_label_4.insets = new Insets(10, 5, 0, 0);
     gbc_label_4.gridx = 0;
     gbc_label_4.gridy = 4;
     panel3.add(label_4, gbc_label_4);
@@ -197,11 +198,14 @@ public class TabPiu extends JPanel {
     spinner.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
     spinner.setEditor(new JSpinner.NumberEditor(spinner, "     "));
     GridBagConstraints gbc_s1 = new GridBagConstraints();
-    gbc_s1.insets = new Insets(0, 10, 0, 15);
+    gbc_s1.anchor = GridBagConstraints.EAST;
+    gbc_s1.insets = new Insets(0, 0, 0, 45);
     gbc_s1.gridx = 0;
     gbc_s1.gridy = 5;
     spinner.setEnabled(false);
     panel3.add(spinner, gbc_s1);
+    
+   
 
 
     JSlider slider_1 = new JSlider(SwingConstants.VERTICAL, 0, 250, 0);
@@ -211,9 +215,9 @@ public class TabPiu extends JPanel {
     slider_1.setMajorTickSpacing(50);
     slider_1.setUI(new MySliderUI(slider_1));
     GridBagConstraints gbc_slider_1 = new GridBagConstraints();
-    gbc_slider_1.anchor = GridBagConstraints.WEST;
-    gbc_slider_1.fill = GridBagConstraints.VERTICAL;
-    gbc_slider_1.insets = new Insets(0, 50, 0, 0);
+    gbc_slider_1.anchor = GridBagConstraints.EAST;
+    gbc_slider_1.fill = GridBagConstraints.VERTICAL;  
+    gbc_slider_1.insets = new Insets(0, 0, 0, 35);
     gbc_slider_1.gridx = 0;
     gbc_slider_1.gridy = 10;
     panel3.add(slider_1, gbc_slider_1);
@@ -247,6 +251,7 @@ public class TabPiu extends JPanel {
     slider_2.setPaintLabels(true);
     slider_2.setMinorTickSpacing(10);
     slider_2.setMajorTickSpacing(50);
+    slider_2.setUI(new MySliderUI(slider_2));   
     GridBagConstraints gbc_slider_2 = new GridBagConstraints();
     gbc_slider_2.anchor = GridBagConstraints.WEST;
     gbc_slider_2.fill = GridBagConstraints.VERTICAL;
@@ -287,6 +292,8 @@ public class TabPiu extends JPanel {
     slider.setMinorTickSpacing(10);
     slider.setPaintTicks(true);
     slider.setPaintLabels(true);
+    slider.setUI(new MySliderUI(slider));   
+    
     GridBagConstraints gbc_slider = new GridBagConstraints();
     gbc_slider.fill = GridBagConstraints.VERTICAL;
     gbc_slider.insets = new Insets(0, 50, 0, 0);
@@ -321,6 +328,7 @@ public class TabPiu extends JPanel {
     slider_4.setPaintLabels(true);
     slider_4.setMinorTickSpacing(1);
     slider_4.setMajorTickSpacing(10);
+    slider_4.setUI(new MySliderUI(slider_4));      
     GridBagConstraints gbc_slider_4 = new GridBagConstraints();
     gbc_slider_4.anchor = GridBagConstraints.WEST;
     gbc_slider_4.fill = GridBagConstraints.VERTICAL;
@@ -368,17 +376,18 @@ public class TabPiu extends JPanel {
     gbl_panel_2.columnWidths = new int[] {600, 0};
     gbl_panel_2.rowHeights = new int[] {800, 0};
     gbl_panel_2.columnWeights = new double[] {0.0, Double.MIN_VALUE};
-    gbl_panel_2.rowWeights = new double[] {0.0, Double.MIN_VALUE};
+    gbl_panel_2.rowWeights = new double[] {10.0, Double.MIN_VALUE};
     panel_2.setLayout(gbl_panel_2);
 
+    
+    // = new GridBagLayout();
     JTable table = new JTable(data, column) {
       @Override
       public boolean isCellEditable(int row, int column) {
         return column == 1 ? true : false;
       }
     };
-    table.setColumnSelectionAllowed(true);
-table.setFont(new Font("Times New Roman", Font.BOLD, 17));
+    table.setFont(new Font("Times New Roman", Font.BOLD, 17));
     table.setRowHeight(50);
     table.setColumnSelectionAllowed(true);
     table.getColumnModel().getColumn(0).setPreferredWidth(330);
@@ -392,14 +401,20 @@ table.setFont(new Font("Times New Roman", Font.BOLD, 17));
     gbc_table.gridy = 0;
     panel_2.add(table, gbc_table);
 
-    table.getColumnModel().getColumn(0).setPreferredWidth(300);
-    table.getColumnModel().getColumn(1).setPreferredWidth(180);
-    table.getColumnModel().getColumn(3).setPreferredWidth(220);
-    GridBagConstraints gbc_table = new GridBagConstraints();
-    gbc_table.fill = GridBagConstraints.BOTH;
-    gbc_table.gridx = 0;
-    gbc_table.gridy = 0;
-    panel_2.add(table, gbc_table);
+
+    
+    
+//
+//    table.setColumnSelectionAllowed(true);
+//
+//    table.getColumnModel().getColumn(0).setPreferredWidth(300);
+//    table.getColumnModel().getColumn(1).setPreferredWidth(180);
+//    table.getColumnModel().getColumn(3).setPreferredWidth(220);
+//    GridBagConstraints gbc_table = new GridBagConstraints();
+//    gbc_table.fill = GridBagConstraints.BOTH;
+//    gbc_table.gridx = 0;
+//    gbc_table.gridy = 0;
+//    panel_2.add(table, gbc_table);
 
   }
 
@@ -418,7 +433,7 @@ table.setFont(new Font("Times New Roman", Font.BOLD, 17));
       Rectangle t = trackRect;
       Point2D start = new Point2D.Float(t.x - t.width, t.y - t.height);
       Point2D end = new Point2D.Float(t.width, t.height);
-      Color[] colors = {Color.cyan, Color.green, Color.yellow, Color.red};
+      Color[] colors = {Color.red, Color.yellow, Color.green, Color.cyan,};
       p = new LinearGradientPaint(start, end, fracs, colors);
       g2d.setPaint(p);
       g2d.fillRect(t.x, t.y, t.width, t.height);
@@ -426,19 +441,18 @@ table.setFont(new Font("Times New Roman", Font.BOLD, 17));
       // calculate how much of the progress bar to fill
       double percentage = (double) slider.getValue() / (double) slider.getMaximum();
 
-      // PAINT THE BACKGROUND
-      // create a gradient paint for the background
-      p = new LinearGradientPaint(start, end, new float[] {0.4f, 0.8f},
-          new Color[] {Color.gray.brighter(), Color.gray.brighter().brighter()});
-      g2d.setPaint(p);
-      g2d.fillRoundRect(t.x, t.y, t.width,
-          t.height - (int) (t.height * percentage), 4, 4);
 
       // PAINT THE FOREGROUND
       // create the gradient paint
       p = new LinearGradientPaint(start, end, fracs, colors);
       g2d.setPaint(p);
       g2d.fillRoundRect(t.x, t.y, t.width, (int) (t.height * percentage), 4, 4);
+      // PAINT THE BACKGROUND
+      // create a gradient paint for the background
+      p = new LinearGradientPaint(start, end, new float[] {0.4f, 0.8f},
+          new Color[] {Color.gray.brighter(), Color.gray.brighter().brighter()});
+      g2d.setPaint(p);
+      g2d.fillRoundRect(t.x, t.y, t.width, t.height - (int) (t.height * percentage), 4, 4);
 
       // fill the progress bar with a rectange of that size, (with curved corners of 4px diameter)
 
