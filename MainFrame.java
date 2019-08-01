@@ -26,7 +26,7 @@ public class MainFrame extends JFrame {
   // private TabPanel tab;
   private JButton btn;
   private FormPanel formPanel;
-  private GraphPanel graphPanel;
+  //private GraphPanel graphPanel;
 
 
 
@@ -85,8 +85,10 @@ public class MainFrame extends JFrame {
     add(btn, ab.SOUTH);
 
     // change the entire window size.
-
-    setSize(1100, 1000);
+    setResizable(true);
+//    setSize(1100, 1000);
+   // JFrame a = new JFrame ();
+   setMinimumSize(new Dimension (1100,1100));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
 
