@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class MainFrame extends JFrame {
   // private TabPanel tab;
   private JButton btn;
   private FormPanel formPanel;
-  //private GraphPanel graphPanel;
+  // private GraphPanel graphPanel;
 
 
 
@@ -74,8 +75,8 @@ public class MainFrame extends JFrame {
 
     add(btn, ab.SOUTH);
 
-
-    formPanel.setPreferredSize(new Dimension(600, 100));
+    setSize(1500, 1030);
+    formPanel.setPreferredSize(new Dimension(600, 200));
     // formPanel.setBackground(Color.ORANGE);
     // gui.add(panel2, BorderLayout.CENTER);
     // add(Box.createRigidArea(new Dimension(10,50)));
@@ -85,10 +86,7 @@ public class MainFrame extends JFrame {
     add(btn, ab.SOUTH);
 
     // change the entire window size.
-    setResizable(true);
-//    setSize(1100, 1000);
-   // JFrame a = new JFrame ();
-   setMinimumSize(new Dimension (1100,1100));
+    // setResizable(true);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
 
@@ -99,19 +97,47 @@ public class MainFrame extends JFrame {
     JMenuBar menubar = new JMenuBar();
     JMenu File = new JMenu("File");
     JMenu View = new JMenu("View");
-    JMenu Window = new JMenu("Window");
+    // JMenu Window = new JMenu("Window");
     JMenu Tools = new JMenu("Tools");
     JMenu Help = new JMenu("Help");
+    File.setFont(new Font("Times New Roman", Font.BOLD, 20));
+    View.setFont(new Font("Times New Roman", Font.BOLD, 20));
+    Tools.setFont(new Font("Times New Roman", Font.BOLD, 20));
+    Help.setFont(new Font("Times New Roman", Font.BOLD, 20));
 
     // initialize each components
-    JMenuItem OpenFile = new JMenuItem("OpenFile");
-    JMenuItem NewFile = new JMenuItem("NewFile");
-    JMenuItem CloseFile = new JMenuItem("CloseFile");
+    JMenuItem OpenFile = new JMenuItem("Load File");
+    OpenFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
+    OpenFile.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent arg0) {
+        // TODO Auto-generated method stub
+        formPanel.getActionLoadListener();
+
+      }
+
+    });
+    //////////Save Function.
+    JMenuItem NewFile = new JMenuItem("Save File");
+    NewFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
+    NewFile.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent arg0) {
+        // TODO Auto-generated method stub
+        formPanel.getActionSaveListener();
+
+      }
+
+    });
+    JMenuItem CloseFile = new JMenuItem("Exit");
+    CloseFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
 
     // Add items to menu bar.
     menubar.add(File);
     menubar.add(View);
-    menubar.add(Window);
+
     menubar.add(Tools);
     menubar.add(Help);
 
