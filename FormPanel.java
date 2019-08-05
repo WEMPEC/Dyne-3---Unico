@@ -38,7 +38,7 @@ import javax.swing.filechooser.FileSystemView;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class FormPanel extends JPanel {
-  private FormListener formev;
+
   private JLabel headerLabel, imageLabel, loadNotify, temp;
   private JTextField headertextField;
   private Image image;
@@ -48,6 +48,7 @@ public class FormPanel extends JPanel {
   private Boolean upload;
   private ParseXml loadinfo;
   private JSpinner spinner;
+  private GridBagConstraints gc;
 
   public FormPanel() {
     JSpinner spinner = new JSpinner();
@@ -65,8 +66,10 @@ public class FormPanel extends JPanel {
     headertextField = new JTextField("WEMPEC CELL4 170KW");
     reset = new JButton("RESET");
     reset.setFont((new Font("Times New Roman", Font.BOLD, 17)));
-    loadNotify = new JLabel("load Notify message");
+    loadNotify = new JLabel("Load Notify Message");
+    loadNotify.setFont((new Font("Times New Roman", Font.BOLD, 18)));
     temp = new JLabel("Save Notify Message");
+    temp.setFont((new Font("Times New Roman", Font.BOLD, 18)));
     try {
       image = ImageIO.read(new File("letter.png")).getScaledInstance(50, 50, Image.SCALE_DEFAULT);
     } catch (IOException e) {
@@ -86,49 +89,7 @@ public class FormPanel extends JPanel {
     stopPiu.setBackground(Color.red);
     stopPiu.setForeground(Color.WHITE);
 
-    savebutton = new JButton("  SAVE ");
-    savebutton.setFont((new Font("Times New Roman", Font.BOLD, 17)));
-    savebutton.setSize(200, 50);
-    LoadButton fileUpload = new LoadButton(savebutton, loadbutton);
-    savebutton.addActionListener(new ActionListener() {
-      // temp = new JLabel();
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        j.setFileFilter(filter);
-        j.setPreferredSize(new Dimension(800, 600));
-
-        // invoke the showsSaveDialog function to show the save dialog
-        int r = j.showSaveDialog(null);
-
-        // if the user selects a file
-        if (r == JFileChooser.APPROVE_OPTION)
-
-        {
-          try {
-            FileWriter fw = new FileWriter(j.getSelectedFile() + ".xml");
-            fw.write("test content");
-            fw.close();
-          } catch (Exception ex) {
-            ex.printStackTrace();
-          }
-
-          // set the label to the path of the selected file
-          temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + "successfully");
-        }
-
-        // if the user cancelled the operation
-        else if (j.getSelectedFile() == null) {
-          temp.setText("SAVE operation cancel");
-        } else {
-          temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + "Failed");
-        }
-
-      }
-    });
-
+  
     // call layout manager to determines the perferred size.
     tab = new TabPanel(loadinfo);
 
@@ -143,13 +104,10 @@ public class FormPanel extends JPanel {
     //
     // public void layout() {
     setLayout(new GridBagLayout());
-    GridBagConstraints gc = new GridBagConstraints();
+    gc = new GridBagConstraints();
     // x from left to right
 
-    loadbutton = new JButton(" LOAD  ");
-    loadbutton.setSize(200, 50);
-    loadbutton.setFont((new Font("Times New Roman", Font.BOLD, 17)));
-    ///////////// first row/////////////////////
+     ///////////// first row/////////////////////
     gc.weightx = 1;
     gc.weighty = 0;
     // fill can be horizontal, vertical, none or both.
@@ -183,17 +141,11 @@ public class FormPanel extends JPanel {
     gc.anchor = GridBagConstraints.LINE_START;
 
     gc.weighty = 0;
-    gc.insets = new Insets(0, 195, 0, 0);
+    gc.insets = new Insets(0, 10, 0, 0);
 
     add(loadNotify, gc);
     gc.insets = new Insets(0, 100, 0, 0);
-    add(savebutton, gc);
-    gc.anchor = GridBagConstraints.LINE_END;
-    gc.insets = new Insets(0, 0, 0, 500);
-    add(loadbutton, gc);
-    gc.insets = new Insets(0, 0, 0, 200);
-    add(spinner, gc);
-    // gc.insets = new Insets(0, 0, 0, 300);
+      // gc.insets = new Insets(0, 0, 0, 300);
     //
     // add(temp, gc);
 
@@ -203,8 +155,7 @@ public class FormPanel extends JPanel {
     gc.gridx = 0;
     gc.gridy++;
 
-    // add(loadNotify, gc);
-    gc.insets = new Insets(0, 195, 0, 0);
+    gc.insets = new Insets(0, 10, 0, 0);
 
     add(temp, gc);
     if (!upload) {
@@ -213,64 +164,13 @@ public class FormPanel extends JPanel {
       gc.gridy++;
       gc.weightx = 1;
       gc.weighty = 0.5;
-      gc.insets = new Insets(0, 10, 0, 0);
+      gc.insets = new Insets(0, 10, 40, 0);
       add(tab, gc);
       gc.anchor = GridBagConstraints.LINE_END;
 
     }
 
-    loadbutton.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        j.setPreferredSize(new Dimension(800, 600));
-        j.setFont((new Font("Times New Roman", Font.BOLD, 26)));
-        j.setFileFilter(filter);
-
-        int returnVal = j.showOpenDialog(null);
-
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-          File file = j.getSelectedFile();
-          // This is where a real application would open the file.
-          loadNotify.setText("Load: " + file.getName() + " successfully.");
-          //
-          // spinner.setModel(
-          // new SpinnerNumberModel(new Integer(1900), new Integer(0), null, new Integer(1)));
-          //
-          // spinner.setEditor(new JSpinner.NumberEditor(spinner, "00000"));
-
-          try {
-            loadinfo = new ParseXml(file);
-            upload = true;
-            tab.removeAll();
-            tab = new TabPanel(loadinfo);
-            gc.anchor = GridBagConstraints.LINE_START;
-
-            gc.gridx = 0;
-            gc.gridy = 4;
-            gc.weightx = 1;
-            gc.weighty = 0.5;
-            gc.insets = new Insets(0, 10, 0, 0);
-            add(tab, gc);
-            System.out.println("load infor in formpanel           " + loadinfo.getSentVal()[2]);
-          } catch (ParserConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-          }
-
-
-        } else {
-          if (j.getSelectedFile() == null) {
-            loadNotify.setText("LOAD operation cancel");
-          } else {
-            loadNotify.setText("Load" + j.getSelectedFile().getAbsolutePath() + "Failed");
-          }
-        }
-      }
-
-    });
+   
 
     reset.addActionListener(new ActionListener() {
 
@@ -289,7 +189,7 @@ public class FormPanel extends JPanel {
         gc.anchor = GridBagConstraints.LINE_START;
         revalidate();
         gc.gridx = 0;
-        gc.gridy = 3;
+        gc.gridy = 4;
         gc.weightx = 1;
         gc.weighty = 0.5;
         gc.insets = new Insets(0, 10, 0, 0);
@@ -298,24 +198,93 @@ public class FormPanel extends JPanel {
 
       }
     });
+  }
+  //
 
-    //
-
-    // gc.weightx = 1;
-    // gc.weighty = 0.2;
-    // gc.gridx = 1;
-    // gc.insets = new Insets(0, 0, 0, 0);
-    // add(ageList, gc);
-    gc.anchor = GridBagConstraints.LINE_END;
+  // gc.weightx = 1;
+  // gc.weighty = 0.2;
+  // gc.gridx = 1;
+  // gc.insets = new Insets(0, 0, 0, 0);
+  // add(ageList, gc);
+  // gc.anchor = GridBagConstraints.LINE_END;
 
 
 
+  public void getActionLoadListener() {
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
+    JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+    j.setPreferredSize(new Dimension(800, 600));
+    j.setFont((new Font("Times New Roman", Font.BOLD, 26)));
+    j.setFileFilter(filter);
+
+    int returnVal = j.showOpenDialog(null);
+
+    if (returnVal == JFileChooser.APPROVE_OPTION) {
+      File file = j.getSelectedFile();
+      // This is where a real application would open the file.
+      loadNotify.setText("Load: " + file.getName() + " successfully.");
+      //
+      // spinner.setModel(
+      // new SpinnerNumberModel(new Integer(1900), new Integer(0), null, new Integer(1)));
+      //
+      // spinner.setEditor(new JSpinner.NumberEditor(spinner, "00000"));
+
+      try {
+        loadinfo = new ParseXml(file);
+        upload = true;
+        tab.removeAll();
+        tab = new TabPanel(loadinfo);
+        gc.anchor = GridBagConstraints.LINE_START;
+
+        gc.gridx = 0;
+        gc.gridy = 4;
+        gc.weightx = 1;
+        gc.weighty = 0.5;
+        gc.insets = new Insets(0, 10, 0, 0);
+        add(tab, gc);
+        System.out.println("load infor in formpanel           " + loadinfo.getSentVal()[2]);
+      } catch (ParserConfigurationException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+
+
+    } else {
+      if (j.getSelectedFile() == null) {
+        loadNotify.setText("LOAD operation cancel");
+      } else {
+        loadNotify.setText("Load" + j.getSelectedFile().getAbsolutePath() + "Failed");
+      }
+    }
   }
 
-  public void setFormListener(FormListener formListener) {
-    // TODO Auto-generated method stub
+  public void getActionSaveListener() {
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
+    JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+    j.setFileFilter(filter);
+    j.setPreferredSize(new Dimension(800, 600));
 
-    this.formev = formListener;
+    // invoke the showsSaveDialog function to show the save dialog
+    int r = j.showSaveDialog(null);
+    // if the user selects a file
+    if (r == JFileChooser.APPROVE_OPTION)
+    {
+      try {
+        FileWriter fw = new FileWriter(j.getSelectedFile() + ".xml");
+        fw.write("test content");
+        fw.close();
+      } catch (Exception ex) {
+        ex.printStackTrace();
+      }
+      // set the label to the path of the selected file
+      temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + "successfully");
+    }
+    // if the user cancelled the operation
+    else if (j.getSelectedFile() == null) {
+      temp.setText("SAVE operation cancel");
+    } else {
+      temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + "Failed");
+    }
   }
 
 }
