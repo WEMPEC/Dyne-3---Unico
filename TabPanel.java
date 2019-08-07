@@ -1,4 +1,3 @@
-
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -8,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JFrame;
@@ -16,11 +16,13 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ScrollPaneLayout;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -44,22 +46,20 @@ public class TabPanel extends JPanel {
     JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
     ImageIcon icon = createImageIcon("");
     this.loadinfo = loadinfo;
-    checkupload =false;
+    checkupload = false;
     if (loadinfo != null) {
       checkupload = true;
     }
-     // pass the load file info to the abs tab
-    // if (checkupload) {
-    // loadinfo.
-    // }
+
 
     // abs//////////////////////////
-    System.out.println("tab panel if load " + checkupload  );
+    System.out.println("tab panel if load " + checkupload);
     if (loadinfo != null) {
-      
-      System.out.println( "value [2]" + loadinfo.getSentVal() [2] );  }
-    
-  
+
+      System.out.println("value [2]" + loadinfo.getSentVal()[2]);
+    }
+
+
     JTabbedPane Abs = new JTabbedPane(JTabbedPane.TOP);
     tabbedPane.addTab("Abs", null, Abs, null);
     JPanel panel_1 = new JPanel();
@@ -101,17 +101,24 @@ public class TabPanel extends JPanel {
 
 
     //// Faults
-    JTabbedPane Faults = new JTabbedPane(JTabbedPane.TOP);
-
-    tabbedPane.addTab("Faults", null, Faults, null);
-
-    tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-    JPanel panel_6 = new JPanel();
     GridBagLayout gbl_panel_5 = new GridBagLayout();
-    Faults.addTab("Values", null, panel_6, null);
+    JPanel panel_6 = new JPanel(gbl_panel_5);
+    JScrollPane scrollPane = new JScrollPane(panel_6, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    //tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+
     faultsTab = new TabFaults(panel_6, gbl_panel_5);
+    scrollPane.setMinimumSize(new Dimension(tabWidth, tabHeight));
+    scrollPane.setPreferredSize(new Dimension(tabWidth, tabHeight));
+    
     panel_6.setLayout(gbl_panel_5);
-    panel_6.setPreferredSize(new Dimension(tabWidth, tabHeight));
+    panel_6.setMinimumSize(new Dimension(tabWidth*2, tabHeight*2));
+    
+    panel_6.setPreferredSize(new Dimension(tabWidth*2, tabHeight*2));
+    tabbedPane.add(scrollPane);
+    tabbedPane.addTab("Faults", null, scrollPane, null);
+
+
 
     JComponent panel3 = makeTextPanel("Panel #3");
     tabbedPane.addTab("Tab 3", icon, panel3, "Still does nothing");
