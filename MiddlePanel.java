@@ -36,6 +36,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
   private JLabel sent, received;
   private StringListener textListener;
   private JSpinner spinner, spinnera, spinner1, spinner1a, spinner2, spinner2a, spinner3, spinner3a;
+  private JSlider slider, slider_1, slider_2, slider_4;
 
   public MiddlePanel() {
 
@@ -102,7 +103,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     c.insets = new Insets(15, 0, 0, 0);
     pane.add(startDrive, c);
 
-    JSlider slider_1 = new JSlider(SwingConstants.VERTICAL, 0, 250, 0);
+    slider_1 = new JSlider(SwingConstants.VERTICAL, 0, 250, 0);
     slider_1.setPaintTicks(true);
     slider_1.setPaintLabels(true);
     slider_1.setMinorTickSpacing(10);
@@ -113,6 +114,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     c.insets = new Insets(0, 0, 0, 40);
     c.gridx = 1;
     c.gridy = 10;
+
     pane.add(slider_1, c);
 
     JLabel label_4 = new JLabel("Volt Cmd (V)");
@@ -186,7 +188,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_s2a.gridy = 6;
     pane.add(spinner1a, gbc_s2a);
 
-    JSlider slider_2 = new JSlider(SwingConstants.VERTICAL, 0, 150, 0);
+    slider_2 = new JSlider(SwingConstants.VERTICAL, 0, 150, 0);
     slider_2.setPaintTicks(true);
     slider_2.setPaintLabels(true);
     slider_2.setMinorTickSpacing(10);
@@ -234,7 +236,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     pane.add(spinner2a, gbc_s3a);
 
 
-    JSlider slider = new JSlider(JSlider.VERTICAL, 0, 200, 0);
+    slider = new JSlider(JSlider.VERTICAL, 0, 200, 0);
     // slider.setLabelTable(labelTable);
     slider.setPaintLabels(true);
     // Turn on labels at major tick marks.
@@ -283,7 +285,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     pane.add(spinner3a, gbc_s4a);
 
 
-    JSlider slider_4 = new JSlider(SwingConstants.VERTICAL, 0, 30, 15);
+    slider_4 = new JSlider(SwingConstants.VERTICAL, 0, 30, 15);
     slider_4.setPaintTicks(true);
     slider_4.setPaintLabels(true);
     slider_4.setMinorTickSpacing(1);
@@ -340,15 +342,11 @@ public class MiddlePanel extends JPanel implements ActionListener {
     }
   }
 
-  public void setStringListener(StringListener stringListner) {
-
-    this.textListener = stringListner;
-  }
 
 
   public void setSlider(JSlider tempslide, String tempvalue) {
     tempslide.setValue(Integer.parseInt(tempvalue));
- 
+
   }
 
 
@@ -358,14 +356,63 @@ public class MiddlePanel extends JPanel implements ActionListener {
     tempspin.setValue((Integer) tempvalue);
     System.out.println("SET SPINNER IN MIDDLE");
     System.out.print("value of spine" + tempspin.getValue().toString());
- 
+
   }
 
 
 
+  public void listener(JSpinner spinner, JSlider slider_1, int num) {
+    this.spinner = spinner;
+    if (num == 0) {
+      this.spinner = spinner;
+      this.slider_1 = slider_1;
+      setsliderSpinner(spinner, slider_1);
+    } else if (num == 1) {
+      this.spinner1 = spinner;
+      this.slider_2 = slider_1;
+      setsliderSpinner(spinner, slider_1);
+
+    }
+
+  }
+
+  private void setsliderSpinner(JSpinner spinner, JSlider slider_1) {
+
+    spinner.addChangeListener(new ChangeListener() {
+      @Override
+      public void stateChanged(ChangeEvent e) {
+
+        String tempint = spinner.getValue().toString();
+        if (!tempint.equals(null)) {
+          System.out.println("in listener     ");
+          setSlider(slider_1, tempint);
+
+        }
+      }
+    }
+
+    );
+    slider_1.addChangeListener(new ChangeListener() {
+      @Override
+      public void stateChanged(ChangeEvent e) {
+        int tempint = slider_1.getValue();
+        if (tempint != 0) {
+          System.out.print("in listener     ");
+          setSpinner(spinner, tempint);
+        }
+      }
+    }
+
+    );
+
+  }
+
   @Override
-  public void actionPerformed(ActionEvent e) {
+  public void actionPerformed(ActionEvent arg0) {
     // TODO Auto-generated method stub
 
   }
+
+
 }
+
