@@ -25,6 +25,8 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicSliderUI;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -44,6 +46,7 @@ public class TabPiu extends JPanel {
   private JTable table;
   private GridBagLayout gbl_panel_2;
   private JPanel panel_2;
+  protected GridBagConstraints gbc_s1;
 
   public TabPiu(JPanel panel, GridBagLayout gl_panel, JPanel panel1, GridBagLayout gl_panel1) {
     // TODO Auto-generated constructor stub
@@ -61,45 +64,45 @@ public class TabPiu extends JPanel {
         new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     panel3.setLayout(gl_Detail);
 
-//
-//    JButton button1 = new JButton("Bus ON");
-//    button1.setBackground(Color.GREEN);
-//    GridBagConstraints gbc_button1 = new GridBagConstraints();
-//    gbc_button1.anchor = GridBagConstraints.WEST;
-//    gbc_button1.insets = new Insets(0, 0, 30, 40);
-//    gbc_button1.gridheight = 2;
-//    gbc_button1.gridx = 3;
-//    gbc_button1.gridy = 0;
-//    panel3.add(button1, gbc_button1);
-//
-//    JButton button2 = new JButton("Start PIU");
-//    button2.setBackground(Color.GREEN);
-//    GridBagConstraints gbc_button2 = new GridBagConstraints();
-//    gbc_button2.anchor = GridBagConstraints.WEST;
-//    gbc_button2.insets = new Insets(0, 80, 30, 0);
-//    gbc_button2.gridheight = 2;
-//    gbc_button2.gridx = 3;
-//    gbc_button2.gridy = 0;
-//    panel3.add(button2, gbc_button2);
-//
-//    button1.addActionListener(new ActionListener() {
-//      public void actionPerformed(ActionEvent arg0) {}
-//    });
-//
-//    JButton button = new JButton("Bus Off");
-//    button.setForeground(Color.WHITE);
-//    button.setBackground(Color.RED);
-//    GridBagConstraints gbc_button = new GridBagConstraints();
-//    gbc_button.anchor = GridBagConstraints.WEST;
-//    gbc_button.insets = new Insets(0, 50, 30, 0);
-//    gbc_button.gridheight = 2;
-//    gbc_button.gridx = 2;
-//    gbc_button.gridy = 0;
-//    panel3.add(button, gbc_button);
-//
-//    button.addActionListener(new ActionListener() {
-//      public void actionPerformed(ActionEvent arg0) {}
-//    });
+    //
+    // JButton button1 = new JButton("Bus ON");
+    // button1.setBackground(Color.GREEN);
+    // GridBagConstraints gbc_button1 = new GridBagConstraints();
+    // gbc_button1.anchor = GridBagConstraints.WEST;
+    // gbc_button1.insets = new Insets(0, 0, 30, 40);
+    // gbc_button1.gridheight = 2;
+    // gbc_button1.gridx = 3;
+    // gbc_button1.gridy = 0;
+    // panel3.add(button1, gbc_button1);
+    //
+    // JButton button2 = new JButton("Start PIU");
+    // button2.setBackground(Color.GREEN);
+    // GridBagConstraints gbc_button2 = new GridBagConstraints();
+    // gbc_button2.anchor = GridBagConstraints.WEST;
+    // gbc_button2.insets = new Insets(0, 80, 30, 0);
+    // gbc_button2.gridheight = 2;
+    // gbc_button2.gridx = 3;
+    // gbc_button2.gridy = 0;
+    // panel3.add(button2, gbc_button2);
+    //
+    // button1.addActionListener(new ActionListener() {
+    // public void actionPerformed(ActionEvent arg0) {}
+    // });
+    //
+    // JButton button = new JButton("Bus Off");
+    // button.setForeground(Color.WHITE);
+    // button.setBackground(Color.RED);
+    // GridBagConstraints gbc_button = new GridBagConstraints();
+    // gbc_button.anchor = GridBagConstraints.WEST;
+    // gbc_button.insets = new Insets(0, 50, 30, 0);
+    // gbc_button.gridheight = 2;
+    // gbc_button.gridx = 2;
+    // gbc_button.gridy = 0;
+    // panel3.add(button, gbc_button);
+    //
+    // button.addActionListener(new ActionListener() {
+    // public void actionPerformed(ActionEvent arg0) {}
+    // });
 
     JLabel lblNewLabel_2 = new JLabel("Vslew Cmd");
     lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 17));
@@ -159,8 +162,8 @@ public class TabPiu extends JPanel {
 
     JToggleButton tglbtnNewToggleButton = new JToggleButton("Volt Mode");
     GridBagConstraints gbc_tglbtnNewToggleButton = new GridBagConstraints();
-    gbc_tglbtnNewToggleButton.anchor = GridBagConstraints.WEST;  
-   // gbc_tglbtnNewToggleButton.fill = GridBagConstraints.HORIZONTAL;
+    gbc_tglbtnNewToggleButton.anchor = GridBagConstraints.WEST;
+    // gbc_tglbtnNewToggleButton.fill = GridBagConstraints.HORIZONTAL;
     gbc_tglbtnNewToggleButton.insets = new Insets(0, 30, 0, 0);
     gbc_tglbtnNewToggleButton.gridx = 3;
     gbc_tglbtnNewToggleButton.gridy = 2;
@@ -196,16 +199,15 @@ public class TabPiu extends JPanel {
     spinner.setPreferredSize(new Dimension(150, 100));
     spinner.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner.setEditor(new JSpinner.NumberEditor(spinner, "     "));
-    GridBagConstraints gbc_s1 = new GridBagConstraints();
+    spinner.setEditor(new JSpinner.NumberEditor(spinner, "000"));
+    gbc_s1 = new GridBagConstraints();
     gbc_s1.anchor = GridBagConstraints.EAST;
     gbc_s1.insets = new Insets(0, 0, 0, 45);
     gbc_s1.gridx = 0;
     gbc_s1.gridy = 5;
     spinner.setEnabled(false);
     panel3.add(spinner, gbc_s1);
-    
-   
+
 
 
     JSlider slider_1 = new JSlider(SwingConstants.VERTICAL, 0, 250, 0);
@@ -216,13 +218,42 @@ public class TabPiu extends JPanel {
     slider_1.setUI(new MySliderUI(slider_1));
     GridBagConstraints gbc_slider_1 = new GridBagConstraints();
     gbc_slider_1.anchor = GridBagConstraints.EAST;
-    gbc_slider_1.fill = GridBagConstraints.VERTICAL;  
+    gbc_slider_1.fill = GridBagConstraints.VERTICAL;
     gbc_slider_1.insets = new Insets(0, 0, 0, 35);
     gbc_slider_1.gridx = 0;
     gbc_slider_1.gridy = 10;
     panel3.add(slider_1, gbc_slider_1);
     slider_1.setEnabled(false);
 
+    spinner.addChangeListener(new ChangeListener() {
+      @Override
+      public void stateChanged(ChangeEvent e) {
+        String tempint = spinner.getValue().toString();
+        if (!tempint.equals(null)) {
+          System.out.println("in listener     ");
+          setSlider(slider_1, tempint);
+          MiddlePanel newMiddle = new MiddlePanel();
+          newMiddle.setSlider(slider_1, tempint);
+        }
+      }
+    }
+
+    );
+    slider_1.addChangeListener(new ChangeListener() {
+      @Override
+      public void stateChanged(ChangeEvent e) {
+        int tempint = slider_1.getValue();
+        if (tempint != 0) {
+          System.out.print("in listener     ");
+          MiddlePanel newMiddle = new MiddlePanel();
+
+          newMiddle.setSpinner(spinner, tempint);
+          setSpinner(spinner, tempint);
+        }
+      }
+    }
+
+    );
 
 
     JLabel label_8 = new JLabel("Curr Lim (A)");
@@ -238,7 +269,7 @@ public class TabPiu extends JPanel {
     spinner1.setPreferredSize(new Dimension(150, 100));
     spinner1.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner1.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner1.setEditor(new JSpinner.NumberEditor(spinner1, "     "));
+    spinner1.setEditor(new JSpinner.NumberEditor(spinner1, "000"));
     GridBagConstraints gbc_s2 = new GridBagConstraints();
     gbc_s2.insets = new Insets(0, 25, 0, 15);
     gbc_s2.gridx = 1;
@@ -251,7 +282,7 @@ public class TabPiu extends JPanel {
     slider_2.setPaintLabels(true);
     slider_2.setMinorTickSpacing(10);
     slider_2.setMajorTickSpacing(50);
-    slider_2.setUI(new MySliderUI(slider_2));   
+    slider_2.setUI(new MySliderUI(slider_2));
     GridBagConstraints gbc_slider_2 = new GridBagConstraints();
     gbc_slider_2.anchor = GridBagConstraints.WEST;
     gbc_slider_2.fill = GridBagConstraints.VERTICAL;
@@ -260,10 +291,9 @@ public class TabPiu extends JPanel {
     gbc_slider_2.gridy = 10;
     slider_2.setEnabled(false);
     panel3.add(slider_2, gbc_slider_2);
+    listener(spinner1,  slider_2  );
 
-
-
-    JLabel label_5 = new JLabel("PowerLim (kw)");
+    JLabel label_5 = new JLabel("Speed (rpm)");
     label_5.setFont(new Font("Times New Roman", Font.BOLD, 14));
     GridBagConstraints gbc_label_5 = new GridBagConstraints();
     gbc_label_5.fill = GridBagConstraints.BOTH;
@@ -276,7 +306,7 @@ public class TabPiu extends JPanel {
     spinner2.setPreferredSize(new Dimension(150, 100));
     spinner2.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner2.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner2.setEditor(new JSpinner.NumberEditor(spinner2, "     "));
+    spinner2.setEditor(new JSpinner.NumberEditor(spinner2, "000"));
     GridBagConstraints gbc_s3 = new GridBagConstraints();
     gbc_s3.insets = new Insets(0, 20, 0, 15);
     gbc_s3.gridx = 2;
@@ -292,8 +322,8 @@ public class TabPiu extends JPanel {
     slider.setMinorTickSpacing(10);
     slider.setPaintTicks(true);
     slider.setPaintLabels(true);
-    slider.setUI(new MySliderUI(slider));   
-    
+    slider.setUI(new MySliderUI(slider));
+
     GridBagConstraints gbc_slider = new GridBagConstraints();
     gbc_slider.fill = GridBagConstraints.VERTICAL;
     gbc_slider.insets = new Insets(0, 50, 0, 0);
@@ -301,8 +331,10 @@ public class TabPiu extends JPanel {
     gbc_slider.gridy = 10;
     panel3.add(slider, gbc_slider);
 
+    listener(spinner2,  slider  );
 
-    JLabel label_6 = new JLabel("IntRes (mOhm)");
+    
+    JLabel label_6 = new JLabel("Torq (rpm)");
     label_6.setFont(new Font("Times New Roman", Font.BOLD, 14));
     GridBagConstraints gbc_label_6 = new GridBagConstraints();
     gbc_label_6.fill = GridBagConstraints.BOTH;
@@ -315,7 +347,7 @@ public class TabPiu extends JPanel {
     spinner3.setPreferredSize(new Dimension(150, 100));
     spinner3.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner3.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner3.setEditor(new JSpinner.NumberEditor(spinner3, "     "));
+    spinner3.setEditor(new JSpinner.NumberEditor(spinner3, "000"));
     GridBagConstraints gbc_s4 = new GridBagConstraints();
     gbc_s4.insets = new Insets(0, 30, 0, 15);
     gbc_s4.gridx = 3;
@@ -328,7 +360,7 @@ public class TabPiu extends JPanel {
     slider_4.setPaintLabels(true);
     slider_4.setMinorTickSpacing(1);
     slider_4.setMajorTickSpacing(10);
-    slider_4.setUI(new MySliderUI(slider_4));      
+    slider_4.setUI(new MySliderUI(slider_4));
     GridBagConstraints gbc_slider_4 = new GridBagConstraints();
     gbc_slider_4.anchor = GridBagConstraints.WEST;
     gbc_slider_4.fill = GridBagConstraints.VERTICAL;
@@ -338,6 +370,7 @@ public class TabPiu extends JPanel {
     slider_4.setEnabled(false);
     panel3.add(slider_4, gbc_slider_4);
 
+    listener(spinner3,  slider_4  );
 
 
     tglbtnNewToggleButton.addActionListener(new ActionListener() {
@@ -379,7 +412,7 @@ public class TabPiu extends JPanel {
     gbl_panel_2.rowWeights = new double[] {10.0, Double.MIN_VALUE};
     panel_2.setLayout(gbl_panel_2);
 
-    
+
     // = new GridBagLayout();
     JTable table = new JTable(data, column) {
       @Override
@@ -402,19 +435,18 @@ public class TabPiu extends JPanel {
     panel_2.add(table, gbc_table);
 
 
-    
-    
-//
-//    table.setColumnSelectionAllowed(true);
-//
-//    table.getColumnModel().getColumn(0).setPreferredWidth(300);
-//    table.getColumnModel().getColumn(1).setPreferredWidth(180);
-//    table.getColumnModel().getColumn(3).setPreferredWidth(220);
-//    GridBagConstraints gbc_table = new GridBagConstraints();
-//    gbc_table.fill = GridBagConstraints.BOTH;
-//    gbc_table.gridx = 0;
-//    gbc_table.gridy = 0;
-//    panel_2.add(table, gbc_table);
+
+    //
+    // table.setColumnSelectionAllowed(true);
+    //
+    // table.getColumnModel().getColumn(0).setPreferredWidth(300);
+    // table.getColumnModel().getColumn(1).setPreferredWidth(180);
+    // table.getColumnModel().getColumn(3).setPreferredWidth(220);
+    // GridBagConstraints gbc_table = new GridBagConstraints();
+    // gbc_table.fill = GridBagConstraints.BOTH;
+    // gbc_table.gridx = 0;
+    // gbc_table.gridy = 0;
+    // panel_2.add(table, gbc_table);
 
   }
 
@@ -473,5 +505,48 @@ public class TabPiu extends JPanel {
 
   public boolean isCellEditable(int row, int col) {
     return true;
+  }
+
+  private void setSlider(JSlider tempslide, String tempvalue) {
+    tempslide.setValue(Integer.parseInt(tempvalue));
+
+  }
+
+  private void setSpinner(JSpinner tempspin, int tempvalue) {
+    tempspin.setValue((Integer) tempvalue);
+
+  }
+
+  private void listener(JSpinner spinner, JSlider slider_1) {
+    spinner.addChangeListener(new ChangeListener() {
+      @Override
+      public void stateChanged(ChangeEvent e) {
+        String tempint = spinner.getValue().toString();
+        if (!tempint.equals(null)) {
+          System.out.println("in listener     ");
+          setSlider(slider_1, tempint);
+          MiddlePanel newMiddle = new MiddlePanel();
+          newMiddle.setSlider(slider_1, tempint);
+        }
+      }
+    }
+
+    );
+    slider_1.addChangeListener(new ChangeListener() {
+      @Override
+      public void stateChanged(ChangeEvent e) {
+        int tempint = slider_1.getValue();
+        if (tempint != 0) {
+          System.out.print("in listener     ");
+          MiddlePanel newMiddle = new MiddlePanel();
+
+          newMiddle.setSpinner(spinner, tempint);
+          setSpinner(spinner, tempint);
+        }
+      }
+    }
+
+    );
+
   }
 }
