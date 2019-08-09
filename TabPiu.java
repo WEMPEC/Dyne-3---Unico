@@ -46,7 +46,16 @@ public class TabPiu extends JPanel {
   private JTable table;
   private GridBagLayout gbl_panel_2;
   private JPanel panel_2;
-  protected GridBagConstraints gbc_s1;
+  private GridBagConstraints gbc_s1, gbc_s2, gbc_s3, gbc_s4, gbc_slider_1, gbc_slider, gbc_slider_2,
+      gbc_slider_4;
+  private JSlider slider;
+
+  /**
+   * @return the slider
+   */
+  public JSlider getSlider() {
+    return slider;
+  }
 
   public TabPiu(JPanel panel, GridBagLayout gl_panel, JPanel panel1, GridBagLayout gl_panel1) {
     // TODO Auto-generated constructor stub
@@ -64,45 +73,6 @@ public class TabPiu extends JPanel {
         new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     panel3.setLayout(gl_Detail);
 
-    //
-    // JButton button1 = new JButton("Bus ON");
-    // button1.setBackground(Color.GREEN);
-    // GridBagConstraints gbc_button1 = new GridBagConstraints();
-    // gbc_button1.anchor = GridBagConstraints.WEST;
-    // gbc_button1.insets = new Insets(0, 0, 30, 40);
-    // gbc_button1.gridheight = 2;
-    // gbc_button1.gridx = 3;
-    // gbc_button1.gridy = 0;
-    // panel3.add(button1, gbc_button1);
-    //
-    // JButton button2 = new JButton("Start PIU");
-    // button2.setBackground(Color.GREEN);
-    // GridBagConstraints gbc_button2 = new GridBagConstraints();
-    // gbc_button2.anchor = GridBagConstraints.WEST;
-    // gbc_button2.insets = new Insets(0, 80, 30, 0);
-    // gbc_button2.gridheight = 2;
-    // gbc_button2.gridx = 3;
-    // gbc_button2.gridy = 0;
-    // panel3.add(button2, gbc_button2);
-    //
-    // button1.addActionListener(new ActionListener() {
-    // public void actionPerformed(ActionEvent arg0) {}
-    // });
-    //
-    // JButton button = new JButton("Bus Off");
-    // button.setForeground(Color.WHITE);
-    // button.setBackground(Color.RED);
-    // GridBagConstraints gbc_button = new GridBagConstraints();
-    // gbc_button.anchor = GridBagConstraints.WEST;
-    // gbc_button.insets = new Insets(0, 50, 30, 0);
-    // gbc_button.gridheight = 2;
-    // gbc_button.gridx = 2;
-    // gbc_button.gridy = 0;
-    // panel3.add(button, gbc_button);
-    //
-    // button.addActionListener(new ActionListener() {
-    // public void actionPerformed(ActionEvent arg0) {}
-    // });
 
     JLabel lblNewLabel_2 = new JLabel("Vslew Cmd");
     lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 17));
@@ -216,7 +186,7 @@ public class TabPiu extends JPanel {
     slider_1.setMinorTickSpacing(10);
     slider_1.setMajorTickSpacing(50);
     slider_1.setUI(new MySliderUI(slider_1));
-    GridBagConstraints gbc_slider_1 = new GridBagConstraints();
+    gbc_slider_1 = new GridBagConstraints();
     gbc_slider_1.anchor = GridBagConstraints.EAST;
     gbc_slider_1.fill = GridBagConstraints.VERTICAL;
     gbc_slider_1.insets = new Insets(0, 0, 0, 35);
@@ -233,7 +203,7 @@ public class TabPiu extends JPanel {
           System.out.println("in listener     ");
           setSlider(slider_1, tempint);
           MiddlePanel newMiddle = new MiddlePanel();
-          newMiddle.setSlider(slider_1, tempint);
+          newMiddle.listener(spinner, slider_1, 0);
         }
       }
     }
@@ -270,7 +240,7 @@ public class TabPiu extends JPanel {
     spinner1.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner1.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
     spinner1.setEditor(new JSpinner.NumberEditor(spinner1, "000"));
-    GridBagConstraints gbc_s2 = new GridBagConstraints();
+    gbc_s2 = new GridBagConstraints();
     gbc_s2.insets = new Insets(0, 25, 0, 15);
     gbc_s2.gridx = 1;
     gbc_s2.gridy = 5;
@@ -283,7 +253,7 @@ public class TabPiu extends JPanel {
     slider_2.setMinorTickSpacing(10);
     slider_2.setMajorTickSpacing(50);
     slider_2.setUI(new MySliderUI(slider_2));
-    GridBagConstraints gbc_slider_2 = new GridBagConstraints();
+    gbc_slider_2 = new GridBagConstraints();
     gbc_slider_2.anchor = GridBagConstraints.WEST;
     gbc_slider_2.fill = GridBagConstraints.VERTICAL;
     gbc_slider_2.insets = new Insets(0, 65, 0, 0);
@@ -291,7 +261,7 @@ public class TabPiu extends JPanel {
     gbc_slider_2.gridy = 10;
     slider_2.setEnabled(false);
     panel3.add(slider_2, gbc_slider_2);
-    listener(spinner1,  slider_2  );
+    listener(spinner1, slider_2);
 
     JLabel label_5 = new JLabel("Speed (rpm)");
     label_5.setFont(new Font("Times New Roman", Font.BOLD, 14));
@@ -307,14 +277,14 @@ public class TabPiu extends JPanel {
     spinner2.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner2.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
     spinner2.setEditor(new JSpinner.NumberEditor(spinner2, "000"));
-    GridBagConstraints gbc_s3 = new GridBagConstraints();
+    gbc_s3 = new GridBagConstraints();
     gbc_s3.insets = new Insets(0, 20, 0, 15);
     gbc_s3.gridx = 2;
     gbc_s3.gridy = 5;
     panel3.add(spinner2, gbc_s3);
 
 
-    JSlider slider = new JSlider(JSlider.VERTICAL, 0, 200, 0);
+    slider = new JSlider(JSlider.VERTICAL, 0, 200, 0);
     // slider.setLabelTable(labelTable);
     slider.setPaintLabels(true);
     // Turn on labels at major tick marks.
@@ -324,16 +294,16 @@ public class TabPiu extends JPanel {
     slider.setPaintLabels(true);
     slider.setUI(new MySliderUI(slider));
 
-    GridBagConstraints gbc_slider = new GridBagConstraints();
+    gbc_slider = new GridBagConstraints();
     gbc_slider.fill = GridBagConstraints.VERTICAL;
     gbc_slider.insets = new Insets(0, 50, 0, 0);
     gbc_slider.gridx = 2;
     gbc_slider.gridy = 10;
     panel3.add(slider, gbc_slider);
 
-    listener(spinner2,  slider  );
+    listener(spinner2, slider);
 
-    
+
     JLabel label_6 = new JLabel("Torq (rpm)");
     label_6.setFont(new Font("Times New Roman", Font.BOLD, 14));
     GridBagConstraints gbc_label_6 = new GridBagConstraints();
@@ -370,7 +340,7 @@ public class TabPiu extends JPanel {
     slider_4.setEnabled(false);
     panel3.add(slider_4, gbc_slider_4);
 
-    listener(spinner3,  slider_4  );
+    listener(spinner3, slider_4);
 
 
     tglbtnNewToggleButton.addActionListener(new ActionListener() {
@@ -449,6 +419,8 @@ public class TabPiu extends JPanel {
     // panel_2.add(table, gbc_table);
 
   }
+
+
 
   private static class MySliderUI extends BasicSliderUI {
 
@@ -548,5 +520,22 @@ public class TabPiu extends JPanel {
 
     );
 
+  }
+
+  public ChangeListener getChangeLister(JSlider slider_1, JSpinner spinner) {
+    ChangeListener e = new ChangeListener() {
+      @Override
+      public void stateChanged(ChangeEvent e) {
+        int tempint = slider_1.getValue();
+        if (tempint != 0) {
+          System.out.print("in listener     ");
+          MiddlePanel newMiddle = new MiddlePanel();
+
+          newMiddle.setSpinner(spinner, tempint);
+          setSpinner(spinner, tempint);
+        }
+      }
+    };
+    return e;
   }
 }
