@@ -24,6 +24,8 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicSliderUI;
 
 
@@ -33,7 +35,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
   private JButton startPiu, startDrive;
   private JLabel sent, received;
   private StringListener textListener;
-
+  private JSpinner spinner, spinnera, spinner1, spinner1a, spinner2, spinner2a, spinner3, spinner3a;
 
   public MiddlePanel() {
 
@@ -123,7 +125,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_label_4.gridy = 4;
     pane.add(label_4, gbc_label_4);
 
-    JSpinner spinner = new JSpinner();
+    spinner = new JSpinner();
     spinner.getEditor().getComponent(0).setBackground(Color.green);
     JComponent editor = spinner.getEditor();
     JFormattedTextField tf = ((JSpinner.DefaultEditor) editor).getTextField();
@@ -139,7 +141,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_s1.gridy = 5;
     pane.add(spinner, gbc_s1);
 
-    JSpinner spinnera = new JSpinner();
+    spinnera = new JSpinner();
     JFormattedTextField tfa = ((JSpinner.DefaultEditor) editor).getTextField();
     tfa.setColumns(7);
     spinnera.setPreferredSize(new Dimension(70, 30));
@@ -162,7 +164,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_label_8.gridy = 4;
     pane.add(label_8, gbc_label_8);
 
-    JSpinner spinner1 = new JSpinner();
+    spinner1 = new JSpinner();
     spinner1.setPreferredSize(new Dimension(70, 30));
     spinner1.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner1.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
@@ -173,7 +175,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_s2.gridy = 5;
     pane.add(spinner1, gbc_s2);
 
-    JSpinner spinner1a = new JSpinner();
+    spinner1a = new JSpinner();
     spinner1a.setPreferredSize(new Dimension(70, 30));
     spinner1a.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner1a.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
@@ -209,7 +211,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_label_5.gridy = 4;
     pane.add(label_5, gbc_label_5);
 
-    JSpinner spinner2 = new JSpinner();
+    spinner2 = new JSpinner();
     spinner2.setPreferredSize(new Dimension(70, 30));
     spinner2.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner2.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
@@ -220,7 +222,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_s3.gridy = 5;
     pane.add(spinner2, gbc_s3);
 
-    JSpinner spinner2a = new JSpinner();
+    spinner2a = new JSpinner();
     spinner2a.setPreferredSize(new Dimension(70, 30));
     spinner2a.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner2a.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
@@ -258,7 +260,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_label_6.gridy = 4;
     pane.add(label_6, gbc_label_6);
 
-    JSpinner spinner3 = new JSpinner();
+    spinner3 = new JSpinner();
     spinner3.setPreferredSize(new Dimension(70, 30));
     spinner3.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner3.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
@@ -269,7 +271,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_s4.gridy = 5;
     pane.add(spinner3, gbc_s4);
 
-    JSpinner spinner3a = new JSpinner();
+    spinner3a = new JSpinner();
     spinner3a.setPreferredSize(new Dimension(70, 30));
     spinner3a.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner3a.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
@@ -344,23 +346,26 @@ public class MiddlePanel extends JPanel implements ActionListener {
   }
 
 
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
-    System.out.print("is clicked");
-    JButton whichButton = (JButton) e.getSource();
-    if (whichButton == startPiu) {
-      if (textListener != null) {
-        textListener.textEmitted("Hello\n");
-      }
-      // textPanel2.appendText("HELLO\n");
-    } else if (whichButton == startDrive) {
-      if (textListener != null) {
-        textListener.textEmitted("BYE\n");
-      }
-      // textPanel2.appendText("BYE\n");
-    }
+  public void setSlider(JSlider tempslide, String tempvalue) {
+    tempslide.setValue(Integer.parseInt(tempvalue));
+ 
   }
 
 
+
+  public void setSpinner(JSpinner tempspin, int tempvalue) {
+
+    tempspin.setValue((Integer) tempvalue);
+    System.out.println("SET SPINNER IN MIDDLE");
+    System.out.print("value of spine" + tempspin.getValue().toString());
+ 
+  }
+
+
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    // TODO Auto-generated method stub
+
+  }
 }
