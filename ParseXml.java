@@ -15,9 +15,24 @@ public class ParseXml {
   private String[] states;
   private String[] torq;
   private String[] configStatus;
-  private String[] limits;
+  private String[] limits, limitPiu, bararray;
+  private String[] faultlistarray;
 
 
+
+  /**
+   * @return the limitPiu
+   */
+  public String[] getLimitPiu() {
+    return limitPiu;
+  }
+
+  /**
+   * @param limitPiu the limitPiu to set
+   */
+  public void setLimitPiu(String[] limitPiu) {
+    this.limitPiu = limitPiu;
+  }
 
   public ParseXml(File inputFile) throws ParserConfigurationException {
     // File inputFile = new File(fileName);
@@ -141,10 +156,79 @@ public class ParseXml {
         }
       }
 
+      NodeList limitListPiu = doc.getElementsByTagName("LimitsPiu");
+      System.out.println("----------------------------");
+      limitPiu = new String[limitListPiu.getLength()];
+      for (int temp = 0; temp < limitListPiu.getLength(); temp++) {
+        Node nNode = limitListPiu.item(temp);
+        System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
+        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+          Element eElement = (Element) nNode;
+          String tempv = eElement.getElementsByTagName("value").item(0).getTextContent();
+          limitPiu[temp] = tempv;
+          System.out
+              .println(" Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
+          System.out.println(
+              "value : " + eElement.getElementsByTagName("value").item(0).getTextContent());
+        }
+      }
 
+      NodeList bar = doc.getElementsByTagName("bar");
+      System.out.println("----------------------------");
+      bararray = new String[bar.getLength()];
+      for (int temp = 0; temp < bar.getLength(); temp++) {
+        Node nNode = bar.item(temp);
+        System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+          Element eElement = (Element) nNode;
+          String tempv = eElement.getElementsByTagName("value").item(0).getTextContent();
+          bararray[temp] = tempv;
+          System.out
+              .println(" Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
+          System.out.println(
+              "value : " + eElement.getElementsByTagName("value").item(0).getTextContent());
+        }
+      }
+
+      NodeList faultlist = doc.getElementsByTagName("faults");
+      System.out.println("----------------------------");
+      faultlistarray = new String[faultlist.getLength()];
+      for (int temp = 0; temp < faultlist.getLength(); temp++) {
+        Node nNode = faultlist.item(temp);
+        System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+          Element eElement = (Element) nNode;
+          String tempv = eElement.getElementsByTagName("value").item(0).getTextContent();
+          if (tempv.equalsIgnoreCase("ok")) {faultlistarray[temp] = "OK";}
+          else if (tempv.equalsIgnoreCase("fault")) {faultlistarray[temp] = "FAULT";}
+          else { faultlistarray[temp] = "ERROR";}
+          System.out
+              .println(" Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
+          System.out.println(
+              "value : " + eElement.getElementsByTagName("value").item(0).getTextContent());
+        }
+      }
+      
+      
     } catch (Exception e) {
     }
+  }
+
+  /**
+   * @return the faultlistarray
+   */
+  public String[] getFaultlistarray() {
+    return faultlistarray;
+  }
+
+  /**
+   * @param faultlistarray the faultlistarray to set
+   */
+  public void setFaultlistarray(String[] faultlistarray) {
+    this.faultlistarray = faultlistarray;
   }
 
   /**
@@ -166,6 +250,20 @@ public class ParseXml {
    */
   public NodeList getAbsVDDList() {
     return absVDDList;
+  }
+
+  /**
+   * @return the bararray
+   */
+  public String[] getBararray() {
+    return bararray;
+  }
+
+  /**
+   * @param bararray the bararray to set
+   */
+  public void setBararray(String[] bararray) {
+    this.bararray = bararray;
   }
 
   /**
