@@ -4,9 +4,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,8 +18,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class MainFrame extends JFrame {
 
@@ -25,41 +32,25 @@ public class MainFrame extends JFrame {
 
   private MiddlePanel Middle;
   // private TabPanel tab;
-  private JButton btn;
   private FormPanel formPanel;
+  private ParseXml temp;
   // private GraphPanel graphPanel;
 
-
+  private BorderLayout ab;
 
   public MainFrame() throws IOException {
 
     super("Run Dyne");
-    BorderLayout ab = new BorderLayout();
+    ab = new BorderLayout();
     setLayout(ab);
     // tab = new TabPanel();
     formPanel = new FormPanel();
-    Middle = new MiddlePanel();
+    Middle = new MiddlePanel(null);
+
+
     // textPanel = new TextPanel();
 
 
-
-    btn = new JButton("CLICK ME ");
-    // action listener interface
-    btn.addActionListener(new ActionListener() {
-      // perform action of an anonymous class
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-
-        if (btn.getText().equals("CLICK ME ")) {
-          btn.setText("DON'T CLICK ME");
-        }
-
-        else if (btn.getText().equals("DON'T CLICK ME")) {
-          btn.setText("CLICK ME ");
-        }
-      }
-    }
-    );
 
     // pass in the controller.
     // tab.setPreferredSize(new Dimension(300, 100));
@@ -67,12 +58,11 @@ public class MainFrame extends JFrame {
 
     add(Middle, ab.CENTER);
 
-    add(btn, ab.SOUTH);
 
     setSize(1500, 1030);
     formPanel.setPreferredSize(new Dimension(600, 200));
     add(formPanel, ab.WEST);
-    add(btn, ab.SOUTH);
+
 
     // change the entire window size.
 
@@ -80,6 +70,8 @@ public class MainFrame extends JFrame {
     setVisible(true);
 
   }
+
+
 
   private JMenuBar menubar() {
 
@@ -97,16 +89,28 @@ public class MainFrame extends JFrame {
     // initialize each components
     JMenuItem OpenFile = new JMenuItem("Load File");
     OpenFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
+
     OpenFile.addActionListener(new ActionListener() {
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
-        formPanel.getActionLoadListener();
+       // Middle.removeAll();
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        j.setPreferredSize(new Dimension(800, 600));
+        j.setFont((new Font("Times New Roman", Font.BOLD, 26)));
+        j.setFileFilter(filter);
+
+        Middle = formPanel.getActionLoadListener(j);
+        add(Middle, ab.CENTER);
+
 
       }
+    }
 
-    });
+    );
     ////////// Save Function.
     JMenuItem NewFile = new JMenuItem("Save File");
     NewFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
@@ -118,9 +122,17 @@ public class MainFrame extends JFrame {
         formPanel.getActionSaveListener();
       }
     });
+
     JMenuItem CloseFile = new JMenuItem("Exit");
     CloseFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
-
+    CloseFile.setMnemonic(KeyEvent.VK_C);
+    CloseFile.setToolTipText("Exit application");
+    CloseFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
+    CloseFile.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent event) {
+        System.exit(0);
+      }
+    });
     // Add items to menu bar.
     menubar.add(File);
     menubar.add(View);
@@ -135,5 +147,11 @@ public class MainFrame extends JFrame {
     return menubar;
   }
 
+  public void getMiddle(MiddlePanel Middle) {
 
+
+    add(Middle, ab.CENTER);
+  }
 }
+
+
