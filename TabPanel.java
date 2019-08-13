@@ -78,24 +78,10 @@ public class TabPanel extends JPanel {
 
     // Piu
 
-    JTabbedPane Piu = new JTabbedPane(JTabbedPane.TOP);
-    JPanel panel_3 = new JPanel();
-    tabbedPane.addTab("Piu", null, Piu, null);
-    Piu.addTab("Values", null, panel_3, null);
-    tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-
-    // JPanel panel_4 = new JPanel();
-    GridBagLayout gbl_panel_3 = new GridBagLayout();
-    // GroupLayout gbl_panel_4 = new GroupLayout(panel_4);
     JPanel panel_4 = new JPanel();
-    Piu.addTab("Limits & SetPoints", null, panel_4, null);
-
     GridBagLayout gbl4 = new GridBagLayout();
-
-    tabPiu = new TabPiu(panel_3, gbl_panel_3, panel_4, gbl4);
-    // panel_3.setLayout(gbl_panel_3);
-    panel_3.setLayout(gbl_panel_3);
-    panel_3.setPreferredSize(new Dimension(tabWidth, tabHeight));
+    tabPiu = new TabPiu(panel_4, gbl4, checkupload,loadinfo);
+    tabbedPane.addTab("Piu", null, panel_4, null);
     panel_4.setLayout(gbl4);
     panel_4.setPreferredSize(new Dimension(tabWidth, tabHeight));
 
@@ -105,16 +91,16 @@ public class TabPanel extends JPanel {
     JPanel panel_6 = new JPanel(gbl_panel_5);
     JScrollPane scrollPane = new JScrollPane(panel_6, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
         JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-    //tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+    // tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-    faultsTab = new TabFaults(panel_6, gbl_panel_5);
+    faultsTab = new TabFaults(panel_6, gbl_panel_5,checkupload,loadinfo );
     scrollPane.setMinimumSize(new Dimension(tabWidth, tabHeight));
     scrollPane.setPreferredSize(new Dimension(tabWidth, tabHeight));
-    
+
     panel_6.setLayout(gbl_panel_5);
-    panel_6.setMinimumSize(new Dimension(tabWidth*2, tabHeight*2));
-    
-    panel_6.setPreferredSize(new Dimension(tabWidth*2, tabHeight*2));
+    panel_6.setMinimumSize(new Dimension(tabWidth * 2, tabHeight * 2));
+
+    panel_6.setPreferredSize(new Dimension(tabWidth * 2, tabHeight * 2));
     tabbedPane.add(scrollPane);
     tabbedPane.addTab("Faults", null, scrollPane, null);
 
@@ -124,10 +110,7 @@ public class TabPanel extends JPanel {
     tabbedPane.addTab("Tab 3", icon, panel3, "Still does nothing");
     tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
 
-    JComponent panel4 = makeTextPanel("Panel #4 (has a preferred size of 410 x 50).");
-    panel4.setPreferredSize(new Dimension(tabWidth, tabHeight));
-    tabbedPane.addTab("Tab 4", icon, panel4, "Does nothing at all");
-    tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
+   
 
     // Add the tabbed pane to this panel.
     add(tabbedPane);
