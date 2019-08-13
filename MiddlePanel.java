@@ -37,8 +37,23 @@ public class MiddlePanel extends JPanel implements ActionListener {
   private StringListener textListener;
   private JSpinner spinner, spinnera, spinner1, spinner1a, spinner2, spinner2a, spinner3, spinner3a;
   private JSlider slider, slider_1, slider_2, slider_4;
+  private String[] slideVal;
+  private Boolean checkload;
 
-  public MiddlePanel() {
+  public MiddlePanel(ParseXml loadinfo) {
+    if (loadinfo != null) {
+      checkload = true;
+      slideVal = loadinfo.getBararray();
+      // absVDD = loadinfo.getAbsVDDList();
+    } else {
+      slideVal = new String[4];
+      for (int i = 0; i < slideVal.length; ++i) {
+        slideVal[i] = "0";
+      }
+      checkload = false;
+    }
+
+
 
     setBorder(BorderFactory.createBevelBorder(ABORT, getForeground(), getBackground()));
     JPanel pane = new JPanel(new GridBagLayout());
@@ -76,7 +91,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     c.insets = new Insets(22, 0, 0, 0);
     pane.add(startPiu, c);
 
-    sent = new JLabel("     Set");
+    sent = new JLabel("     Command");
     sent.setBorder(BorderFactory.createLineBorder(Color.GREEN));
     sent.setForeground(new Color(0, 200, 15));
     sent.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -86,7 +101,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     c.insets = new Insets(0, 40, 0, 0);
     pane.add(sent, c);
 
-    received = new JLabel("Received");
+    received = new JLabel("Feedback");
     received.setBorder(BorderFactory.createLineBorder(Color.magenta));
     received.setFont(new Font("Times New Roman", Font.BOLD, 20));
     received.setForeground(Color.magenta);
@@ -103,7 +118,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     c.insets = new Insets(15, 0, 0, 0);
     pane.add(startDrive, c);
 
-    slider_1 = new JSlider(SwingConstants.VERTICAL, 0, 250, 0);
+    slider_1 = new JSlider(SwingConstants.VERTICAL, 0, 250, Integer.parseInt(slideVal[0]));
     slider_1.setPaintTicks(true);
     slider_1.setPaintLabels(true);
     slider_1.setMinorTickSpacing(10);
@@ -114,8 +129,8 @@ public class MiddlePanel extends JPanel implements ActionListener {
     c.insets = new Insets(0, 0, 0, 40);
     c.gridx = 1;
     c.gridy = 10;
-
-    pane.add(slider_1, c);
+    setSlider(slider_1, slideVal[0]);
+     pane.add(slider_1, c);
 
     JLabel label_4 = new JLabel("Volt Cmd (V)");
     label_4.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -135,7 +150,11 @@ public class MiddlePanel extends JPanel implements ActionListener {
     spinner.setPreferredSize(new Dimension(70, 30));
     spinner.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner.setEditor(new JSpinner.NumberEditor(spinner, "     "));
+    if (checkload) {
+      spinner.setEditor(new JSpinner.NumberEditor(spinner, slideVal[0]));
+    } else {
+      spinner.setEditor(new JSpinner.NumberEditor(spinner, "000"));
+    }
     GridBagConstraints gbc_s1 = new GridBagConstraints();
     gbc_s1.anchor = GridBagConstraints.EAST;
     gbc_s1.insets = new Insets(0, 0, 0, 45);
@@ -149,7 +168,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     spinnera.setPreferredSize(new Dimension(70, 30));
     spinnera.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinnera.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinnera.setEditor(new JSpinner.NumberEditor(spinnera, "     "));
+    spinnera.setEditor(new JSpinner.NumberEditor(spinnera, "000"));
     GridBagConstraints gbc_s1a = new GridBagConstraints();
     gbc_s1a.anchor = GridBagConstraints.EAST;
     gbc_s1a.insets = new Insets(10, 0, 0, 45);
@@ -157,6 +176,8 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_s1a.gridy = 6;
     pane.add(spinnera, gbc_s1a);
 
+    listener(spinner, slider_1, slideVal[0]);
+    ////////////////////////////////////////////////////////////////////
     JLabel label_8 = new JLabel("Curr Lim (A)");
     label_8.setFont(new Font("Times New Roman", Font.BOLD, 20));
     GridBagConstraints gbc_label_8 = new GridBagConstraints();
@@ -170,7 +191,11 @@ public class MiddlePanel extends JPanel implements ActionListener {
     spinner1.setPreferredSize(new Dimension(70, 30));
     spinner1.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner1.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner1.setEditor(new JSpinner.NumberEditor(spinner1, "     "));
+    if (checkload) {
+      spinner1.setEditor(new JSpinner.NumberEditor(spinner1, slideVal[1]));
+    } else {
+      spinner1.setEditor(new JSpinner.NumberEditor(spinner1, "000"));
+    }
     GridBagConstraints gbc_s2 = new GridBagConstraints();
     gbc_s2.insets = new Insets(0, 55, 0, 15);
     gbc_s2.gridx = 2;
@@ -181,7 +206,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     spinner1a.setPreferredSize(new Dimension(70, 30));
     spinner1a.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner1a.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner1a.setEditor(new JSpinner.NumberEditor(spinner1a, "     "));
+    spinner1a.setEditor(new JSpinner.NumberEditor(spinner1a, "000"));
     GridBagConstraints gbc_s2a = new GridBagConstraints();
     gbc_s2a.insets = new Insets(10, 55, 0, 15);
     gbc_s2a.gridx = 2;
@@ -194,6 +219,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     slider_2.setMinorTickSpacing(10);
     slider_2.setMajorTickSpacing(50);
     slider_2.setUI(new MySliderUI(slider_2));
+    setSlider(slider_2, slideVal[1]);
     GridBagConstraints gbc_slider_2 = new GridBagConstraints();
     gbc_slider_2.anchor = GridBagConstraints.WEST;
     gbc_slider_2.fill = GridBagConstraints.VERTICAL;
@@ -202,8 +228,9 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_slider_2.gridy = 10;
     pane.add(slider_2, gbc_slider_2);
 
+    listener(spinner1, slider_2, slideVal[1]);
 
-
+    ///////////////////////////////////////////////////////////////
     JLabel label_5 = new JLabel("Speed (rpm)");
     label_5.setFont(new Font("Times New Roman", Font.BOLD, 20));
     GridBagConstraints gbc_label_5 = new GridBagConstraints();
@@ -217,7 +244,8 @@ public class MiddlePanel extends JPanel implements ActionListener {
     spinner2.setPreferredSize(new Dimension(70, 30));
     spinner2.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner2.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner2.setEditor(new JSpinner.NumberEditor(spinner2, "     "));
+
+    spinner2.setEditor(new JSpinner.NumberEditor(spinner2, "000"));
     GridBagConstraints gbc_s3 = new GridBagConstraints();
     gbc_s3.insets = new Insets(0, 70, 0, 15);
     gbc_s3.gridx = 3;
@@ -228,7 +256,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     spinner2a.setPreferredSize(new Dimension(70, 30));
     spinner2a.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner2a.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner2a.setEditor(new JSpinner.NumberEditor(spinner2a, "     "));
+    spinner2a.setEditor(new JSpinner.NumberEditor(spinner2a, "000"));
     GridBagConstraints gbc_s3a = new GridBagConstraints();
     gbc_s3a.insets = new Insets(10, 70, 0, 15);
     gbc_s3a.gridx = 3;
@@ -251,8 +279,9 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_slider.gridx = 3;
     gbc_slider.gridy = 10;
     pane.add(slider, gbc_slider);
-
-
+    setSlider(slider, slideVal[2]);
+    listener(spinner2, slider, slideVal[2]);
+    //////////////////////////////////////////////////////////
     JLabel label_6 = new JLabel("Torq (Nm)");
     label_6.setFont(new Font("Times New Roman", Font.BOLD, 20));
     GridBagConstraints gbc_label_6 = new GridBagConstraints();
@@ -266,7 +295,11 @@ public class MiddlePanel extends JPanel implements ActionListener {
     spinner3.setPreferredSize(new Dimension(70, 30));
     spinner3.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner3.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner3.setEditor(new JSpinner.NumberEditor(spinner3, "     "));
+    if (checkload) {
+      spinner3.setEditor(new JSpinner.NumberEditor(spinner3, slideVal[1]));
+    } else {
+      spinner3.setEditor(new JSpinner.NumberEditor(spinner3, "000"));
+    }
     GridBagConstraints gbc_s4 = new GridBagConstraints();
     gbc_s4.insets = new Insets(0, 80, 0, 15);
     gbc_s4.gridx = 4;
@@ -277,7 +310,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     spinner3a.setPreferredSize(new Dimension(70, 30));
     spinner3a.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner3a.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-    spinner3a.setEditor(new JSpinner.NumberEditor(spinner3a, "     "));
+    spinner3a.setEditor(new JSpinner.NumberEditor(spinner3a, "000"));
     GridBagConstraints gbc_s4a = new GridBagConstraints();
     gbc_s4a.insets = new Insets(10, 80, 0, 15);
     gbc_s4a.gridx = 4;
@@ -285,11 +318,11 @@ public class MiddlePanel extends JPanel implements ActionListener {
     pane.add(spinner3a, gbc_s4a);
 
 
-    slider_4 = new JSlider(SwingConstants.VERTICAL, 0, 30, 15);
+    slider_4 = new JSlider(SwingConstants.VERTICAL, 0, 500, 0);
     slider_4.setPaintTicks(true);
     slider_4.setPaintLabels(true);
-    slider_4.setMinorTickSpacing(1);
-    slider_4.setMajorTickSpacing(10);
+    slider_4.setMinorTickSpacing(20);
+    slider_4.setMajorTickSpacing(100);
     slider_4.setUI(new MySliderUI(slider_4));
     GridBagConstraints gbc_slider_4 = new GridBagConstraints();
     gbc_slider_4.anchor = GridBagConstraints.WEST;
@@ -298,6 +331,8 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_slider_4.gridx = 4;
     gbc_slider_4.gridy = 10;
     pane.add(slider_4, gbc_slider_4);
+    setSlider(slider_4, slideVal[3]);
+    listener(spinner3, slider_4, slideVal[3]);
 
   }
 
@@ -354,39 +389,27 @@ public class MiddlePanel extends JPanel implements ActionListener {
   public void setSpinner(JSpinner tempspin, int tempvalue) {
 
     tempspin.setValue((Integer) tempvalue);
-    System.out.println("SET SPINNER IN MIDDLE");
+    System.out.println("SET SPINNER IN MIDDLEhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
     System.out.print("value of spine" + tempspin.getValue().toString());
 
   }
 
 
 
-  public void listener(JSpinner spinner, JSlider slider_1, int num) {
-    this.spinner = spinner;
-    if (num == 0) {
-      this.spinner = spinner;
-      this.slider_1 = slider_1;
-      setsliderSpinner(spinner, slider_1);
-    } else if (num == 1) {
-      this.spinner1 = spinner;
-      this.slider_2 = slider_1;
-      setsliderSpinner(spinner, slider_1);
-
-    }
-
-  }
-
-  private void setsliderSpinner(JSpinner spinner, JSlider slider_1) {
-
-    spinner.addChangeListener(new ChangeListener() {
+  private void listener(JSpinner tempSpin, JSlider slider_1, String val) {
+    tempSpin.addChangeListener(new ChangeListener() {
       @Override
       public void stateChanged(ChangeEvent e) {
+        String tempint = null;
+        if (checkload) {
+          tempint = val;
+        } else {
+          tempint = tempSpin.getValue().toString();
+        }
 
-        String tempint = spinner.getValue().toString();
         if (!tempint.equals(null)) {
           System.out.println("in listener     ");
           setSlider(slider_1, tempint);
-
         }
       }
     }
@@ -395,10 +418,15 @@ public class MiddlePanel extends JPanel implements ActionListener {
     slider_1.addChangeListener(new ChangeListener() {
       @Override
       public void stateChanged(ChangeEvent e) {
-        int tempint = slider_1.getValue();
+        int tempint = 0;
+        if (checkload) {
+          tempint = Integer.parseInt(val);
+        } else {
+          tempint = slider_1.getValue();
+        }
         if (tempint != 0) {
           System.out.print("in listener     ");
-          setSpinner(spinner, tempint);
+          setSpinner(tempSpin, tempint);
         }
       }
     }
