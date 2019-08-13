@@ -57,17 +57,11 @@ public class MainFrame extends JFrame {
         else if (btn.getText().equals("DON'T CLICK ME")) {
           btn.setText("CLICK ME ");
         }
-
       }
-
     }
-
     );
 
-
-
     // pass in the controller.
-
     // tab.setPreferredSize(new Dimension(300, 100));
     add((menubar()), ab.NORTH);
 
@@ -77,16 +71,11 @@ public class MainFrame extends JFrame {
 
     setSize(1500, 1030);
     formPanel.setPreferredSize(new Dimension(600, 200));
-    // formPanel.setBackground(Color.ORANGE);
-    // gui.add(panel2, BorderLayout.CENTER);
-    // add(Box.createRigidArea(new Dimension(10,50)));
     add(formPanel, ab.WEST);
-    // add(tab);
-    // add(new JSeparator(SwingConstants.VERTICAL));
     add(btn, ab.SOUTH);
 
     // change the entire window size.
-    // setResizable(true);
+
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
 
@@ -118,7 +107,7 @@ public class MainFrame extends JFrame {
       }
 
     });
-    //////////Save Function.
+    ////////// Save Function.
     JMenuItem NewFile = new JMenuItem("Save File");
     NewFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
     NewFile.addActionListener(new ActionListener() {
@@ -127,9 +116,7 @@ public class MainFrame extends JFrame {
       public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
         formPanel.getActionSaveListener();
-
       }
-
     });
     JMenuItem CloseFile = new JMenuItem("Exit");
     CloseFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
@@ -145,10 +132,6 @@ public class MainFrame extends JFrame {
     File.add(OpenFile);
     File.add(CloseFile);
     this.setVisible(true);
-    // (menubar);
-    // textPanel2 = new TextPanel();
-
-    // reference to the actionPerformed method.
     return menubar;
   }
 
