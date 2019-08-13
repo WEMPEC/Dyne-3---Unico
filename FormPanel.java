@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -199,50 +200,35 @@ public class FormPanel extends JPanel {
       }
     });
   }
-  //
-
-  // gc.weightx = 1;
-  // gc.weighty = 0.2;
-  // gc.gridx = 1;
-  // gc.insets = new Insets(0, 0, 0, 0);
-  // add(ageList, gc);
-  // gc.anchor = GridBagConstraints.LINE_END;
 
 
-
-  public void getActionLoadListener() {
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
-    JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-    j.setPreferredSize(new Dimension(800, 600));
-    j.setFont((new Font("Times New Roman", Font.BOLD, 26)));
-    j.setFileFilter(filter);
-
+  public MiddlePanel getActionLoadListener(JFileChooser j) {
+   
+    MiddlePanel  middle = new MiddlePanel (loadinfo);
+    
     int returnVal = j.showOpenDialog(null);
 
     if (returnVal == JFileChooser.APPROVE_OPTION) {
-      File file = j.getSelectedFile();
+      File  file = j.getSelectedFile();
       // This is where a real application would open the file.
       loadNotify.setText("Load: " + file.getName() + " successfully.");
-      //
-      // spinner.setModel(
-      // new SpinnerNumberModel(new Integer(1900), new Integer(0), null, new Integer(1)));
-      //
-      // spinner.setEditor(new JSpinner.NumberEditor(spinner, "00000"));
-
+     
       try {
-        loadinfo = new ParseXml(file);
+        this.loadinfo = new ParseXml(file);
         upload = true;
         tab.removeAll();
         tab = new TabPanel(loadinfo);
         gc.anchor = GridBagConstraints.LINE_START;
-
         gc.gridx = 0;
         gc.gridy = 4;
-        gc.weightx = 1;
-        gc.weighty = 0.5;
-        gc.insets = new Insets(0, 10, 0, 0);
+        gc.insets = new Insets(0, 10, 35, 0);
         add(tab, gc);
+        
+          middle = new MiddlePanel (loadinfo);
+        
+        
         System.out.println("load infor in formpanel           " + loadinfo.getSentVal()[2]);
+       
       } catch (ParserConfigurationException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
@@ -256,6 +242,7 @@ public class FormPanel extends JPanel {
         loadNotify.setText("Load" + j.getSelectedFile().getAbsolutePath() + "Failed");
       }
     }
+    return middle;
   }
 
   public void getActionSaveListener() {
@@ -287,23 +274,12 @@ public class FormPanel extends JPanel {
     }
   }
 
+  public ParseXml getLoadinfo() {
+    // TODO Auto-generated method stub
+    return loadinfo;
+  }
+
 }
 
 
-class AgeCat {
-  private String text;
-  private int id;
 
-  public AgeCat(int id, String text) {
-    this.text = text;
-    this.id = id;
-  }
-
-  public String toString() {
-    return text;
-  }
-
-  public int getID() {
-    return id;
-  }
-}
