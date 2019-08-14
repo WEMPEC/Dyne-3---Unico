@@ -34,30 +34,22 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class TabAbs implements ChangeListener {
-  private GridBagLayout gbl_panel_1;
-  private JPanel panel_1;
-  private JTextField textField;
-  private JTextField textField_1;
-  private JTextField textField_2;
-  private JTextField txtConverter;
-  private JTextField textField_4;
-  private JTextField textField_5;
-  private JTextField textField_6;
-  private JTextField textField_7;
-  private JPanel panel_2;
+  private GridBagLayout gbl_panel_1, gbl_panel_2;
+  private JPanel panel_1, panel_2;
+  private JTextField textField, textField_1, textField_2, txtConverter, textField_4, textField_5,
+      textField_6, textField_7;
   private JTable table;
-  private GridBagLayout gbl_panel_2;
   private Boolean checkload;
-  private JSpinner spinner_1, spinner_2;
-  private int[] tempsent;
-  private int[] tempreceived;
-  private String[] tempstates;
-  private String[] tempTorq;
-  private String[] tempConfigStatus;
-  private String[] tempLimit;
+  private JSpinner spinner, spinner_6, spinner_1, spinner_7, spinner_2, spinner_8, spinner_3,
+      spinner_9, spinner_4, spinner_10, spinner_11, spinner_5;
+  private JToggleButton tglbtnTorsReady, tglbtnDigReady, tglbtnTorsReady_1, tglbtnTorsSent;
+  private int[] tempsent, tempreceived;
+  private String[] tempstates, tempTorq, tempConfigStatus, tempLimit, saveValue;
+  private String[][] data;
 
   public TabAbs(JPanel panel, GridBagLayout gl_panel, JPanel panel1, GridBagLayout gl_panel1,
       Boolean checkupload, ParseXml loadinfo) {
+    saveValue = new String[40];
     // TODO Auto-generated constructor stub
     this.gbl_panel_1 = gl_panel;
     this.panel_1 = panel;
@@ -86,7 +78,7 @@ public class TabAbs implements ChangeListener {
       for (int i = 0; i < tempLimit.length; ++i) {
         tempLimit[i] = "0";
       }
-      
+
     }
     // System.out.println(tempConfigStatus[1]);
     // absVDD = getAbsVDDList();
@@ -134,7 +126,7 @@ public class TabAbs implements ChangeListener {
     gbc_label_7.gridy = 1;
     panel_1.add(label_7, gbc_label_7);
 
-    JToggleButton tglbtnDigReady = new JToggleButton(" Dig Done   ");
+    tglbtnDigReady = new JToggleButton(" Dig Done   ");
     if (tempConfigStatus[0].equals("ON")) {
 
       tglbtnDigReady.doClick();
@@ -156,12 +148,13 @@ public class TabAbs implements ChangeListener {
     gbc_lblAbortRaterpmsec.gridy = 2;
     panel_1.add(lblAbortRaterpmsec, gbc_lblAbortRaterpmsec);
 
-    JSpinner spinner = new JSpinner();
+    spinner = new JSpinner();
     JComponent editor = spinner.getEditor();
     JFormattedTextField tf = ((JSpinner.DefaultEditor) editor).getTextField();
     tf.setColumns(7);
     spinner.setPreferredSize(new Dimension(150, 100));
     spinner.setFont(new Font("Times New Roman", Font.PLAIN, 17));
+    spinner.setEditor(new JSpinner.NumberEditor(spinner, "000"));
     spinner.setModel(new SpinnerNumberModel(new Integer(tempsent[0]), null, null, new Integer(1)));
     GridBagConstraints gbc_spinner = new GridBagConstraints();
     gbc_spinner.insets = new Insets(0, 0, 5, 5);
@@ -169,7 +162,9 @@ public class TabAbs implements ChangeListener {
     gbc_spinner.gridy = 2;
     panel_1.add(spinner, gbc_spinner);
 
-    JSpinner spinner_6 = new JSpinner();
+    spinner_6 = new JSpinner();
+    spinner_6.setEditor(new JSpinner.NumberEditor(spinner_6, "000"));
+
     spinner_6.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner_6
         .setModel(new SpinnerNumberModel(new Integer(tempreceived[0]), null, null, new Integer(1)));
@@ -181,7 +176,7 @@ public class TabAbs implements ChangeListener {
 
 
 
-    JToggleButton tglbtnTorsReady = new JToggleButton(" Dig Ready  ");
+    tglbtnTorsReady = new JToggleButton(" Dig Ready  ");
     GridBagConstraints gbc_tglbtnTorsReady = new GridBagConstraints();
     gbc_tglbtnTorsReady.anchor = GridBagConstraints.EAST;
     if (tempConfigStatus[1].equals("ON")) {
@@ -206,6 +201,8 @@ public class TabAbs implements ChangeListener {
     panel_1.add(torqFS, gbc_lblTorqfullscaleAenm);
 
     spinner_1 = new JSpinner();
+    spinner_1.setEditor(new JSpinner.NumberEditor(spinner_1, "000"));
+
     spinner_1.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner_1
         .setModel(new SpinnerNumberModel(new Integer(tempsent[1]), null, null, new Integer(1)));
@@ -215,7 +212,8 @@ public class TabAbs implements ChangeListener {
     gbc_spinner_1.gridy = 3;
     panel_1.add(spinner_1, gbc_spinner_1);
 
-    JSpinner spinner_7 = new JSpinner();
+    spinner_7 = new JSpinner();
+    spinner_7.setEditor(new JSpinner.NumberEditor(spinner_7, "000"));
     spinner_7.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner_7
         .setModel(new SpinnerNumberModel(new Integer(tempreceived[1]), null, null, new Integer(1)));
@@ -225,7 +223,7 @@ public class TabAbs implements ChangeListener {
     gbc_spinner_7.gridy = 3;
     panel_1.add(spinner_7, gbc_spinner_7);
 
-    JToggleButton tglbtnTorsReady_1 = new JToggleButton("Tors Ready");
+    tglbtnTorsReady_1 = new JToggleButton("Tors Ready");
     tglbtnTorsReady_1.setHorizontalAlignment(SwingConstants.LEFT);
     if (tempConfigStatus[2].equals("ON")) {
 
@@ -250,6 +248,8 @@ public class TabAbs implements ChangeListener {
 
 
     spinner_2 = new JSpinner();
+    spinner_2.setEditor(new JSpinner.NumberEditor(spinner_2, "000"));
+
     spinner_2.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner_2
         .setModel(new SpinnerNumberModel(new Integer(tempsent[2]), null, null, new Integer(1)));
@@ -258,21 +258,11 @@ public class TabAbs implements ChangeListener {
     gbc_spinner_2.gridx = 1;
     gbc_spinner_2.gridy = 4;
 
-    // spinner_2.addChangeListener(new ChangeListener() {
-    // @Override
-    // public void stateChanged(ChangeEvent e) {
-    // System.out.println("add change listener");
-    // spinner_2.setModel(
-    // new SpinnerNumberModel(new Integer(1900), new Integer(0), null, new Integer(1)));
-    //
-    // spinner_2.setEditor(new JSpinner.NumberEditor(spinner, "00000"));
-    //
-    // }
-    // });
-
     panel_1.add(spinner_2, gbc_spinner_2);
 
-    JSpinner spinner_8 = new JSpinner();
+    spinner_8 = new JSpinner();
+    spinner_8.setEditor(new JSpinner.NumberEditor(spinner_8, "000"));
+
     spinner_8.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner_8.setModel(new SpinnerNumberModel(new Long(tempreceived[2]), null, null, new Long(1)));
     GridBagConstraints gbc_spinner_8 = new GridBagConstraints();
@@ -281,7 +271,7 @@ public class TabAbs implements ChangeListener {
     gbc_spinner_8.gridy = 4;
     panel_1.add(spinner_8, gbc_spinner_8);
 
-    JToggleButton tglbtnTorsSent = new JToggleButton(" Tors Sent  ");
+    tglbtnTorsSent = new JToggleButton(" Tors Sent  ");
     // tglbtnTorsSent.setFont(new Font("Times New Roman", Font.BOLD, 17));
     if (tempConfigStatus[3].equals("ON")) {
 
@@ -303,7 +293,8 @@ public class TabAbs implements ChangeListener {
     gbc_lblNotUsed.gridy = 5;
     panel_1.add(lblNotUsed, gbc_lblNotUsed);
 
-    JSpinner spinner_3 = new JSpinner();
+    spinner_3 = new JSpinner();
+    spinner_3.setEditor(new JSpinner.NumberEditor(spinner_3, "000"));
     spinner_3.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner_3
         .setModel(new SpinnerNumberModel(new Integer(tempsent[3]), null, null, new Integer(1)));
@@ -313,7 +304,8 @@ public class TabAbs implements ChangeListener {
     gbc_spinner_3.gridy = 5;
     panel_1.add(spinner_3, gbc_spinner_3);
 
-    JSpinner spinner_9 = new JSpinner();
+    spinner_9 = new JSpinner();
+    spinner_9.setEditor(new JSpinner.NumberEditor(spinner_9, "000"));
     spinner_9.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     GridBagConstraints gbc_spinner_9 = new GridBagConstraints();
     gbc_spinner_9.insets = new Insets(0, 0, 5, 5);
@@ -339,7 +331,9 @@ public class TabAbs implements ChangeListener {
     gbc_lblNotUsed_1.gridy = 6;
     panel_1.add(lblNotUsed_1, gbc_lblNotUsed_1);
 
-    JSpinner spinner_4 = new JSpinner();
+    spinner_4 = new JSpinner();
+    spinner_4.setEditor(new JSpinner.NumberEditor(spinner_4, "000"));
+
     spinner_4.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner_4
         .setModel(new SpinnerNumberModel(new Integer(tempsent[4]), null, null, new Integer(1)));
@@ -349,7 +343,9 @@ public class TabAbs implements ChangeListener {
     gbc_spinner_4.gridy = 6;
     panel_1.add(spinner_4, gbc_spinner_4);
 
-    JSpinner spinner_10 = new JSpinner();
+    spinner_10 = new JSpinner();
+    spinner_10.setEditor(new JSpinner.NumberEditor(spinner_10, "000"));
+
     spinner_10.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     GridBagConstraints gbc_spinner_10 = new GridBagConstraints();
     gbc_spinner_10.insets = new Insets(0, 0, 5, 5);
@@ -375,7 +371,9 @@ public class TabAbs implements ChangeListener {
     gbc_lblTcmdFiltTconst.gridy = 7;
     panel_1.add(lblTcmdFiltTconst, gbc_lblTcmdFiltTconst);
 
-    JSpinner spinner_5 = new JSpinner();
+    spinner_5 = new JSpinner();
+    spinner_5.setEditor(new JSpinner.NumberEditor(spinner_5, "000"));
+
     spinner_5.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner_5
         .setModel(new SpinnerNumberModel(new Integer(tempsent[5]), null, null, new Integer(1)));
@@ -385,7 +383,9 @@ public class TabAbs implements ChangeListener {
     gbc_spinner_5.gridy = 7;
     panel_1.add(spinner_5, gbc_spinner_5);
 
-    JSpinner spinner_11 = new JSpinner();
+    spinner_11 = new JSpinner();
+    spinner_11.setEditor(new JSpinner.NumberEditor(spinner_11, "000"));
+
     spinner_11.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner_11
         .setModel(new SpinnerNumberModel(new Integer(tempreceived[5]), null, null, new Integer(1)));
@@ -441,8 +441,13 @@ public class TabAbs implements ChangeListener {
     gbc_lblCalSignalAe.gridy = 10;
     panel_1.add(lblCalSignalAe, gbc_lblCalSignalAe);
 
-    textField_6 = new JTextField();
-    textField_6.setText(tempTorq[0]);
+
+    if (checkload) {
+      textField_6 = new JTextField(tempTorq[0]);
+
+    } else {
+      textField_6 = new JTextField("0");
+    }
     textField_6.setColumns(10);
     GridBagConstraints gbc_textField_6 = new GridBagConstraints();
     gbc_textField_6.insets = new Insets(0, 0, 5, 5);
@@ -464,7 +469,7 @@ public class TabAbs implements ChangeListener {
       txtConverter = new JTextField(tempstates[0]);
 
     } else {
-      txtConverter = new JTextField("");
+      txtConverter = new JTextField("0");
     }
 
     txtConverter.setColumns(10);
@@ -484,8 +489,13 @@ public class TabAbs implements ChangeListener {
     gbc_lblTorqFbAenm.gridy = 11;
     panel_1.add(lblTorqFbAenm, gbc_lblTorqFbAenm);
 
-    textField_7 = new JTextField();
-    textField_7.setText(tempTorq[1]);
+    if (checkload) {
+      textField_7 = new JTextField(tempTorq[1]);
+
+    } else {
+      textField_7 = new JTextField("0");
+    }
+
     textField_7.setColumns(10);
     GridBagConstraints gbc_textField_7 = new GridBagConstraints();
     gbc_textField_7.insets = new Insets(0, 0, 5, 5);
@@ -503,12 +513,12 @@ public class TabAbs implements ChangeListener {
     gbc_lblInverter.gridy = 11;
     panel_1.add(lblInverter, gbc_lblInverter);
 
+    if (checkload) {
+      textField_4 = new JTextField(tempstates[1]);
 
-    textField_4 = new JTextField();
-    // textField_4 = new JTextField();}
-    textField_4.setColumns(10);
-    textField_4.setText(tempstates[1]);
-
+    } else {
+      textField_4 = new JTextField("0");
+    }
     GridBagConstraints gbc_textField_4 = new GridBagConstraints();
     gbc_textField_4.insets = new Insets(0, 0, 5, 5);
     gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
@@ -529,7 +539,7 @@ public class TabAbs implements ChangeListener {
       textField_5 = new JTextField(tempstates[2]);
 
     } else {
-      textField_5 = new JTextField();
+      textField_5 = new JTextField("0");
     }
     textField_5.setColumns(10);
     GridBagConstraints gbc_textField_5 = new GridBagConstraints();
@@ -541,18 +551,20 @@ public class TabAbs implements ChangeListener {
 
 
 
-   
-
     // Table
-    String data[][] = {{"Name", "Set", "Min", "Max"}, {"Min Speed (rpm) ", tempLimit [0], "0", "10000"},
-        {"Def Speed (rpm) ", tempLimit [1], "0", "10000"}, {"Max Speed (rpm) ", tempLimit [2], "0", "1000"},
-        {"Min Torque(Nm) ", tempLimit [3], "0", "10000"}, {"Def Torque (Nm) ", tempLimit [4], "0", "10000"},
-        {"Max Torque (Nm) ", tempLimit [5], "0", "1000"},
-        {"Min Acceleration Limit (rpm/s)", tempLimit [6], "0", "10000"},
-        {"Def Acceleration Limit (rpm/s)", tempLimit [7], "0", "10000"},
-        {"Max Acceleration Limit (rpm/s)", tempLimit [8], "0", "70"},
-        {"Minium Inertia (kgm2)", tempLimit [9], "0", "70"}, {"Default Inertia (kgm2)", tempLimit [10], "0", "700"},
-        {"Max Inertia (kgm2)", tempLimit [11], "0", "70"}};
+    data = new String[][] {{"Name", "Set", "Min", "Max"},
+        {"Min Speed (rpm) ", tempLimit[0], "0", "10000"},
+        {"Def Speed (rpm) ", tempLimit[1], "0", "10000"},
+        {"Max Speed (rpm) ", tempLimit[2], "0", "1000"},
+        {"Min Torque(Nm) ", tempLimit[3], "0", "10000"},
+        {"Def Torque (Nm) ", tempLimit[4], "0", "10000"},
+        {"Max Torque (Nm) ", tempLimit[5], "0", "1000"},
+        {"Min Acceleration Limit (rpm/s)", tempLimit[6], "0", "10000"},
+        {"Def Acceleration Limit (rpm/s)", tempLimit[7], "0", "10000"},
+        {"Max Acceleration Limit (rpm/s)", tempLimit[8], "0", "70"},
+        {"Minium Inertia (kgm2)", tempLimit[9], "0", "70"},
+        {"Default Inertia (kgm2)", tempLimit[10], "0", "700"},
+        {"Max Inertia (kgm2)", tempLimit[11], "0", "70"}};
     String column[] = {"ID", "NAME", "SALARY", "set"};
 
     gbl_panel_2.columnWidths = new int[] {600, 0};
@@ -562,7 +574,7 @@ public class TabAbs implements ChangeListener {
     panel_2.setLayout(gbl_panel_2);
 
     // = new GridBagLayout();
-    JTable table = new JTable(data, column) {
+    table = new JTable(data, column) {
       @Override
       public boolean isCellEditable(int row, int column) {
         return column == 1 ? true : false;
@@ -575,6 +587,8 @@ public class TabAbs implements ChangeListener {
     table.getColumnModel().getColumn(1).setPreferredWidth(120);
     table.getColumnModel().getColumn(3).setPreferredWidth(120);
 
+
+
     GridBagConstraints gbc_table = new GridBagConstraints();
     gbc_table.fill = GridBagConstraints.BOTH;
     gbc_table.gridx = 0;
@@ -584,8 +598,8 @@ public class TabAbs implements ChangeListener {
 
 
   }
-  
-  
+
+
 
   /**
    * @param textField the textField to set
@@ -602,5 +616,105 @@ public class TabAbs implements ChangeListener {
 
   }
 
+  public String getsaveABS() {
+    String[] a = new String[40];
+    saveValue[0] = spinner.getValue().toString();
+    saveValue[1] = spinner_6.getValue().toString();
+    saveValue[2] = spinner_1.getValue().toString();
+    saveValue[3] = spinner_7.getValue().toString();
+    saveValue[4] = spinner_2.getValue().toString();
+    saveValue[5] = spinner_8.getValue().toString();
+    saveValue[6] = spinner_3.getValue().toString();
+    saveValue[7] = spinner_9.getValue().toString();
+    saveValue[8] = spinner_4.getValue().toString();
+    saveValue[9] = spinner_10.getValue().toString();
+    saveValue[10] = spinner_5.getValue().toString();
+    saveValue[11] = spinner_11.getValue().toString();
+    saveValue[12] = checkConfigStatus(tglbtnTorsReady);
+    saveValue[13] = checkConfigStatus(tglbtnDigReady);
+    saveValue[14] = checkConfigStatus(tglbtnTorsReady_1);
+    saveValue[15] = checkConfigStatus(tglbtnTorsSent);
+    saveValue[16] = textField_6.getText();
+    saveValue[17] = textField_7.getText();
+    saveValue[18] = txtConverter.getText();
+    saveValue[19] = textField_4.getText();
+    saveValue[20] = textField_5.getText();
+    String[] listVal = new String[20];
+    for (int i = 1; i < data.length; ++i) {
+      listVal[i - 1] = table.getModel().getValueAt(i, 1).toString();
 
+    }
+
+    String absinfo = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + "<Content>\r\n"
+        + "<ABS>\r\n" + "    <values_to_Drive_Dsp>\r\n"
+        + "        <name>Abort Rate (rpm/sec)</name>\r\n" + "        <sent>" + saveValue[0]
+        + "</sent>\r\n" + "        <received>" + saveValue[1] + "</received>\r\n"
+        + "    </values_to_Drive_Dsp>\r\n" + "\r\n" + "    <values_to_Drive_Dsp>\r\n"
+        + "        <name>TorqFull Scale AE (Nm)</name>\r\n" + "        <sent>" + saveValue[2]
+        + "</sent>\r\n" + "        <received>" + saveValue[3] + "</received>\r\n"
+        + "    </values_to_Drive_Dsp>\r\n" + "\r\n" + "    <values_to_Drive_Dsp>\r\n"
+        + "        <name>Torq Zero AE (Nm)</name>\r\n" + "        <sent>" + saveValue[4]
+        + "</sent>\r\n" + "        <received>" + saveValue[5] + "</received>\r\n"
+        + "    </values_to_Drive_Dsp>\r\n" + "\r\n" + "    <values_to_Drive_Dsp>\r\n"
+        + "        <name>Not Used </name>\r\n" + "        <sent>" + saveValue[6] + "</sent>\r\n"
+        + "        <received>" + saveValue[7] + "</received>\r\n" + "    </values_to_Drive_Dsp>\r\n"
+        + "    \r\n" + "    <values_to_Drive_Dsp>\r\n" + "        <name>Not Used </name>\r\n"
+        + "        <sent>" + saveValue[8] + "</sent>\r\n" + "        <received>" + saveValue[9]
+        + "</received>\r\n" + "    </values_to_Drive_Dsp>\r\n" + "\r\n"
+        + "    <values_to_Drive_Dsp>\r\n" + "        <name>Tcmd Filt Const (ms) </name>\r\n"
+        + "        <sent>" + saveValue[10] + "</sent>\r\n" + "        <received>" + saveValue[11]
+        + "</received>\r\n" + "    </values_to_Drive_Dsp>\r\n" + "\r\n" + "    <Config_Status>\r\n"
+        + "        <name>Cfg Ready</name>\r\n" + "        <status>" + saveValue[12]
+        + "</status>\r\n" + "    </Config_Status>\r\n" + "\r\n" + "    <Config_Status>\r\n"
+        + "        <name>Cfg Done</name>\r\n" + "        <status>" + saveValue[13]
+        + "</status>\r\n" + "    </Config_Status>\r\n" + "\r\n" + "    <Config_Status>\r\n"
+        + "        <name>Tors Ready</name>\r\n" + "        <status>" + saveValue[14]
+        + "</status>\r\n" + "    </Config_Status>\r\n" + "\r\n" + "    <Config_Status>\r\n"
+        + "        <name>Tors Sent</name>\r\n" + "        <status>" + saveValue[15]
+        + "</status>\r\n" + "    </Config_Status>\r\n" + "\r\n" + "    <Torq>\r\n"
+        + "        <name>CAL Signal AE (Nm)</name>\r\n" + "        <value>" + saveValue[16]
+        + "</value>\r\n" + "    </Torq>\r\n" + "\r\n" + "    <Torq>\r\n"
+        + "        <name>Torq F/B AE(Nm)</name>\r\n" + "        <value>" + saveValue[17]
+        + "</value>\r\n" + "    </Torq>\r\n" + "\r\n" + "    <States>\r\n"
+        + "        <name>Converter</name>\r\n" + "        <value>" + saveValue[18] + "</value>\r\n"
+        + "    </States>\r\n" + "\r\n" + "    <States>\r\n" + "        <name>Inverter</name>\r\n"
+        + "        <value>" + saveValue[19] + "</value>\r\n" + "    </States>\r\n" + "\r\n"
+        + "    <States>\r\n" + "        <name>Host Contr</name>\r\n" + "        <value>"
+        + saveValue[20] + "</value>\r\n" + "    </States>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Min Speed (rpm)</name>\r\n" + "        <value>" + listVal[0]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Def Speed (rpm)</name>\r\n" + "        <value>" + listVal[1]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Max Speed (rpm)</name>\r\n" + "        <value>" + listVal[2]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Min Torque (Nm)</name>\r\n" + "        <value>" + listVal[3]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Def Torque (Nm)</name>\r\n" + "        <value>" + listVal[4]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Max Torque (Nm)</name>\r\n" + "        <value>" + listVal[5]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Min AccelLim (rpm/s)</name>\r\n" + "        <value>" + listVal[6]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Def AccelLim (rpm/s)</name>\r\n" + "        <value>" + listVal[7]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Max AccelLim (rpm/s)</name>\r\n" + "        <value>" + listVal[8]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Min Interia (kgm2)</name>\r\n" + "        <value>" + listVal[9]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Default Interia (kgm2)</name>\r\n" + "        <value>" + listVal[10]
+        + "</value>\r\n" + "    </Limits>\r\n" + "\r\n" + "    <Limits>\r\n"
+        + "        <name>Max Interia (kgm2)</name>\r\n" + "        <value>" + listVal[11]
+        + "</value>\r\n" + "    </Limits>\r\n" + "</ABS>";
+
+    return absinfo;
+  }
+
+  private String checkConfigStatus(JToggleButton button) {
+    String temp = "OFF";
+    if (button.isEnabled()) {
+      temp = "ON";
+    }
+    return temp;
+
+  }
 }
