@@ -258,7 +258,9 @@ public class FormPanel extends JPanel {
     {
       try {
         FileWriter fw = new FileWriter(j.getSelectedFile() + ".xml");
-        fw.write("test content");
+        String tempinfo = tab.getInfo();
+        System.out.println ("tempinfo in formpanel " + tempinfo);
+        fw.write(tempinfo);
         fw.close();
       } catch (Exception ex) {
         ex.printStackTrace();
