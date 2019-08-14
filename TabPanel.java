@@ -158,6 +158,12 @@ public class TabPanel extends JPanel {
     // TODO Auto-generated method stub
     return AbsTab;
   }
-
+public String getInfo () {
+  String absInfo =  AbsTab.getsaveABS();
+  System.out.println ("tempinfo in tab panel " + absInfo);
+  
+  return absInfo;
+  
+}
 
 }
