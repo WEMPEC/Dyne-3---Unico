@@ -80,7 +80,7 @@ public class TabPanel extends JPanel {
 
     JPanel panel_4 = new JPanel();
     GridBagLayout gbl4 = new GridBagLayout();
-    tabPiu = new TabPiu(panel_4, gbl4, checkupload,loadinfo);
+    tabPiu = new TabPiu(panel_4, gbl4, checkupload, loadinfo);
     tabbedPane.addTab("Piu", null, panel_4, null);
     panel_4.setLayout(gbl4);
     panel_4.setPreferredSize(new Dimension(tabWidth, tabHeight));
@@ -93,7 +93,7 @@ public class TabPanel extends JPanel {
         JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     // tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-    faultsTab = new TabFaults(panel_6, gbl_panel_5,checkupload,loadinfo );
+    faultsTab = new TabFaults(panel_6, gbl_panel_5, checkupload, loadinfo);
     scrollPane.setMinimumSize(new Dimension(tabWidth, tabHeight));
     scrollPane.setPreferredSize(new Dimension(tabWidth, tabHeight));
 
@@ -110,7 +110,7 @@ public class TabPanel extends JPanel {
     tabbedPane.addTab("Tab 3", icon, panel3, "Still does nothing");
     tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
 
-   
+
 
     // Add the tabbed pane to this panel.
     add(tabbedPane);
@@ -158,12 +158,20 @@ public class TabPanel extends JPanel {
     // TODO Auto-generated method stub
     return AbsTab;
   }
-public String getInfo () {
-  String absInfo =  AbsTab.getsaveABS();
-  System.out.println ("tempinfo in tab panel " + absInfo);
+
+  public String getInfo(String sliderinfo) {
+    String absInfo = AbsTab.getsaveABS();
+    String piuinfo = tabPiu.getsavePIU();
+    absInfo = absInfo.concat(piuinfo);
+    absInfo = absInfo.concat(sliderinfo);
+    String faultinfo = faultsTab.getFaultsinfo();
+    absInfo = absInfo.concat(faultinfo);
   
-  return absInfo;
-  
-}
+
+    System.out.println("tempinfo in tab panel " + absInfo);
+
+    return absInfo;
+
+  }
 
 }
