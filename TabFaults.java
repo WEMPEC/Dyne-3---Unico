@@ -14,14 +14,29 @@ public class TabFaults extends JPanel {
   private GridBagLayout gbl_panel_4;
   private JPanel panel_4;
   private JScrollPane scrollPane;
+  private ParseXml loaddata;
+  private Boolean ifLoad;
+  private String[] faultlist;
 
-  public TabFaults(JPanel panel, GridBagLayout gl_panel) {
+  public TabFaults(JPanel panel, GridBagLayout gl_panel, Boolean checkupload, ParseXml loadinfo) {
     // TODO Auto-generated constructor stub
     panel_4 = panel;
     gbl_panel_4 = gl_panel;
-    // scrollPane = scrollPane1;
+    loaddata = loadinfo;
+    ifLoad = checkupload;
 
-    gbl_panel_4.columnWidths = new int[] {30, 30, 105, 140, 68, 57, 105};
+    if (ifLoad & loadinfo != null) {
+      faultlist = loadinfo.getFaultlistarray();
+      // absVDD = loadinfo.getAbsVDDList();
+    } else {
+      faultlist = new String[40];
+      for (int i = 0; i < faultlist.length; ++i) {
+        faultlist[i] = "/";
+      }
+    }
+
+
+    gbl_panel_4.columnWidths = new int[] {30, 30, 105, 40, 30, 40, 105};
     gbl_panel_4.rowHeights = new int[] {47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47};
     gbl_panel_4.columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     gbl_panel_4.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -29,13 +44,13 @@ public class TabFaults extends JPanel {
     panel_4.setLayout(gbl_panel_4);
 
     String column[] = {"Converter Fault M632", "BoardSel0/1 M 622", "PwmSwap M623",
-        "No Run Bit Drive M635", "PwmSwap M623", "No Run Bit Drive M635", "GateDrive 5678 M624",
+        "No Run Bit Drive M635", "PwmSwap M623", "No Run Bit Conv M633", "GateDrive 5678 M624",
         "Igbt Temp M634", "Gbl 5010/5003 M625", "Enc Quad Loss M636", "Overcurrent 1/2 M626",
         "12T M637", "Estop M627", "Overspeed M638", "Loss of Hbeat (H) M628", "CsGblMtr M639",
         "Output Contact M629", "ExtTrip M640", "HostTripped M630", "Invalidvar M642",
         "CoolSystRun M642", "Spare M643"};
     for (int i = 0; i < column.length; ++i) {
-      JLabel ok = new JLabel("OK");
+      JLabel ok = new JLabel(faultlist[i]);
       setthefont(ok);
       setthecolor(ok);
       GridBagConstraints c2 = new GridBagConstraints();
@@ -85,7 +100,7 @@ public class TabFaults extends JPanel {
 
   private void setthefont(JLabel a) {
 
-    a.setFont((new Font("Times New Roman", Font.BOLD, 17)));
+    a.setFont((new Font("Times New Roman", Font.BOLD, 16)));
 
   }
 
@@ -93,8 +108,112 @@ public class TabFaults extends JPanel {
     System.out.print(b.toString());
     if (b.getText().toString().equalsIgnoreCase("ok")) {
       b.setForeground(Color.GREEN);
-    } else {
+    } else if (b.getText().toString().equalsIgnoreCase("fault")) {
       b.setForeground(Color.RED);
+    } else {
+      b.setForeground(Color.ORANGE);
     }
+  }
+
+  public String getFaultsinfo() {
+    String info = "\r\n" + 
+        "<FAULTS>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Converter Fault M632</name>\r\n" + 
+        "    <value>"+faultlist[0]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>BoardSel0/1 M 622</name>\r\n" + 
+        "    <value>"+faultlist[1]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>PwmSwap M623</name>\r\n" + 
+        "    <value>"+faultlist[2]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>No Run Bit Drive M635</name>\r\n" + 
+        "    <value>"+faultlist[3]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>PwmSwap M623</name>\r\n" + 
+        "    <value>"+faultlist[4]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "\r\n" + 
+        "<faults>\r\n" + 
+        "    <name> No Run Bit Conv M633 </name>\r\n" + 
+        "    <value>"+faultlist[5]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>GateDrive 5678 M624</name>\r\n" + 
+        "    <value>"+faultlist[6]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Igbt Temp M634</name>\r\n" + 
+        "    <value>"+faultlist[7]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Gbl 5010/5003 M625</name>\r\n" + 
+        "    <value>"+faultlist[8]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Enc Quad Loss M636</name>\r\n" + 
+        "    <value>"+faultlist[9]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Overcurrent 1/2 M626</name>\r\n" + 
+        "    <value>"+faultlist[10]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Estop M627</name>\r\n" + 
+        "    <value>"+faultlist[11]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>12T M637</name>\r\n" + 
+        "    <value>"+faultlist[12]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Overspeed M638</name>\r\n" + 
+        "    <value>"+faultlist[13]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Loss of Hbeat (H) M628</name>\r\n" + 
+        "    <value>"+faultlist[14]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>CsGblMtr M639</name>\r\n" + 
+        "    <value>"+faultlist[15]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Output Contact M629</name>\r\n" + 
+        "    <value>"+faultlist[16]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>ExtTrip M640</name>\r\n" + 
+        "    <value>"+faultlist[17]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>HostTripped M630</name>\r\n" + 
+        "    <value>"+faultlist[18]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Invalidvar M642</name>\r\n" + 
+        "    <value>"+faultlist[19]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>CoolSystRun M642</name>\r\n" + 
+        "    <value>"+faultlist[20]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "<faults>\r\n" + 
+        "    <name>Spare M643</name>\r\n" + 
+        "    <value>"+faultlist[21]+"</value>\r\n" + 
+        "</faults>\r\n" + 
+        "\r\n" + 
+        "\r\n" + 
+        "</FAULTS>\r\n" + 
+        "</Content>";
+
+    return info;
+
+
   }
 }

@@ -245,7 +245,7 @@ public class FormPanel extends JPanel {
     return middle;
   }
 
-  public void getActionSaveListener() {
+  public void getActionSaveListener(String sliderinfo) {
     FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
     JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     j.setFileFilter(filter);
@@ -258,15 +258,14 @@ public class FormPanel extends JPanel {
     {
       try {
         FileWriter fw = new FileWriter(j.getSelectedFile() + ".xml");
-        String tempinfo = tab.getInfo();
-        System.out.println ("tempinfo in formpanel " + tempinfo);
-        fw.write(tempinfo);
+        String tempinfo = tab.getInfo( sliderinfo);
+          fw.write(tempinfo);
         fw.close();
       } catch (Exception ex) {
         ex.printStackTrace();
       }
       // set the label to the path of the selected file
-      temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + "successfully");
+      temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + " successfully");
     }
     // if the user cancelled the operation
     else if (j.getSelectedFile() == null) {

@@ -130,7 +130,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     c.gridx = 1;
     c.gridy = 10;
     setSlider(slider_1, slideVal[0]);
-     pane.add(slider_1, c);
+    pane.add(slider_1, c);
 
     JLabel label_4 = new JLabel("Volt Cmd (V)");
     label_4.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -441,6 +441,16 @@ public class MiddlePanel extends JPanel implements ActionListener {
 
   }
 
+  public SaveFileWriter getinfo() {
+    String volt = spinner.getValue().toString();
+    String cur = spinner1.getValue().toString();
+    String spd = spinner2.getValue().toString();
+    String torq = spinner3.getValue().toString();
+    SaveFileWriter slideobj = new SaveFileWriter(volt, cur, spd, torq);
+    return slideobj;
+
+
+  }
 
 }
 

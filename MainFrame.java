@@ -119,7 +119,9 @@ public class MainFrame extends JFrame {
       @Override
       public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
-        formPanel.getActionSaveListener();
+        SaveFileWriter obj = Middle.getinfo();
+        String sliderinfo = obj.getXMLinfo ();
+        formPanel.getActionSaveListener(sliderinfo);
       }
     });
 
