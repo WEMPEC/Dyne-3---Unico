@@ -21,6 +21,8 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.xml.parsers.ParserConfigurationException;
@@ -35,7 +37,7 @@ public class MainFrame extends JFrame {
   private FormPanel formPanel;
   private ParseXml temp;
   // private GraphPanel graphPanel;
-
+  private JButton reset;
   private BorderLayout ab;
 
   public MainFrame() throws IOException {
@@ -44,24 +46,52 @@ public class MainFrame extends JFrame {
     ab = new BorderLayout();
     setLayout(ab);
     // tab = new TabPanel();
-    formPanel = new FormPanel();
     Middle = new MiddlePanel(null);
+    formPanel = new FormPanel();
+    reset = new JButton("reset");
+    reset.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent arg0) {
+        // TODO Auto-generated method stub
+        // Middle.removeAll();
+        Middle.removeAll();
+        formPanel.removeAll();
+       
+        formPanel = new FormPanel();
+        Middle = new MiddlePanel(null);
+        add(Middle, BorderLayout.CENTER);
+        add(reset, BorderLayout.SOUTH);
+        add((menubar()), BorderLayout.NORTH);
+
+        setSize(1500, 1030);
+        formPanel.setPreferredSize(new Dimension(600, 200));
+        add(formPanel, BorderLayout.WEST);
 
 
+        // change the entire window size.
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+
+      }
+    }
+
+    );
     // textPanel = new TextPanel();
 
 
 
     // pass in the controller.
     // tab.setPreferredSize(new Dimension(300, 100));
-    add((menubar()), ab.NORTH);
+    add((menubar()), BorderLayout.NORTH);
 
-    add(Middle, ab.CENTER);
-
+    add(Middle, BorderLayout.CENTER);
+    add(reset, BorderLayout.SOUTH);
 
     setSize(1500, 1030);
     formPanel.setPreferredSize(new Dimension(600, 200));
-    add(formPanel, ab.WEST);
+    add(formPanel, BorderLayout.WEST);
 
 
     // change the entire window size.
@@ -77,25 +107,75 @@ public class MainFrame extends JFrame {
 
     JMenuBar menubar = new JMenuBar();
     JMenu File = new JMenu("File");
+    JMenu reset = new JMenu("Reset");
     JMenu View = new JMenu("View");
     // JMenu Window = new JMenu("Window");
     JMenu Tools = new JMenu("Tools");
     JMenu Help = new JMenu("Help");
     File.setFont(new Font("Times New Roman", Font.BOLD, 20));
+    reset.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
     View.setFont(new Font("Times New Roman", Font.BOLD, 20));
     Tools.setFont(new Font("Times New Roman", Font.BOLD, 20));
     Help.setFont(new Font("Times New Roman", Font.BOLD, 20));
+    // reset function
+    reset.addMenuListener(new MenuListener() {
+      @Override
+      public void menuSelected(MenuEvent e) {
+          System.out.println("menuSelected");
+
+         // TODO Auto-generated method stub
+        System.out.println("reset is clicked");
+        Middle.removeAll();
+        formPanel.removeAll();
+       
+        formPanel = new FormPanel();
+        Middle = new MiddlePanel(null);
+        add(Middle, BorderLayout.CENTER);
+        add(reset, BorderLayout.SOUTH);
+        add((menubar()), BorderLayout.NORTH);
+
+        setSize(1500, 1030);
+        formPanel.setPreferredSize(new Dimension(600, 200));
+        add(formPanel, BorderLayout.WEST);
+
+
+        // change the entire window size.
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+      }
+
+      @Override
+      public void menuCanceled(MenuEvent arg0) {
+        System.out.println("menucancle");
+        Middle = new MiddlePanel(null);
+        add(formPanel, BorderLayout.WEST);
+        add(Middle, BorderLayout.CENTER);
+      }
+
+      @Override
+      public void menuDeselected(MenuEvent arg0) {
+        System.out.println("menudeselect");
+   
+      }
+    }
+
+    );
+
+
 
     // initialize each components
     JMenuItem OpenFile = new JMenuItem("Load File");
     OpenFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
 
+    //// load function
     OpenFile.addActionListener(new ActionListener() {
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
-       // Middle.removeAll();
+        // Middle.removeAll();
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -104,7 +184,7 @@ public class MainFrame extends JFrame {
         j.setFileFilter(filter);
 
         Middle = formPanel.getActionLoadListener(j);
-        add(Middle, ab.CENTER);
+        add(Middle, BorderLayout.CENTER);
 
 
       }
@@ -120,7 +200,7 @@ public class MainFrame extends JFrame {
       public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
         SaveFileWriter obj = Middle.getinfo();
-        String sliderinfo = obj.getXMLinfo ();
+        String sliderinfo = obj.getXMLinfo();
         formPanel.getActionSaveListener(sliderinfo);
       }
     });
@@ -138,7 +218,7 @@ public class MainFrame extends JFrame {
     // Add items to menu bar.
     menubar.add(File);
     menubar.add(View);
-
+    menubar.add(reset);
     menubar.add(Tools);
     menubar.add(Help);
 
@@ -150,9 +230,7 @@ public class MainFrame extends JFrame {
   }
 
   public void getMiddle(MiddlePanel Middle) {
-
-
-    add(Middle, ab.CENTER);
+    add(Middle, BorderLayout.CENTER);
   }
 }
 

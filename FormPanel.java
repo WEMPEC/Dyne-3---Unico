@@ -24,6 +24,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -50,8 +51,19 @@ public class FormPanel extends JPanel {
   private ParseXml loadinfo;
   private JSpinner spinner;
   private GridBagConstraints gc;
+  private MiddlePanel middlep;
+  private boolean restcheck;
+  private BorderLayout abc;
+  /**
+   * @return the restcheck
+   */
+  public boolean isRestcheck() {
+    return restcheck;
+  }
+
 
   public FormPanel() {
+    restcheck = false;
     JSpinner spinner = new JSpinner();
     JComponent editor = spinner.getEditor();
     JFormattedTextField tf = ((JSpinner.DefaultEditor) editor).getTextField();
@@ -59,8 +71,7 @@ public class FormPanel extends JPanel {
     spinner.setPreferredSize(new Dimension(150, 100));
     spinner.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner.setModel(new SpinnerNumberModel(new Integer(300), null, null, new Integer(1)));
-
-
+  
     upload = false;
     headerLabel = new JLabel("  Dyne 3");
     headerLabel.setFont(new Font("Courier New", Font.BOLD, 46));
@@ -90,7 +101,7 @@ public class FormPanel extends JPanel {
     stopPiu.setBackground(Color.red);
     stopPiu.setForeground(Color.WHITE);
 
-  
+
     // call layout manager to determines the perferred size.
     tab = new TabPanel(loadinfo);
 
@@ -108,7 +119,7 @@ public class FormPanel extends JPanel {
     gc = new GridBagConstraints();
     // x from left to right
 
-     ///////////// first row/////////////////////
+    ///////////// first row/////////////////////
     gc.weightx = 1;
     gc.weighty = 0;
     // fill can be horizontal, vertical, none or both.
@@ -146,7 +157,7 @@ public class FormPanel extends JPanel {
 
     add(loadNotify, gc);
     gc.insets = new Insets(0, 100, 0, 0);
-      // gc.insets = new Insets(0, 0, 0, 300);
+    // gc.insets = new Insets(0, 0, 0, 300);
     //
     // add(temp, gc);
 
@@ -171,48 +182,47 @@ public class FormPanel extends JPanel {
 
     }
 
-   
+
 
     reset.addActionListener(new ActionListener() {
-
+     
       @Override
       public void actionPerformed(ActionEvent arg0) {
+        restcheck = true;
         try {
           loadinfo = new ParseXml(null);
+          new MiddlePanel (null);
+         
         } catch (ParserConfigurationException e) {
           // TODO Auto-generated catch block
           e.printStackTrace();
-        }
+        } 
         // TODO Auto-generated method stub
         tab.removeAll();
+        //middlep.removeAll();
+        revalidate();
         System.out.print("reset is clicked");
         tab = new TabPanel(null);
-        gc.anchor = GridBagConstraints.LINE_START;
-        revalidate();
+           revalidate();
         gc.gridx = 0;
         gc.gridy = 4;
-        gc.weightx = 1;
-        gc.weighty = 0.5;
-        gc.insets = new Insets(0, 10, 0, 0);
         add(tab, gc);
-
-
       }
     });
   }
 
 
   public MiddlePanel getActionLoadListener(JFileChooser j) {
-   
-    MiddlePanel  middle = new MiddlePanel (loadinfo);
-    
+
+    MiddlePanel middle = new MiddlePanel(loadinfo);
+
     int returnVal = j.showOpenDialog(null);
 
     if (returnVal == JFileChooser.APPROVE_OPTION) {
-      File  file = j.getSelectedFile();
+      File file = j.getSelectedFile();
       // This is where a real application would open the file.
       loadNotify.setText("Load: " + file.getName() + " successfully.");
-     
+
       try {
         this.loadinfo = new ParseXml(file);
         upload = true;
@@ -223,12 +233,12 @@ public class FormPanel extends JPanel {
         gc.gridy = 4;
         gc.insets = new Insets(0, 10, 35, 0);
         add(tab, gc);
-        
-          middle = new MiddlePanel (loadinfo);
-        
-        
+
+        middle = new MiddlePanel(loadinfo);
+
+
         System.out.println("load infor in formpanel           " + loadinfo.getSentVal()[2]);
-       
+
       } catch (ParserConfigurationException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
@@ -254,12 +264,11 @@ public class FormPanel extends JPanel {
     // invoke the showsSaveDialog function to show the save dialog
     int r = j.showSaveDialog(null);
     // if the user selects a file
-    if (r == JFileChooser.APPROVE_OPTION)
-    {
+    if (r == JFileChooser.APPROVE_OPTION) {
       try {
         FileWriter fw = new FileWriter(j.getSelectedFile() + ".xml");
-        String tempinfo = tab.getInfo( sliderinfo);
-          fw.write(tempinfo);
+        String tempinfo = tab.getInfo(sliderinfo);
+        fw.write(tempinfo);
         fw.close();
       } catch (Exception ex) {
         ex.printStackTrace();
@@ -281,6 +290,5 @@ public class FormPanel extends JPanel {
   }
 
 }
-
 
 
