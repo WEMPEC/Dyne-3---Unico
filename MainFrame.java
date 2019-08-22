@@ -37,8 +37,8 @@ public class MainFrame extends JFrame {
   private FormPanel formPanel;
   private ParseXml temp;
   // private GraphPanel graphPanel;
-  private JButton reset;
   private BorderLayout ab;
+  private Boolean loadfileCheck;
 
   public MainFrame() throws IOException {
 
@@ -48,47 +48,12 @@ public class MainFrame extends JFrame {
     // tab = new TabPanel();
     Middle = new MiddlePanel(null);
     formPanel = new FormPanel();
-    reset = new JButton("reset");
-    reset.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
-        // Middle.removeAll();
-        Middle.removeAll();
-        formPanel.removeAll();
-       
-        formPanel = new FormPanel();
-        Middle = new MiddlePanel(null);
-        add(Middle, BorderLayout.CENTER);
-        add(reset, BorderLayout.SOUTH);
-        add((menubar()), BorderLayout.NORTH);
-
-        setSize(1500, 1030);
-        formPanel.setPreferredSize(new Dimension(600, 200));
-        add(formPanel, BorderLayout.WEST);
-
-
-        // change the entire window size.
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
-      }
-    }
-
-    );
-    // textPanel = new TextPanel();
-
-
+    loadfileCheck = false;
 
     // pass in the controller.
-    // tab.setPreferredSize(new Dimension(300, 100));
     add((menubar()), BorderLayout.NORTH);
 
     add(Middle, BorderLayout.CENTER);
-    add(reset, BorderLayout.SOUTH);
-
     setSize(1500, 1030);
     formPanel.setPreferredSize(new Dimension(600, 200));
     add(formPanel, BorderLayout.WEST);
@@ -107,66 +72,19 @@ public class MainFrame extends JFrame {
 
     JMenuBar menubar = new JMenuBar();
     JMenu File = new JMenu("File");
-    JMenu reset = new JMenu("Reset");
     JMenu View = new JMenu("View");
     // JMenu Window = new JMenu("Window");
     JMenu Tools = new JMenu("Tools");
     JMenu Help = new JMenu("Help");
     File.setFont(new Font("Times New Roman", Font.BOLD, 20));
-    reset.setFont(new Font("Times New Roman", Font.BOLD, 20));
 
     View.setFont(new Font("Times New Roman", Font.BOLD, 20));
     Tools.setFont(new Font("Times New Roman", Font.BOLD, 20));
     Help.setFont(new Font("Times New Roman", Font.BOLD, 20));
     // reset function
-    reset.addMenuListener(new MenuListener() {
-      @Override
-      public void menuSelected(MenuEvent e) {
-          System.out.println("menuSelected");
-
-         // TODO Auto-generated method stub
-        System.out.println("reset is clicked");
-        Middle.removeAll();
-        formPanel.removeAll();
-       
-        formPanel = new FormPanel();
-        Middle = new MiddlePanel(null);
-        add(Middle, BorderLayout.CENTER);
-        add(reset, BorderLayout.SOUTH);
-        add((menubar()), BorderLayout.NORTH);
-
-        setSize(1500, 1030);
-        formPanel.setPreferredSize(new Dimension(600, 200));
-        add(formPanel, BorderLayout.WEST);
-
-
-        // change the entire window size.
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-      }
-
-      @Override
-      public void menuCanceled(MenuEvent arg0) {
-        System.out.println("menucancle");
-        Middle = new MiddlePanel(null);
-        add(formPanel, BorderLayout.WEST);
-        add(Middle, BorderLayout.CENTER);
-      }
-
-      @Override
-      public void menuDeselected(MenuEvent arg0) {
-        System.out.println("menudeselect");
-   
-      }
-    }
-
-    );
-
-
 
     // initialize each components
-    JMenuItem OpenFile = new JMenuItem("Load File");
+    JMenuItem OpenFile = new JMenuItem("Load");
     OpenFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
 
     //// load function
@@ -184,15 +102,12 @@ public class MainFrame extends JFrame {
         j.setFileFilter(filter);
 
         Middle = formPanel.getActionLoadListener(j);
+        loadfileCheck = true;
         add(Middle, BorderLayout.CENTER);
-
-
       }
-    }
-
-    );
+    });
     ////////// Save Function.
-    JMenuItem NewFile = new JMenuItem("Save File");
+    JMenuItem NewFile = new JMenuItem("Save ");
     NewFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
     NewFile.addActionListener(new ActionListener() {
 
@@ -201,7 +116,21 @@ public class MainFrame extends JFrame {
         // TODO Auto-generated method stub
         SaveFileWriter obj = Middle.getinfo();
         String sliderinfo = obj.getXMLinfo();
-        formPanel.getActionSaveListener(sliderinfo);
+        formPanel.getActionSaveListener(sliderinfo, loadfileCheck);
+      }
+    });
+    //// save as function
+    JMenuItem saveAsFile = new JMenuItem("Save As");
+    saveAsFile.setFont(new Font("Times New Roman", Font.BOLD, 17));
+    saveAsFile.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent arg0) {
+        // TODO Auto-generated method stub
+        SaveFileWriter obj = Middle.getinfo();
+        String sliderinfo = obj.getXMLinfo();
+
+        formPanel.getActionSaveListener(sliderinfo, !loadfileCheck);
       }
     });
 
@@ -218,12 +147,12 @@ public class MainFrame extends JFrame {
     // Add items to menu bar.
     menubar.add(File);
     menubar.add(View);
-    menubar.add(reset);
     menubar.add(Tools);
     menubar.add(Help);
 
-    File.add(NewFile);
     File.add(OpenFile);
+    File.add(NewFile);// save
+    File.add(saveAsFile);// save as
     File.add(CloseFile);
     this.setVisible(true);
     return menubar;
