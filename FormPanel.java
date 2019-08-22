@@ -53,7 +53,9 @@ public class FormPanel extends JPanel {
   private GridBagConstraints gc;
   private MiddlePanel middlep;
   private boolean restcheck;
-  private BorderLayout abc;
+  private String filename;
+
+
   /**
    * @return the restcheck
    */
@@ -63,7 +65,7 @@ public class FormPanel extends JPanel {
 
 
   public FormPanel() {
-    restcheck = false;
+    filename = null;
     JSpinner spinner = new JSpinner();
     JComponent editor = spinner.getEditor();
     JFormattedTextField tf = ((JSpinner.DefaultEditor) editor).getTextField();
@@ -71,7 +73,7 @@ public class FormPanel extends JPanel {
     spinner.setPreferredSize(new Dimension(150, 100));
     spinner.setFont(new Font("Times New Roman", Font.PLAIN, 17));
     spinner.setModel(new SpinnerNumberModel(new Integer(300), null, null, new Integer(1)));
-  
+
     upload = false;
     headerLabel = new JLabel("  Dyne 3");
     headerLabel.setFont(new Font("Courier New", Font.BOLD, 46));
@@ -133,10 +135,8 @@ public class FormPanel extends JPanel {
     gc.insets = new Insets(20, 20, 0, 0);
     add(imageLabel, gc);
     gc.insets = new Insets(20, 200, 0, 0);
-
-    // gc.gridx = 2;
     gc.insets = new Insets(20, 300, 0, 0);
-    add(reset, gc);
+    // add(reset, gc);
     gc.insets = new Insets(20, 450, 0, 0);
     add(stopDrive, gc);
     gc.anchor = GridBagConstraints.LINE_END;
@@ -179,36 +179,35 @@ public class FormPanel extends JPanel {
       gc.insets = new Insets(0, 10, 40, 0);
       add(tab, gc);
       gc.anchor = GridBagConstraints.LINE_END;
-
     }
 
 
 
-    reset.addActionListener(new ActionListener() {
-     
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-        restcheck = true;
-        try {
-          loadinfo = new ParseXml(null);
-          new MiddlePanel (null);
-         
-        } catch (ParserConfigurationException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        } 
-        // TODO Auto-generated method stub
-        tab.removeAll();
-        //middlep.removeAll();
-        revalidate();
-        System.out.print("reset is clicked");
-        tab = new TabPanel(null);
-           revalidate();
-        gc.gridx = 0;
-        gc.gridy = 4;
-        add(tab, gc);
-      }
-    });
+    // reset.addActionListener(new ActionListener() {
+    //
+    // @Override
+    // public void actionPerformed(ActionEvent arg0) {
+    // restcheck = true;
+    // try {
+    // loadinfo = new ParseXml(null);
+    // new MiddlePanel (null);
+    //
+    // } catch (ParserConfigurationException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
+    // // TODO Auto-generated method stub
+    // tab.removeAll();
+    // //middlep.removeAll();
+    // revalidate();
+    // System.out.print("reset is clicked");
+    // tab = new TabPanel(null);
+    // revalidate();
+    // gc.gridx = 0;
+    // gc.gridy = 4;
+    // add(tab, gc);
+    // }
+    // });
   }
 
 
@@ -222,7 +221,7 @@ public class FormPanel extends JPanel {
       File file = j.getSelectedFile();
       // This is where a real application would open the file.
       loadNotify.setText("Load: " + file.getName() + " successfully.");
-
+      filename = file.getAbsolutePath();
       try {
         this.loadinfo = new ParseXml(file);
         upload = true;
@@ -255,34 +254,53 @@ public class FormPanel extends JPanel {
     return middle;
   }
 
-  public void getActionSaveListener(String sliderinfo) {
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
-    JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-    j.setFileFilter(filter);
-    j.setPreferredSize(new Dimension(800, 600));
+  public void getActionSaveListener(String sliderinfo, Boolean saveCheck) {
+    if (filename == null || !saveCheck) {
+      FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
+      JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+      j.setFileFilter(filter);
+      j.setPreferredSize(new Dimension(800, 600));
 
-    // invoke the showsSaveDialog function to show the save dialog
-    int r = j.showSaveDialog(null);
-    // if the user selects a file
-    if (r == JFileChooser.APPROVE_OPTION) {
+      // invoke the showsSaveDialog function to show the save dialog
+      int r = j.showSaveDialog(null);
+      // if the user selects a file
+      if (r == JFileChooser.APPROVE_OPTION) {
+        try {
+          FileWriter fw = new FileWriter(j.getSelectedFile() + ".xml");
+          String tempinfo = tab.getInfo(sliderinfo);
+          fw.write(tempinfo);
+          fw.close();
+        } catch (Exception ex) {
+          ex.printStackTrace();
+        }
+        // set the label to the path of the selected file
+        temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + " successfully");
+      }
+      // if the user cancelled the operation
+      else if (j.getSelectedFile() == null) {
+        temp.setText("SAVE operation cancel");
+      } else {
+        temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + "Failed");
+      }
+    } else {
       try {
-        FileWriter fw = new FileWriter(j.getSelectedFile() + ".xml");
+        FileWriter fw = new FileWriter(filename);
         String tempinfo = tab.getInfo(sliderinfo);
         fw.write(tempinfo);
         fw.close();
       } catch (Exception ex) {
         ex.printStackTrace();
+        temp.setText("Save" + filename + "Failed");
+
       }
       // set the label to the path of the selected file
-      temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + " successfully");
+      temp.setText("Save" + filename + " successfully");
     }
     // if the user cancelled the operation
-    else if (j.getSelectedFile() == null) {
-      temp.setText("SAVE operation cancel");
-    } else {
-      temp.setText("Save" + j.getSelectedFile().getAbsolutePath() + "Failed");
-    }
+
+
   }
+
 
   public ParseXml getLoadinfo() {
     // TODO Auto-generated method stub
