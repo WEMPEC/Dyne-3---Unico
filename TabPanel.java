@@ -66,6 +66,8 @@ public class TabPanel extends JPanel {
     GridBagLayout gbl_panel_1 = new GridBagLayout();
     GridBagLayout gbl_panel_2 = new GridBagLayout();
     Abs.addTab("Values", null, panel_1, null);
+    Abs.setFont(new Font("Times New Roman", Font.BOLD, 15));
+
     JPanel panel_2 = new JPanel();
     Abs.addTab("Limits & SetPoints", null, panel_2, null);
 
@@ -82,6 +84,9 @@ public class TabPanel extends JPanel {
     GridBagLayout gbl4 = new GridBagLayout();
     tabPiu = new TabPiu(panel_4, gbl4, checkupload, loadinfo);
     tabbedPane.addTab("Piu", null, panel_4, null);
+    tabbedPane.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
+
     panel_4.setLayout(gbl4);
     panel_4.setPreferredSize(new Dimension(tabWidth, tabHeight));
 
