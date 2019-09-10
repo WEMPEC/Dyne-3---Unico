@@ -128,7 +128,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     c.gridy = 1;
     c.insets = new Insets(15, 0, 0, 0);
     pane.add(startDrive, c);
-    System.out.println("slideval in middle"+slideVal[0]);
+    System.out.println("slideval in middle" + slideVal[0]);
     slider_1 = new JSlider(SwingConstants.VERTICAL, 0, 250, Integer.parseInt(slideVal[0]));
     slider_1.setPaintTicks(true);
     slider_1.setPaintLabels(true);
@@ -186,14 +186,14 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_s1a.gridx = 1;
     gbc_s1a.gridy = 6;
     pane.add(spinnera, gbc_s1a);
-    
+
     slider_1a = new JSlider(SwingConstants.VERTICAL, 0, 250, Integer.parseInt(slideVal[0]));
     slider_1a.setPaintTicks(true);
     slider_1a.setPaintLabels(true);
     slider_1a.setMinorTickSpacing(10);
     slider_1a.setMajorTickSpacing(50);
     slider_1a.setUI(new MySliderUIBack(slider_1a));
-    GridBagConstraints gbc_sa = new GridBagConstraints();   
+    GridBagConstraints gbc_sa = new GridBagConstraints();
     gbc_sa.anchor = GridBagConstraints.EAST;
     gbc_sa.fill = GridBagConstraints.VERTICAL;
     gbc_sa.insets = new Insets(0, 0, 0, 10);
@@ -201,11 +201,11 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_sa.gridy = 10;
     setSlider(slider_1a, slideVal[0]);
     pane.add(slider_1a, gbc_sa);
-    
-    
+
+
     listener(spinner, slider_1, slideVal[0]);
     listener(spinnera, slider_1a, slideVal[0]);
-    
+
     ////////////////////////////////////////////////////////////////////
     JLabel label_8 = new JLabel("Curr Lim (A)");
     label_8.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -256,7 +256,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_slider_2.gridx = 2;
     gbc_slider_2.gridy = 10;
     pane.add(slider_2, gbc_slider_2);
-    
+
     slider_2a = new JSlider(SwingConstants.VERTICAL, 0, 150, 0);
     slider_2a.setPaintTicks(true);
     slider_2a.setPaintLabels(true);
@@ -325,7 +325,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_slider.gridy = 10;
     pane.add(slider, gbc_slider);
     setSlider(slider, slideVal[2]);
-    
+
     slidera = new JSlider(JSlider.VERTICAL, 0, 200, 0);
     // slider.setLabelTable(labelTable);
     slidera.setPaintLabels(true);
@@ -342,7 +342,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_slidera.gridy = 10;
     pane.add(slidera, gbc_slidera);
     setSlider(slidera, slideVal[2]);
-    
+
     listener(spinner2, slider, slideVal[2]);
     listener(spinner2a, slidera, slideVal[2]);
     //////////////////////////////////////////////////////////
@@ -396,7 +396,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_slider_4.gridy = 10;
     pane.add(slider_4, gbc_slider_4);
     setSlider(slider_4, slideVal[3]);
-    
+
 
     slider_4a = new JSlider(SwingConstants.VERTICAL, 0, 500, 0);
     slider_4a.setPaintTicks(true);
@@ -412,7 +412,7 @@ public class MiddlePanel extends JPanel implements ActionListener {
     gbc_slider_4a.gridy = 10;
     pane.add(slider_4a, gbc_slider_4a);
     setSlider(slider_4a, slideVal[3]);
-    
+
     listener(spinner3, slider_4, slideVal[3]);
     listener(spinner3a, slider_4a, slideVal[3]);
 
@@ -501,8 +501,10 @@ public class MiddlePanel extends JPanel implements ActionListener {
   }
 
   public void setSlider(JSlider tempslide, String tempvalue) {
-    tempslide.setValue(Integer.parseInt(tempvalue));
+    int tempConv = Integer.parseInt(tempvalue);
+    tempslide.setValue(tempConv);
 
+    Jpython test = new Jpython(tempConv, 1);
   }
 
 
@@ -510,8 +512,8 @@ public class MiddlePanel extends JPanel implements ActionListener {
   public void setSpinner(JSpinner tempspin, int tempvalue) {
 
     tempspin.setValue((Integer) tempvalue);
-    System.out.println("SET SPINNER IN MIDDLEhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
     System.out.print("value of spine" + tempspin.getValue().toString());
+    Jpython test = new Jpython(tempvalue, 1);
 
   }
 
